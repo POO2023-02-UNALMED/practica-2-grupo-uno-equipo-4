@@ -8,12 +8,13 @@ from gestorAplicacion.usuarios.Preferencia import Preferencia
 from gestorAplicacion.usuarios.Huesped import Huesped
 from gestorAplicacion.finanzas.CuentaBancaria import CuentaBancaria
 from gestorAplicacion.hotel.Hotel import Hotel
+from gestorAplicacion.usuarios.Administrador import Administrador
 
 class Signup():
-    nombre_entry = ""
-    telefono_entry = 0
-    username_entry = ""
-    password_entry = ""
+    nombre_entry = object
+    telefono_entry = object
+    username_entry = object
+    password_entry = object
     
     @classmethod
     def iniciar(cls, root:Root):
@@ -22,6 +23,9 @@ class Signup():
             if (usType.get() == "Huesped"):
                 P2.destroy()
                 cls.registroHuesped(P1)
+            elif usType.get() == "Administrador":
+                root.cleanRoot()
+                cls.registroAdministrador(root)
             else:
                 print("No puede registrarse por sí solo, esto lo tiene que hacer el administrador")
         
@@ -58,6 +62,7 @@ class Signup():
         cont.bind("<Button-1>", continuar)
     
     
+    #Registro huesped
     @classmethod
     def registroHuesped(cls, P1):
         global nombre_entry
@@ -69,13 +74,17 @@ class Signup():
                 rNom = False
                 username = username_entry  # Obtener el valor del Entry en tkinter
                 for x in Base.getHuespedes():
-                    if x.get_username() == username:
+                    if x.getUsername() == username:
                         print("\nEste nombre ya está en uso. Intente de nuevo\n")
                         rNom = True
                         break
                 if not rNom:
                     break
             cont_button.destroy()
+            nombre_entry["state"] = "disable"
+            password_entry["state"] = "disable"
+            username_entry["state"] = "disable"
+            telefono_entry["state"] = "disable"
             cls.continueRegistroHuesped(P3)
         
         P3 = tk.Frame(P1, bg="blue", pady=10)
@@ -199,3 +208,113 @@ class Signup():
     def intro(cls, us):
         print(us.presentacion())
         
+        
+    
+    
+    #Registro administrador
+    @classmethod
+    def registroAdministrador(cls, root:Root):
+        
+        global nombre_entry
+        global telefono_entry
+        global username_entry
+        global password_entry
+        def compareName(event):
+            while True:
+                rNom = False
+                username = username_entry  # Obtener el valor del Entry en tkinter
+                for x in Base.getAdministradores():
+                    if x.getUsername() == username:
+                        print("\nEste nombre ya está en uso. Intente de nuevo\n")
+                        rNom = True
+                        break
+                if not rNom:
+                    break
+            cont_button.destroy()
+            nombre_entry["state"] = "disable"
+            password_entry["state"] = "disable"
+            username_entry["state"] = "disable"
+            telefono_entry["state"] = "disable"
+            cls.continueRegistroAdministrador(P2)
+        
+        root.title("SignUp")
+        
+        menuBar = Menu(root)
+        root.config(menu=menuBar)
+        archivo = Menu(menuBar, tearoff=False)
+        menuBar.add_cascade(label="Archivo", menu=archivo)
+        archivo.add_command(label="Salir", command=root.salir)
+        
+        signLabel = tk.Label(root, text="Registrarse", font=("arial", 30))
+        signLabel.pack(side="top", padx=10, pady=10,)
+        
+        P1 = tk.Frame(root, bg="red")
+        P1.pack(side="top", fill="both", expand=True)
+        
+        P2 = tk.Frame(P1, bg="blue", pady=10)
+        P2.place(relx=0.5 ,relheight=1, anchor="n")
+        nombre_label = tk.Label(P2, text="Ingrese su nombre completo:")
+        nombre_label.grid(row=0, column=0, padx=1, pady=1)
+        nombre_entry = tk.Entry(P2)
+        nombre_entry.grid(row=0, column=1, padx=1, pady=1)
+        
+        telefono_label = tk.Label(P2, text="Ingrese su número de teléfono:")
+        telefono_label.grid(row=1, column=0, padx=1, pady=1)
+        telefono_entry = tk.Entry(P2)
+        telefono_entry.grid(row=1, column=1, padx=1, pady=1)
+        
+        username_label = tk.Label(P2, text="Ingrese un nombre de usuario:")
+        username_label.grid(row=2, column=0, padx=1, pady=1)
+        username_entry = tk.Entry(P2)
+        username_entry.grid(row=2, column=1, padx=1, pady=1)
+        
+        password_label = tk.Label(P2, text="Ingrese una contraseña:")
+        password_label.grid(row=3, column=0, padx=1, pady=1)
+        password_entry = tk.Entry(P2, show="*")  # Use show="*" to hide the password
+        password_entry.grid(row=3, column=1, padx=1, pady=1)
+        
+        cont_button = tk.Button(P2, text="Continuar")
+        cont_button.place(rely=0.2, relx=0.5, anchor="c")
+        cont_button.bind("<Button-1>", compareName)
+        
+    
+    @classmethod
+    def continueRegistroAdministrador(cls, P2):
+        def terminar(event):
+            hotel = None
+            selectedHotel = hotel_combobox.get()
+            for x in hoteles:
+                if x.getNombre() == selectedHotel:
+                    hotel = x
+            administrador = Administrador(nombre_entry.get(), telefono_entry.get(), username_entry.get(), password_entry.get(), CuentaBancaria(saldo_entry.get(), banco_entry.get()), hotel)
+            Base.addAdministradores(administrador)
+
+        
+        saldo_label = tk.Label(P2, text="Ingrese el saldo de su cuenta:")
+        saldo_label.grid(column=0, row=4)
+
+        saldo_entry = tk.Entry(P2)
+        saldo_entry.grid(column=1, row=4)
+
+        banco_label = tk.Label(P2, text="Ingrese el banco al que pertenece:")
+        banco_label.grid(column=0, row=5)
+
+        banco_entry = tk.Entry(P2)
+        banco_entry.grid(column=1, row=5)
+        
+        listaNombres = []
+        hoteles = Base.getHoteles()
+        for x in hoteles:
+            if x.getNombre() not in listaNombres:
+                listaNombres.append(x.getNombre())
+        
+        hotel_label = tk.Label(P2, text="Elija el hotel que va a administrar:")
+        hotel_label.grid(column=0, row=7, padx=1, pady=1)
+
+        hotel_combobox = Combobox(P2, values=listaNombres, state="readonly")
+        hotel_combobox.set("Hoteles")
+        hotel_combobox.grid(column=1, row=7, padx=1, pady=1)
+        
+        endRegist = tk.Button(P2, text="Enviar")
+        endRegist.place(relx=0.5, rely=0.3, anchor="n")
+        endRegist.bind("<Button-1>", terminar)

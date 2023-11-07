@@ -94,5 +94,4 @@ class Huesped(Usuario, PresentacionBono):
     def entrando(self):
         return "Entrando a su cuenta de Huesped, señor(a) "+ self.getNombre()
     
-    
         

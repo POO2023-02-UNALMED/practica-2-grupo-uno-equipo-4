@@ -10,4 +10,10 @@ class Administrador(Usuario):
         self.hotel = hotel
         self. salario = 500
         self.ultimoPago = None
-        totalAdministradores += 1
+        Administrador.totalAdministradores += 1
+        
+    def presentacion(self):
+        return ""
+
+    def entrando(self):
+        return f"Entrando a su cuenta de Administrador, señor(a): {self.getNombre()}"
