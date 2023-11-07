@@ -1,7 +1,8 @@
 from .Usuario import Usuario
 from .Preferencia import Preferencia
+from .PresentacionBono import PresentacionBono
 
-class Huesped(Usuario):
+class Huesped(Usuario, PresentacionBono):
     def __init__(self,vip=None,preferencias=None, nombre=None, telefono=None, username=None, password=None, cuentaBancaria=None):
         super().__init__(nombre, telefono, username, password, cuentaBancaria)
         
@@ -82,8 +83,16 @@ class Huesped(Usuario):
         preferencia = Preferencia(ciudad,nombreHotel,tipoHabitacion)
         self._preferencias.append(preferencia)
 
-    def presentacion():
-        pass
+    def ofrecerBono(self):
+        print(f"Se le han añadido {PresentacionBono.BONOHUESPED} $ a su cuenta bancaria")
+        self.getCuentaBancaria().depositar(PresentacionBono.BONOHUESPED)
+
+    def presentacion(self):
+        intro = PresentacionBono.recogerDatos(self)
+        return f"Soy un huésped. {intro}"
 
     def entrando(self):
         return "Entrando a su cuenta de Huesped, señor(a) "+ self.getNombre()
+    
+    
+        

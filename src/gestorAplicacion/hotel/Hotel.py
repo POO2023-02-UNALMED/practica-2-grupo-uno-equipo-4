@@ -76,7 +76,7 @@ class Hotel:
         self.__nombre = __nombre
         
     @property
-    def getCuidad(self):
+    def getCiuidad(self):
        return  self.__ciudad
     
 

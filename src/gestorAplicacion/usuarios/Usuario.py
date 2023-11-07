@@ -3,8 +3,8 @@ from abc import ABC, abstractmethod
 class Usuario(ABC):
     _numUser= 0
     def __init__(self,nombre=None,telefono=None,username=None,password=None,cuentaBancaria=None):
-        Usuario._numUsuario+=1
-        self._id = Usuario._numUsuario
+        Usuario._numUser+=1
+        self._id = Usuario._numUser
         if nombre is not None:
             self._nombre = nombre
 
