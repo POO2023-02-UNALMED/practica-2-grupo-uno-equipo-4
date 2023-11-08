@@ -7,3 +7,12 @@ class Preferencia:
 
         if tipoHabitacion is not None:
             self._tipoHabitacion = tipoHabitacion
+    
+    def getCiudad(self):
+        return self._ciudad
+    
+    def getNombreHotel(self):
+        return self._nombreHotel
+    
+    def getTipoHabitacion(self):
+        return self._tipoHabitacion

@@ -1,6 +1,7 @@
 from .Usuario import Usuario
 from .Preferencia import Preferencia
 from .PresentacionBono import PresentacionBono
+from baseDatos.Base import Base
 
 class Huesped(Usuario, PresentacionBono):
     def __init__(self,vip=None,preferencias=None, nombre=None, telefono=None, username=None, password=None, cuentaBancaria=None):
@@ -94,4 +95,51 @@ class Huesped(Usuario, PresentacionBono):
     def entrando(self):
         return "Entrando a su cuenta de Huesped, señor(a) "+ self.getNombre()
     
+    #Método que se usa en recomendacion hoteles por similar(). 
+    def recomendacionHabitacionPorSimilar(self,hotel,preferencia):
+        habitacionesHotel = hotel.getHabitaciones()
+        habitaciones = [habitacion for habitacion in habitacionesHotel if habitacion.getTipo()==preferencia.getTipoHabitacion()]
+        return habitaciones
         
+    #Para recomendar hoteles basado en las preferencias del huesped
+    def recomendacionHotelesPorSimilar(self,ciudad):
+        recomendaciones = {}
+        hotelesBase = Base.getHoteles()
+        for hotel in hotelesBase:
+            if(hotel.getCiudad() == ciudad):
+                for preferencia in self.getPreferencias():
+                    if(hotel.getNombre() == preferencia.getNombreHotel()):
+                        habitaciones = self.recomendacionHabitacionPorSimilar(hotel,preferencia)
+                        if(habitaciones!= None):
+                            recomendaciones[hotel] = habitaciones
+        return recomendaciones
+
+    def recomendacionHabitacionPorHistorial(self,hotel):
+        habitacionesHotel = hotel.getHabitaciones()
+        habitacionesRecomendadas = []
+        for i in range(len(habitacionesHotel)):
+            calificaciones = {}
+            calificaciones = habitacionesHotel[i].getCalificaciones()
+            for huesped in list(calificaciones.keys()):
+                if(huesped.getId()==self.getId()):
+                    if(calificaciones[huesped]>=4):
+                        habitacionesRecomendadas.append(habitacionesHotel[i])
+                        break
+        return habitacionesRecomendadas
+
+    def recomendacionHotelesPorHistorial(self,ciudad):
+        recomendaciones = {}
+        hoteles = []
+        historialReservas = self.getHistorialReservas()
+        for reserva in historialReservas:
+            if(reserva.getCiudad()==ciudad):
+                calificacion = reserva.getCalificacionHotel()
+                if(calificacion>=4):
+                    hoteles.append(reserva.getHotel())
+                
+        for hotel in hoteles:
+            habitaciones = self.recomendacionHabitacionPorHistorial(hotel)
+            if(habitaciones!=None):
+                recomendaciones[hotel] = habitaciones
+        
+        return recomendaciones

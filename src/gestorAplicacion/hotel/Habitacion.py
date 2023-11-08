@@ -1,4 +1,4 @@
-from hotel import Hotel
+from .Hotel import Hotel
 
 class Habitacion:
     
@@ -6,6 +6,7 @@ class Habitacion:
         
         #self.__calificaciones[Huesped()] = 5.0
         self.__id = __id
+        self.__calificaciones = {}
         
         if __tipo is not None:
             self.__tipo = __tipo
@@ -51,7 +52,6 @@ class Habitacion:
     def setHotel(self, __hotel):
         self.__hotel = __hotel
         
-    @property
     def getTipo(self):
         return self.__tipo
     

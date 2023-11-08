@@ -10,10 +10,10 @@ class Hotel:
             self.__nombre = __nombre
             
         if __ciudad is not None:
-            self.__servicios = __servicios
+            self.__ciudad = __ciudad
         
         if __servicios is not None:
-            self.__ciudad = __ciudad
+            self.__servicios = __servicios
             
         if __habitaciones is  not None:
             self.__habitaciones = __habitaciones
@@ -21,8 +21,8 @@ class Hotel:
         if __empleados is not None:
             self.__empleados = __empleados
         
-        for i  in  __habitaciones:
-            i.__hotel(self)
+        #for i  in  __habitaciones:
+         #   i.__hotel(self)
         
         #for  i  in __empleados:
         #   i.setHotel(self)
@@ -67,7 +67,6 @@ class Hotel:
     def setServicios(self, __servicios):
         self.__servicios = __servicios
         
-    @property
     def getNombre(self):
         return self.__nombre
     
@@ -75,15 +74,13 @@ class Hotel:
     def setNombre(self, __nombre):
         self.__nombre = __nombre
         
-    @property
-    def getCiuidad(self):
+    def getCiudad(self):
        return  self.__ciudad
     
 
     def setCiudad(self, __ciudad):
         self.__ciudad = __ciudad
         
-    @property
     def getHabitaciones(self):
         return self.__habitaciones
     

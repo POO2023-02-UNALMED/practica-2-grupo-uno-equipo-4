@@ -6,8 +6,8 @@ class Reserva:
 
         self.__huesped = __huesped
         self.__habitacion = __habitacion
-        self.__fechaEntrada == __fechaEntrada
-        self.__fechaSalida == __fechaSalida
+        self.__fechaEntrada = __fechaEntrada
+        self.__fechaSalida = __fechaSalida
         self.__costo  = __costo
 
     @property
