@@ -31,8 +31,8 @@ class Deserializador:
         file = open("baseDatos/temp/empleados.pkl", "rb")
         try :
             pcs = pickle.load(file)
-            Base.setEstudiantesMatriculados(pcs)
+            Base.setEmpleados(pcs)
         except EOFError :
-            Base.setEstudiantesMatriculados([])
+            Base.setEmpleados([])
         file.close()
 

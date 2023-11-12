@@ -2,7 +2,7 @@ import sys
 import tkinter as tk
 from tkinter import messagebox
 from gestorGrafico.Root import Root
-from PIL import Image, ImageTk
+#from PIL import Image, ImageTk
 from tkinter import Menu
 import os
 import pathlib
@@ -22,12 +22,26 @@ class Inicio:
                             path+"\\imagenes\\david3.png", path+"\\imagenes\\david4.png"])
 
         self.programadores = [david]
-        self.imagenesMGA = [
-                    Image.open(path+"\\imagenes\\logo1.png").resize((600, 600)),
-                    Image.open(path+"\\imagenes\\logo2.png").resize((600, 600)),
-                    Image.open(path+"\\imagenes\\logo3.png").resize((600, 600)),
-                    Image.open(path+"\\imagenes\\logo4.png").resize((600, 600)),
-                    Image.open(path+"\\imagenes\\logo5.png").resize((600, 600))]
+        
+        imagenp1 = tk.PhotoImage(file = path+"\\imagenes\\logo1.png")
+        imagenp1 = imagenp1.subsample(x= 2, y = 1)
+        imagenp2 = tk.PhotoImage(file = path+"\\imagenes\\logo2.png")
+        imagenp2 = imagenp2.subsample(x= 2, y = 1)
+        imagenp3 = tk.PhotoImage(file = path+"\\imagenes\\logo3.png")
+        imagenp3 = imagenp3.subsample(x= 2, y = 1)
+        imagenp4 = tk.PhotoImage(file = path+"\\imagenes\\logo4.png")
+        imagenp4 = imagenp4.subsample(x= 4, y = 1)
+        imagenp5 = tk.PhotoImage(file = path+"\\imagenes\\logo5.png")
+        imagenp5 = imagenp5.subsample(x= 2, y = 1)
+        self.imagenesMGA = [imagenp1, imagenp2, imagenp3, imagenp4, imagenp5]
+        
+        
+        # self.imagenesMGA = [
+        #             Image.open(path+"\\imagenes\\logo1.png").resize((600, 600)),
+        #             Image.open(path+"\\imagenes\\logo2.png").resize((600, 600)),
+        #             Image.open(path+"\\imagenes\\logo3.png").resize((600, 600)),
+        #             Image.open(path+"\\imagenes\\logo4.png").resize((600, 600)),
+        #             Image.open(path+"\\imagenes\\logo5.png").resize((600, 600))]
 
         self.contP = 0
         self.contI = 0
@@ -73,9 +87,9 @@ class Inicio:
 
         self.imagenes = tk.Label(self.P4)
         self.imagenes.bind("<Button-1>", self.cambiarImagen)
-        imagen = ImageTk.PhotoImage(self.imagenesMGA[0])
-        self.imagenes.config(image=imagen)
-        self.imagenes.image = imagen 
+        #imagen = tk.PhotoImage(self.imagenesMGA[0])
+        self.imagenes.config(image=self.imagenesMGA[0])#corregir image
+        self.imagenes.image = self.imagenesMGA[0] #corregir image
         self.imagenes.pack(side="top")
 
         self.P2 = tk.Frame(self.ventana, bg= "lightgray")
@@ -93,22 +107,30 @@ class Inicio:
         self.P6 = tk.Frame(self.P2)
         self.P6.pack(side="bottom", fill="both")
 
-        imagen1 = ImageTk.PhotoImage(Image.open(self.p.fotos[0]).resize((300, 300)))
+        #imagen1 = ImageTk.PhotoImage(Image.open(self.p.fotos[0]).resize((300, 300)))
+        imagen1 = tk.PhotoImage(file = self.p.fotos[0])
+        imagen1 = imagen1.subsample(x = 4, y=4)
         self.imagen1 = tk.Label(self.P6, image=imagen1)
         self.imagen1.image = imagen1  # Guardar una referencia para evitar que se elimine la imagen
         self.imagen1.grid(row=0, column=0)
 
-        imagen2 = ImageTk.PhotoImage(Image.open(self.p.fotos[1]).resize((300, 300)))
+        #imagen2 = ImageTk.PhotoImage(Image.open(self.p.fotos[1]).resize((300, 300)))
+        imagen2 = tk.PhotoImage(file = (self.p.fotos[1]))
+        imagen2 = imagen2.subsample(x = 2, y=3)
         self.imagen2 = tk.Label(self.P6, image=imagen2)
         self.imagen2.image = imagen2  # Guardar una referencia para evitar que se elimine la imagen
         self.imagen2.grid(row=0, column=1)
 
-        imagen3 = ImageTk.PhotoImage(Image.open(self.p.fotos[2]).resize((300, 300)))
+        #imagen3 = ImageTk.PhotoImage(Image.open(self.p.fotos[2]).resize((300, 300)))
+        imagen3 = tk.PhotoImage(file = (self.p.fotos[2]))
+        imagen3 = imagen3.subsample(x = 2, y=3)
         self.imagen3 = tk.Label(self.P6, image=imagen3)
         self.imagen3.image = imagen3  # Guardar una referencia para evitar que se elimine la imagen
         self.imagen3.grid(row=1, column=0)
 
-        imagen4 = ImageTk.PhotoImage(Image.open(self.p.fotos[3]).resize((300, 300)))
+        #imagen4 = ImageTk.PhotoImage(Image.open(self.p.fotos[3]).resize((300, 300)))
+        imagen4 = tk.PhotoImage(file = (self.p.fotos[3]))
+        imagen4 = imagen4.subsample(x = 2, y=3)
         self.imagen4 = tk.Label(self.P6, image=imagen4)
         self.imagen4.image = imagen4  # Guardar una referencia para evitar que se elimine la imagen
         self.imagen4.grid(row=1, column=1)
@@ -125,9 +147,9 @@ class Inicio:
 
     def cambiarImagen(self, event):
         self.contI = (self.contI + 1) % 5
-        newImage = ImageTk.PhotoImage(self.imagenesMGA[self.contI])
-        self.imagenes.config(image=newImage)
-        self.imagenes.image = newImage 
+        #newImage = tk.PhotoImage(self.imagenesMGA[self.contI])
+        self.imagenes.config(image=self.imagenesMGA[self.contI]) # corregir a new Image
+        self.imagenes.image = self.imagenesMGA[self.contI] #corregir a new image
         self.imagenes.pack(side="top")
 
     def cambioProgramador(self, event):
@@ -139,22 +161,30 @@ class Inicio:
         self.imagen2.destroy()
         self.imagen3.destroy()
         self.imagen4.destroy()
-        imagen1 = ImageTk.PhotoImage(Image.open(self.p.fotos[0]).resize((300, 300)))
+        #imagen1 = ImageTk.PhotoImage(Image.open(self.p.fotos[0]).resize((300, 300)))
+        imagen1 = tk.PhotoImage(file = self.p.fotos[0])
+        imagen1 = imagen1.subsample(x = 2, y=3)
         self.imagen1 = tk.Label(self.P6, image=imagen1)
         self.imagen1.image = imagen1  # Guardar una referencia para evitar que se elimine la imagen
         self.imagen1.grid(row=0, column=0)
 
-        imagen2 = ImageTk.PhotoImage(Image.open(self.p.fotos[1]).resize((300, 300)))
+        #imagen2 = ImageTk.PhotoImage(Image.open(self.p.fotos[1]).resize((300, 300)))
+        imagen2 = tk.PhotoImage(file = (self.p.fotos[1]))
+        imagen2 = imagen2.subsample(x = 2, y=3)
         self.imagen2 = tk.Label(self.P6, image=imagen2)
         self.imagen2.image = imagen2  # Guardar una referencia para evitar que se elimine la imagen
         self.imagen2.grid(row=0, column=1)
 
-        imagen3 = ImageTk.PhotoImage(Image.open(self.p.fotos[2]).resize((300, 300)))
+        #imagen3 = ImageTk.PhotoImage(Image.open(self.p.fotos[2]).resize((300, 300)))
+        imagen3 = tk.PhotoImage(file = (self.p.fotos[2]))
+        imagen3 = imagen3.subsample(x = 2, y=3)
         self.imagen3 = tk.Label(self.P6, image=imagen3)
         self.imagen3.image = imagen3  # Guardar una referencia para evitar que se elimine la imagen
         self.imagen3.grid(row=1, column=0)
 
-        imagen4 = ImageTk.PhotoImage(Image.open(self.p.fotos[3]).resize((300, 300)))
+        #imagen4 = ImageTk.PhotoImage(Image.open(self.p.fotos[3]).resize((300, 300)))
+        imagen4 = tk.PhotoImage(file = (self.p.fotos[3]))
+        imagen4 = imagen4.subsample(x = 2, y=3)
         self.imagen4 = tk.Label(self.P6, image=imagen4)
         self.imagen4.image = imagen4  # Guardar una referencia para evitar que se elimine la imagen
         self.imagen4.grid(row=1, column=1)
