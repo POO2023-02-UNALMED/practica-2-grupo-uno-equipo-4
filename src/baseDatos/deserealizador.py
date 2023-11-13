@@ -1,34 +1,36 @@
 import pickle
 from .Base import Base
 
+#@autor: David Restrepo
+
 class Deserializador:
     @classmethod
     def deserializador(cls):
-        file = open("baseDatos/temp/administradores.pkl", "rb")
+        file = open("src/baseDatos/temp/administradores.pkl", "rb")
         try :
             pcs = pickle.load(file)
-            Base.setProfesores(pcs)
+            Base.setAdministradores(pcs)
         except EOFError :
-            Base.setProfesores([])
+            Base.setAdministradores([])
         file.close()
 
-        file = open("baseDatos/temp/huespedes.pkl", "rb")
+        file = open("src/baseDatos/temp/huespedes.pkl", "rb")
         try :
             pcs = pickle.load(file)
-            Base.setEstudiantes(pcs)
+            Base.setHuespedes(pcs)
         except EOFError :
-            Base.setEstudiantes([])
+            Base.setHuespedes([])
         file.close()
 
-        file = open("baseDatos/temp/hoteles.pkl", "rb")
+        file = open("src/baseDatos/temp/hoteles.pkl", "rb")
         try :
             pcs = pickle.load(file)
-            Base.setAdmins(pcs)
+            Base.setHoteles(pcs)
         except EOFError :
-            Base.setAdmins([])
+            Base.setHoteles([])
         file.close()
 
-        file = open("baseDatos/temp/empleados.pkl", "rb")
+        file = open("src/baseDatos/temp/empleados.pkl", "rb")
         try :
             pcs = pickle.load(file)
             Base.setEmpleados(pcs)

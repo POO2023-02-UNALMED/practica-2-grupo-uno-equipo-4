@@ -10,7 +10,9 @@ from gestorAplicacion.finanzas.CuentaBancaria import CuentaBancaria
 from gestorAplicacion.hotel.Hotel import Hotel
 from gestorAplicacion.usuarios.Administrador import Administrador
 from gestorAplicacion.usuarios.Empleado import Empleado
+from gestorGrafico.Usmenu import Usmenu
 
+#@autor: David Restrepo
 
 class Login():
     @classmethod
@@ -25,6 +27,8 @@ class Login():
                     if x.getUsername() == username and x.getPassword() == password:
                         cls.avisoEntrada(x)
                         correctRegist = True
+                        root.cleanRoot()
+                        Usmenu.menu(root, x)
                         break
                 if correctRegist == False:
                     print("Nombre de usuario o contraseña incorrectos")
@@ -38,6 +42,8 @@ class Login():
                     if x.getUsername() == username and x.getPassword() == password:
                         cls.avisoEntrada(x)
                         correctRegist = True
+                        root.cleanRoot()
+                        Usmenu.menu(root, x)
                         break
                 if correctRegist == False:
                     print("Nombre de usuario o contraseña incorrectos")
@@ -50,6 +56,8 @@ class Login():
                     if x.getUsername() == username and x.getPassword() == password:
                         cls.avisoEntrada(x)
                         correctRegist = True
+                        root.cleanRoot()
+                        Usmenu.menu(root, x)
                         break
                 if correctRegist == False:
                     print("Nombre de usuario o contraseña incorrectos")

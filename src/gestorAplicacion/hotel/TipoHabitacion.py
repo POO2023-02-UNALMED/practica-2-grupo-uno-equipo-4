@@ -1,5 +1,7 @@
 from enum import Enum
 
+#@autor: David Restrepo
+
 class TipoHabitacion(Enum):
     FAMILIAR = [4, 500000]
     DOBLE = [2, 300000]

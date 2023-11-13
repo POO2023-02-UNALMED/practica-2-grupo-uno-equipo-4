@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
 
+#@autor: David Restrepo
+
 class PresentacionBono(ABC):
     BONOHUESPED = 50000
     BONOEMPLEADO = 10000 

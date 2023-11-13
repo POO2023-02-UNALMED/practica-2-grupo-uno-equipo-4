@@ -10,6 +10,9 @@ from gestorAplicacion.finanzas.CuentaBancaria import CuentaBancaria
 from gestorAplicacion.hotel.Hotel import Hotel
 from gestorAplicacion.usuarios.Administrador import Administrador
 from gestorAplicacion.usuarios.Empleado import Empleado
+from gestorGrafico.Usmenu import Usmenu
+
+#@autor: David Restrepo
 
 class Signup():
     nombre_entry = object
@@ -23,7 +26,7 @@ class Signup():
         def continuar(event):
             if (usType.get() == "Huesped"):
                 P2.destroy()
-                cls.registroHuesped(P1)
+                cls.registroHuesped(P1, root)
             elif usType.get() == "Administrador":
                 root.cleanRoot()
                 cls.registroAdministrador(root)
@@ -67,7 +70,7 @@ class Signup():
     
     #Registro huesped
     @classmethod
-    def registroHuesped(cls, P1):
+    def registroHuesped(cls, P1, root):
         global nombre_entry
         global telefono_entry
         global username_entry
@@ -86,7 +89,7 @@ class Signup():
                 password_entry["state"] = "disable"
                 username_entry["state"] = "disable"
                 telefono_entry["state"] = "disable"
-                cls.continueRegistroHuesped(P3)
+                cls.continueRegistroHuesped(P3, root)
         
         P3 = tk.Frame(P1, bg="blue", pady=10)
         P3.place(relx=0.5 ,relheight=1, anchor="n")
@@ -115,18 +118,21 @@ class Signup():
         cont_button.bind("<Button-1>", compareName)
         
     @classmethod
-    def continueRegistroHuesped(cls, P3):
+    def continueRegistroHuesped(cls, P3, root):
         
         def terminar(event):
             preferencias = []
             preferencia = Preferencia(city_combobox.get(), hotels_combobox.get(), habitaciones_combobox.get())
             preferencias.append(preferencia)
-            huesped = Huesped (is_vip_var, preferencias, nombre_entry.get(), telefono_entry.get(), username_entry.get(), password_entry.get(), CuentaBancaria(saldo_entry.get(), banco_entry.get()))
+            huesped = Huesped (bool(is_vip_var), preferencias, nombre_entry.get(), telefono_entry.get(), username_entry.get(), password_entry.get(), CuentaBancaria(saldo_entry.get(), banco_entry.get()))
             Base.addHuespedes(huesped)
         
             if (is_bono_var):
                 huesped.ofrecerBono()
             cls.intro(huesped)
+            
+            root.cleanRoot()
+            Usmenu.menu(root, huesped)
         
         saldo_label = tk.Label(P3, text="Ingrese el saldo de su cuenta:")
         saldo_label.grid(column=0, row=4)
@@ -234,7 +240,7 @@ class Signup():
                 password_entry["state"] = "disable"
                 username_entry["state"] = "disable"
                 telefono_entry["state"] = "disable"
-                cls.continueRegistroAdministrador(P2)
+                cls.continueRegistroAdministrador(P2, root)
         
         root.title("SignUp")
         
@@ -278,7 +284,7 @@ class Signup():
         
     
     @classmethod
-    def continueRegistroAdministrador(cls, P2):
+    def continueRegistroAdministrador(cls, P2, root):
         def terminar(event):
             hotel = None
             selectedHotel = hotel_combobox.get()
@@ -287,6 +293,9 @@ class Signup():
                     hotel = x
             administrador = Administrador(nombre_entry.get(), telefono_entry.get(), username_entry.get(), password_entry.get(), CuentaBancaria(saldo_entry.get(), banco_entry.get()), hotel)
             Base.addAdministradores(administrador)
+            
+            root.cleanRoot()
+            Usmenu.menu(root, administrador)
 
         
         saldo_label = tk.Label(P2, text="Ingrese el saldo de su cuenta:")
@@ -342,7 +351,7 @@ class Signup():
                 password_entry["state"] = "disable"
                 username_entry["state"] = "disable"
                 telefono_entry["state"] = "disable"
-                cls.continueRegistroEmpleado(P2)
+                cls.continueRegistroEmpleado(P2, root)
         
         root.title("SignUp")
         
@@ -386,7 +395,7 @@ class Signup():
         
     
     @classmethod
-    def continueRegistroEmpleado(cls, P2):
+    def continueRegistroEmpleado(cls, P2, root):
         def terminar(event):
             hotel = None
             selectedHotel = hotel_combobox.get()
@@ -399,6 +408,9 @@ class Signup():
             if (is_bono_var):
                 empleado.ofrecerBono()
             cls.intro(empleado)
+            
+            root.cleanRoot()
+            Usmenu.menu(root, empleado)
 
         
         saldo_label = tk.Label(P2, text="Ingrese el saldo de su cuenta:")

@@ -16,10 +16,10 @@ from ..hotel.Hotel import Hotel
 
 class CuentaBancaria():
     nCuentas = 1
-    def __init__(self, banco, saldo, numero=None):
+    def __init__(self, saldo, banco, numero=None):
 
         if(numero == None):
-            self.numero = self.nCuenta
+            self.numero = self.nCuentas
 
         else:
             self.numero = numero

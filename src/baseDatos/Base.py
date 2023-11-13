@@ -1,5 +1,6 @@
 from abc import ABC, abstractclassmethod
 
+#@autor: David Restrepo
 class Base(ABC):
     _administradores = []
     _hoteles = []

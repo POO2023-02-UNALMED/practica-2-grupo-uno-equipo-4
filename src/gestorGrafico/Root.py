@@ -1,4 +1,7 @@
-from tkinter import Tk, Menu
+from tkinter import Tk, Menu, messagebox
+from baseDatos.serializador import Serializador
+
+#@autor: David Restrepo
 
 class Root(Tk) :
     def __init__(self) -> None:
@@ -14,8 +17,7 @@ class Root(Tk) :
 
     def salir(self) :
         from gestorGrafico.Inicio import Inicio
-        #from baseDatos.Serializador import Serializador
-        #Serializador.serializador()
+        Serializador.serializador()
         self.cleanRoot()
         Inicio(self)
 
@@ -23,3 +25,9 @@ class Root(Tk) :
         #from gestorGrafico.UserWindow import UserWindow
         self.cleanRoot()
        # UserWindow(self, user)
+       
+    def aplicacion(self):
+        messagebox.showinfo("Aplicación", "CosmoReserve es un programa desarrollado para gestionar una cadena de hoteles.")
+        
+    def ayuda(self):
+        messagebox.showinfo("Ayuda","¿Qué haces por aquí 👀?\t\t\n\nSomos:\nAlejandra Toro Grisales\nJuan Pablo Rivera Alvarez\nDavid Restrepo Aguilar\nYohan Camilo Sanchez Meza\nSamuel Castaño Alfonso")

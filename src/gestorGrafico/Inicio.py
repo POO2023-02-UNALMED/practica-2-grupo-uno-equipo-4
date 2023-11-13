@@ -12,6 +12,8 @@ from gestorGrafico.Login import Login
 
 path = os.path.join(pathlib.Path(__file__).parent.absolute())
 
+#@autor: David Restrepo
+
 class Inicio:
     def __init__(self, root:Root):
         def descripcion():
