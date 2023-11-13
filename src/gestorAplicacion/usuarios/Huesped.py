@@ -96,7 +96,7 @@ class Huesped(Usuario, PresentacionBono):
         return "Entrando a su cuenta de Huesped, señor(a) "+ self.getNombre()
     
     #Método que se usa en recomendacion hoteles por similar(). 
-    def recomendacionHabitacionPorSimilar(self,hotel,preferencia):
+    def _recomendacionHabitacionPorSimilar(self,hotel,preferencia):
         habitacionesHotel = hotel.getHabitaciones()
         habitaciones = [habitacion for habitacion in habitacionesHotel if habitacion.getTipo()==preferencia.getTipoHabitacion()]
         return habitaciones
@@ -109,12 +109,12 @@ class Huesped(Usuario, PresentacionBono):
             if(hotel.getCiudad() == ciudad):
                 for preferencia in self.getPreferencias():
                     if(hotel.getNombre() == preferencia.getNombreHotel()):
-                        habitaciones = self.recomendacionHabitacionPorSimilar(hotel,preferencia)
+                        habitaciones = self._recomendacionHabitacionPorSimilar(hotel,preferencia)
                         if(habitaciones!= None):
                             recomendaciones[hotel] = habitaciones
         return recomendaciones
 
-    def recomendacionHabitacionPorHistorial(self,hotel):
+    def _recomendacionHabitacionPorHistorial(self,hotel):
         habitacionesHotel = hotel.getHabitaciones()
         habitacionesRecomendadas = []
         for i in range(len(habitacionesHotel)):
@@ -138,7 +138,7 @@ class Huesped(Usuario, PresentacionBono):
                     hoteles.append(reserva.getHotel())
                 
         for hotel in hoteles:
-            habitaciones = self.recomendacionHabitacionPorHistorial(hotel)
+            habitaciones = self._recomendacionHabitacionPorHistorial(hotel)
             if(habitaciones!=None):
                 recomendaciones[hotel] = habitaciones
         
