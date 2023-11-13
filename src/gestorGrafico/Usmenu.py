@@ -13,10 +13,71 @@ from gestorAplicacion.usuarios.Empleado import Empleado
 
 #@autor: David Restrepo
 
-class Usmenu():    
+class Usmenu():
     
     @classmethod
-    def menu(cls, root:Root, us):   
+    def menu(cls, root:Root, us, fTime=False):              
+        
+        def firstTime(us):                                      #Información en caso de primera vez
+            pl = tk.Frame(root)
+            pl.place(relwidth=0.4, relheight=1, relx=0.003, rely=0, anchor="nw")
+            tituloResumen = tk.Label(pl, text="Resumen", font=("Arial",20))
+            tituloResumen.pack(fill="both", pady=10)
+            txt1 = tk.Text(pl)
+            
+            txt1.insert(tk.END, "CosmoReserve es un programa diseñado para gestionar una cadena de hotelería." +
+                                    "Esteprograma consta de diferentes funcionalidades de acuerdo al tipo " +
+                                    "de usuario, ya sea un cliente o un administrador. Estos tendrán que registrarse" +
+                                    "e iniciar sesión para acceder a dichas funcionalidades." +
+                                    "\n\nPor un lado, el administrador podrá crear hoteles, sus" +
+                                    "respectivas habitaciones yservicios; también, administrar todo lo que corresponde" +
+                                    "a los servicios y las finanzas de los hoteles. Por otro lado, los clientes, tanto VIP" +
+                                    "como normales, pueden reservar habitaciones en un hotel específico, asistir a los" +
+                                    "diferentes servicios de dicho hotel, obtener descuentos al momento de reservar y recibir" +
+                                    "recomendaciones de acuerdo a sus experiencias y gustos. Los clientes VIP pueden reservar" +
+                                    "habitaciones especiales que los clientes normales no podrán.")
+            
+            txt1.configure(state="disable")
+            txt1.pack(fill="both", pady=10)
+            
+            
+            pr = tk.Frame(root)
+            pr.place(relwidth=0.4, relheight=1, relx=0.997, rely=0, anchor="ne")
+            tituloFuncionalidad = tk.Label(pr, text="Funcionalidades", font=("Arial",20))
+            tituloFuncionalidad.pack(fill="both", pady=10)
+            txt2 = tk.Text(pr)
+            
+            if (us == "huesped"):
+                txt2.insert(tk.END, "Reservar: tiene la posibilidad de buscar la habitación en la que se hospedará, "+ 
+                                    "primero buscando el hotel que desea y luego la habitación. \n\n"+
+                                    "Recomendaciones: tendrá la posibilidad de ver las recomendaciones de "+
+                                    "hoteles y habitaciones que tiene la cadena hotelera para él, ya sea basadas " +
+                                    "en su experiencia o en la experiencia de otros clientes que cumplan con su perfil.\n\n"+
+                                    "Calificaciones: el usuario tendrá que calificar la habitación en la que se hospedó, así"+ 
+                                    "mismo en caso de haber adquirido algún servicio extra y/o relacionado con algún empleado.")
+            
+                txt2.configure(state="disable")
+                txt2.pack(fill="both", pady=10)
+                
+            elif (us == "administrador"):
+                txt2.insert(tk.END, "Servicios: el administrador tiene la posibilidad de dar un servicio al cliente según sus "+
+                                    "parámetros y lo que fuese solicitado.\n\n"+
+                                    "Pago por administrador: El usuario administrador podrá depositar el respectivo sueldo de cada "+
+                                    "empleado desde la cuenta del hotel, hasta las cuentas de cada empleado. Solo se puede depositar "+
+                                    "a los empleados una vez por mes.\n\n")
+            
+                txt2.configure(state="disable")
+                txt2.pack(fill="both", pady=10)
+                
+            else:
+                txt2.insert(tk.END, "Pago por administrador: El administrador podrá depositar el respectivo sueldo " +
+                                    "de cada empleado.")
+            
+                txt2.configure(state="disable")
+                txt2.pack(fill="both", pady=10)
+        
+        
+        
         root.title("CosmoReserve")
         menuBar = Menu(root)
         root.config(menu=menuBar)
@@ -33,17 +94,22 @@ class Usmenu():
         menuBar.add_cascade(label="Ayuda", menu=ayuda)
         ayuda.add_command(label="Acerca de", command=root.ayuda)
         
-        
+                                                         
         if isinstance(us, Huesped):
             cls.sistemaHuesped(root, us, prosCon)
+            if fTime : firstTime("huesped")                 #Revisar si es primera vez entrando, entonces mostrar el resumen de la aplicación
         elif isinstance(us, Administrador):
             cls.sistemaAdministrador(root, us, prosCon)
+            if fTime : firstTime("administrador")
         else:
             cls.sistemaEmpleado(root, us, prosCon)
+            if fTime : firstTime("empleado")
             
     @classmethod
     def sistemaHuesped(cls, root, us, prosCon):
-        pass
+        def reservar():
+            print(True)
+        prosCon.add_command(label="Reservar", command=reservar)
         
     @classmethod
     def sistemaAdministrador(cls, root, us, prosCon):

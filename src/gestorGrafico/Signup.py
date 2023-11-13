@@ -132,7 +132,7 @@ class Signup():
             cls.intro(huesped)
             
             root.cleanRoot()
-            Usmenu.menu(root, huesped)
+            Usmenu.menu(root, huesped, True)
         
         saldo_label = tk.Label(P3, text="Ingrese el saldo de su cuenta:")
         saldo_label.grid(column=0, row=4)
@@ -295,7 +295,7 @@ class Signup():
             Base.addAdministradores(administrador)
             
             root.cleanRoot()
-            Usmenu.menu(root, administrador)
+            Usmenu.menu(root, administrador, True)
 
         
         saldo_label = tk.Label(P2, text="Ingrese el saldo de su cuenta:")
@@ -410,7 +410,7 @@ class Signup():
             cls.intro(empleado)
             
             root.cleanRoot()
-            Usmenu.menu(root, empleado)
+            Usmenu.menu(root, empleado, True)
 
         
         saldo_label = tk.Label(P2, text="Ingrese el saldo de su cuenta:")
