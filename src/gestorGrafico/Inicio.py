@@ -8,6 +8,7 @@ import os
 import pathlib
 from gestorGrafico.Programador import Programador
 from gestorGrafico.Signup import Signup
+from gestorGrafico.Login import Login
 
 path = os.path.join(pathlib.Path(__file__).parent.absolute())
 
@@ -139,7 +140,7 @@ class Inicio:
         
     def iniciar(self, event):
         self.ventana.cleanRoot()
-        #Login.iniciar(self.ventana)
+        Login.login(self.ventana)
 
     def registrar(self, event):
         self.ventana.cleanRoot()

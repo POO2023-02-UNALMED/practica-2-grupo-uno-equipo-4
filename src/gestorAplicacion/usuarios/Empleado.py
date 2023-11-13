@@ -1,7 +1,11 @@
+from gestorAplicacion.usuarios.PresentacionBono import PresentacionBono
 from .Usuario import Usuario
-class Empleado:
-    def __init__(self,estadoEmpleado):
-        self.estadoEmpleado = estadoEmpleado
+class Empleado (Usuario, PresentacionBono):
+    def __init__(self, nombre, telefono, username, password, cuentaBancaria, hotel, estado_empleado = False, salario=0):
+        super().__init__(nombre, telefono, username, password, cuentaBancaria)
+        self.hotel = hotel
+        self.salario = salario
+        self.estadoEmpleado = estado_empleado
         self.motivosCalificacion = {}
         self.sugerencias = {}
         self.calificaciones = {}
@@ -39,3 +43,14 @@ class Empleado:
 
     def buenasCalificaciones(self):
         pass
+    
+    def ofrecerBono(self):
+        print(f"Se le han añadido {PresentacionBono.BONOEMPLEADO} $ a su cuenta bancaria")
+        self.getCuentaBancaria().depositar(PresentacionBono.BONOEMPLEADO)
+    
+    def presentacion(self):
+        intro = PresentacionBono.recogerDatos(self)
+        return f"Soy un empleado. {intro}"
+
+    def entrando(self):
+        return "Entrando a su cuenta de Empleado, señor(a) "+ self.getNombre()
