@@ -10,20 +10,27 @@ from gestorAplicacion.finanzas.CuentaBancaria import CuentaBancaria
 from gestorAplicacion.hotel.Hotel import Hotel
 from gestorAplicacion.usuarios.Administrador import Administrador
 from gestorAplicacion.usuarios.Empleado import Empleado
+from gestorGrafico.FieldFrame import FieldFrame
+from gestorGrafico.Reservar import Reservar
 
 #@autor: David Restrepo
 
 class Usmenu():
     
+    fTime = False
+    pl = None
+    pr = None
+    
     @classmethod
     def menu(cls, root:Root, us, fTime=False):              
         
-        def firstTime(us):                                      #Información en caso de primera vez
-            pl = tk.Frame(root)
-            pl.place(relwidth=0.4, relheight=1, relx=0.003, rely=0, anchor="nw")
-            tituloResumen = tk.Label(pl, text="Resumen", font=("Arial",20))
+        def firstTime(us):                                     #Información en caso de primera vez
+            cls.fTime = True
+            cls.pl = tk.Frame(root)
+            cls.pl.place(relwidth=0.4, relheight=1, relx=0.003, rely=0, anchor="nw")
+            tituloResumen = tk.Label(cls.pl, text="Resumen", font=("Arial",20))
             tituloResumen.pack(fill="both", pady=10)
-            txt1 = tk.Text(pl)
+            txt1 = tk.Text(cls.pl)
             
             txt1.insert(tk.END, "CosmoReserve es un programa diseñado para gestionar una cadena de hotelería." +
                                     "Esteprograma consta de diferentes funcionalidades de acuerdo al tipo " +
@@ -41,11 +48,11 @@ class Usmenu():
             txt1.pack(fill="both", pady=10)
             
             
-            pr = tk.Frame(root)
-            pr.place(relwidth=0.4, relheight=1, relx=0.997, rely=0, anchor="ne")
-            tituloFuncionalidad = tk.Label(pr, text="Funcionalidades", font=("Arial",20))
+            cls.pr = tk.Frame(root)
+            cls.pr.place(relwidth=0.4, relheight=1, relx=0.997, rely=0, anchor="ne")
+            tituloFuncionalidad = tk.Label(cls.pr, text="Funcionalidades", font=("Arial",20))
             tituloFuncionalidad.pack(fill="both", pady=10)
-            txt2 = tk.Text(pr)
+            txt2 = tk.Text(cls.pr)
             
             if (us == "huesped"):
                 txt2.insert(tk.END, "Reservar: tiene la posibilidad de buscar la habitación en la que se hospedará, "+ 
@@ -107,10 +114,32 @@ class Usmenu():
             
     @classmethod
     def sistemaHuesped(cls, root, us, prosCon):
-        def reservar():
-            print(True)
-        prosCon.add_command(label="Reservar", command=reservar)
+        def reservar():                             #Poner esto al inicio de cada funcionalidad (borra la información anterior)
+            if cls.fTime:
+                cls.pl.destroy()
+                cls.pr.destroy()
+            
+            
+            
+            Reservar.reservar(us, root)
+                
+                        
+            # criterios = ["nombre", "contra", "hola"]                  //Prueba FieldFrame
+            # vals = ["str", "str", "int"]
+            # desabilitados = ["contra"]
+            # p1 = tk.Frame(root, background="white")
+            # p1.pack(expand=True, fill="both")
+            # form = FieldFrame("cri", criterios, "vals", vals, desabilitados)
+            # form.setRoot(p1)
+            # form.getFrame().place(anchor="center", relx=0.5, rely=0.5)
+            
+            
+        prosCon.add_command(label="Reservar", command=reservar)             #Aquí se le agrega los commandos que llevan a las diferentes funcioanlidades
         
+    
+    
+    
+    
     @classmethod
     def sistemaAdministrador(cls, root, us, prosCon):
         pass

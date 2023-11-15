@@ -54,3 +54,11 @@ class Base(ABC):
     @classmethod
     def addEmpleados(cls, empleado):
         cls._empleados.append(empleado)
+        
+    @classmethod
+    def filtrarPorNombre(cls):
+        pass
+                
+    @classmethod
+    def filtrarPorCiudad(cls):
+        pass
