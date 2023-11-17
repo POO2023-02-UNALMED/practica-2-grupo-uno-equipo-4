@@ -2,7 +2,7 @@ class Hotel:
     
     _totalHoteles = []
     
-    def __init__(self,__cuenta_bancaria,__nombre=None,__ciudad=None,__servicios=None,__habitaciones=None,__empleados=None):
+    def __init__(self,__cuenta_bancaria,__nombre=None,__ciudad=None,__servicios=None,_habitaciones=None,__empleados=None):
         
         self.__cuenta_bancaria = __cuenta_bancaria
             
@@ -13,22 +13,22 @@ class Hotel:
             self.__ciudad = __ciudad
         
         if __servicios is not None:
-            self.__servicios = __servicios
+            self._servicios = __servicios
             
-        if __habitaciones is  not None:
-            self.__habitaciones = __habitaciones
+        if _habitaciones is  not None:
+            self._habitaciones = _habitaciones
             
         if __empleados is not None:
             self.__empleados = __empleados
         
-        for i  in  __habitaciones:
+        for i  in  _habitaciones:
             i.setHotel(self)
         
         for  i  in __empleados:
            i.setHotel(self)
     
     def addHabitacion(self, habitacion):
-        self.__habitaciones.append(habitacion)
+        self._habitaciones.append(habitacion)
       
     def addHistorialClientes(self, huesped):
         self.__historial_clientes.append(huesped)
@@ -59,13 +59,13 @@ class Hotel:
     def setCuentaBancaria(self, __cuenta_bancaria):
         self.__cuenta_bancaria = __cuenta_bancaria
         
-    @property
+    
     def getServicios(self):
-        return self.__servicios
+        return self._servicios
     
 
-    def setServicios(self, __servicios):
-        self.__servicios = __servicios
+    def setServicios(self, _servicios):
+        self._servicios = _servicios
         
     def getNombre(self):
         return self.__nombre
@@ -82,11 +82,11 @@ class Hotel:
         self.__ciudad = __ciudad
         
     def getHabitaciones(self):
-        return self.__habitaciones
+        return self._habitaciones
     
 
-    def setHabitaciones(self, __habitaciones):
-        self.__habitaciones = __habitaciones
+    def setHabitaciones(self, _habitaciones):
+        self._habitaciones = _habitaciones
         
     @property
     def getEmpleados(self):

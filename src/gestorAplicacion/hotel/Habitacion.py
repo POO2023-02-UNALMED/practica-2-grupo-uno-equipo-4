@@ -4,20 +4,20 @@ from typing import List
 
 class Habitacion:
     
-    def __init__(self,__id,__tipo=None,__numero_camas=None,__precio=None,__hotel=None):
+    def __init__(self,_id,_tipo=None,_numero_camas=None,_precio=None,__hotel=None):
         
         self.__calificaciones[Huesped()] = 5.0
-        self.__id = __id
+        self.__id = _id
         self.__calificaciones = {}
         
-        if __tipo is not None:
-            self.__tipo = __tipo
+        if _tipo is not None:
+            self._tipo = _tipo
             
-        if __numero_camas is not None:
-            self.__numero_camas =__numero_camas
+        if _numero_camas is not None:
+            self._numero_camas =_numero_camas
         
-        if __precio is not  None:
-            self.__precio = __precio
+        if _precio is not  None:
+            self._precio = _precio
             
         if __hotel is not None:
             self.__hotel  = __hotel
@@ -44,7 +44,7 @@ class Habitacion:
                 rango.append(i)
 
     def  addCalificacion(self, __huesped,__calificacion):
-        self.__calificaciones[__huesped] = __calificacion
+        self._calificaciones[__huesped] = __calificacion
         
     def addMotivos(self, motivo):
         if self.__motivos_calificaciones[motivo] is  not  None:
@@ -61,12 +61,12 @@ class Habitacion:
     def addReservas(self,reserva):
         self.__reservas.append(reserva)
             
-    @property
-    def getId(self):
-        return self.__id
     
-    def setId(self, __id):
-        self.__id = __id
+    def getId(self):
+        return self._id
+    
+    def setId(self, _id):
+        self._id = _id
         
     @property
     def getHotel(self):
@@ -76,24 +76,24 @@ class Habitacion:
         self.__hotel = __hotel
         
     def getTipo(self):
-        return self.__tipo
+        return self._tipo
     
-    def setTipo(self, __tipo):
-        self.__tipo = __tipo
+    def setTipo(self, _tipo):
+        self._tipo = _tipo
         
-    @property
+    
     def getNumeroCamas(self):
-        return self.__numero_camas
+        return self._numero_camas
     
-    def setNumeroCamas(self, __numero_camas):
-        self.__numero_camas = __numero_camas
+    def setNumeroCamas(self, _numero_camas):
+        self._numero_camas = _numero_camas
         
-    @property
-    def getPrecio(self):
-        return self.__precio
     
-    def setPrecio(self, __precio):
-        self.__precio = __precio
+    def getPrecio(self):
+        return self._precio
+    
+    def setPrecio(self, _precio):
+        self._precio = _precio
         
     @property
     def getReserva(self):
@@ -109,19 +109,19 @@ class Habitacion:
     def setReservas(self, __reservas):
         self.__reservas = __reservas
         
-    @property
-    def getCalificaciones(self):
-        return self.__calificaciones
-
-    def setCalificaciones(self, __calificaciones):
-        self.__calificaciones = __calificaciones
-        
-    @property
-    def getReservada(self):
-        return self.__reservada
     
-    def setReservada(self, __reservada):
-        self.__reservada = __reservada
+    def getCalificaciones(self):
+        return self._calificaciones
+
+    def setCalificaciones(self, _calificaciones):
+        self._calificaciones = _calificaciones
+        
+    
+    def getReservada(self):
+        return self._reservada
+    
+    def setReservada(self, _reservada):
+        self._reservada = _reservada
     
     @property
     def getMotivosCalificaciones(self):

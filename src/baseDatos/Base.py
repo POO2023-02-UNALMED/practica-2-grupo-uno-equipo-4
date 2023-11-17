@@ -56,9 +56,96 @@ class Base(ABC):
         cls._empleados.append(empleado)
         
     @classmethod
-    def filtrarPorNombre(cls):
-        pass
+    def filtrarPorNombre(cls, nombre):
+        foundHotel = False
+        nom = nombre[0]
+        for hotel in cls._hoteles:
+            if nom == hotel.getNombre():
+                hotelNombre = hotel
+                foundHotel = True
+        if foundHotel:
+            hotels = [hotelNombre]
+            return hotels
+        else:
+            print("El nombre del hotel que ingresó no se encuentra en la base de datos, intente de nuevo: ", end="")
+            return None
+            
+        
+        
                 
     @classmethod
-    def filtrarPorCiudad(cls):
-        pass
+    def filtrarPorCiudad(cls, ciudad):
+        
+        print(ciudad)
+        foundHotel = False
+        ciu = ciudad[0]
+        hotels = []
+        for hotel in cls._hoteles:
+            if ciu == hotel.getCiudad():
+                hotelNombre = hotel
+                hotels.append(hotelNombre)
+                foundHotel = True
+        if foundHotel:
+            return hotels
+        else:
+            print("La ciudad del hotel que ingresó no se encuentra en la base de datos, intente de nuevo: ", end="")
+            return None
+        
+    
+    @classmethod
+    def filtrarPorId(cls, identificacion, hotel, huesped):
+        foundRoom = False
+        id = identificacion[0]
+        habitaciones = hotel.getHabitaciones()
+        for hab in habitaciones:
+            if int(id) == hab.getId():
+                tipoHab = hab.getTipo()
+                if "vip" in tipoHab and not huesped.isVip():
+                    print("No puede acceder a esta habitación, pues no es VIP")
+                else:    
+                    habitacion = hab
+                    foundHotel = True
+        if foundHotel:
+            habs = [habitacion]
+            return habs
+        else:
+            print("El Id que ingresó no se encuentra en la base de datos, intente de nuevo: ", end="")
+            return None
+        
+    @classmethod
+    def filtrarPorTipo(cls, hotel, tipo):
+        sortedRooms = cls.sortRooms(hotel)
+        habs = []
+        for i in sortedRooms:
+            if i.getTipo() == tipo:
+                habs.append(i)
+        return habs
+        
+    @classmethod
+    def sortRooms(cls, hotel):
+        
+        promHab = {}
+        habitaciones = hotel.getHabitaciones()
+        
+        for j in habitaciones:
+            dicCalificaciones = j.getCalificaciones()
+            calificaciones = list(dicCalificaciones.values())
+            
+            s = 0
+            for k in calificaciones:
+                s += k
+            
+            prom = s/len(calificaciones)
+            promHab[j] = prom
+        
+        sortedPromHab = dict(sorted(promHab.items(), key=lambda item:item[1], reverse=True))
+        sortedRooms = list(sortedPromHab.keys())
+        return sortedRooms
+                        
+                    
+                        
+                    
+                    
+
+                
+                    

@@ -89,7 +89,7 @@ class Inicio:
         self.boton2.bind("<Button-1>", self.registrar)
 
         self.imagenes = tk.Label(self.P4)
-        self.imagenes.bind("<Button-1>", self.cambiarImagen)
+        self.imagenes.bind("<Enter>", self.cambiarImagen)
         #imagen = tk.PhotoImage(self.imagenesMGA[0])
         self.imagenes.config(image=self.imagenesMGA[0])#corregir image
         self.imagenes.image = self.imagenesMGA[0] #corregir image

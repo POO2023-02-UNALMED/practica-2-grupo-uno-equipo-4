@@ -11,11 +11,11 @@ class TipoHabitacion(Enum):
     VIPSIMPLE = [1, 300000]
 
 
-    def asign_camas(list):
-        return list[0]
+    def asign_camas(tipo):
+        return tipo.value[0]
 
-    def asign_precio(list):
-        return list[1]
+    def asign_precio(tipo):
+        return tipo.value[1]
     
 if __name__ == "__main__":
-    print(TipoHabitacion.asign_camas(TipoHabitacion.SIMPLE.value))
+    print(TipoHabitacion.asign_camas(TipoHabitacion.VIPFAMILIAR))

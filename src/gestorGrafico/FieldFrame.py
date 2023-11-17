@@ -6,27 +6,36 @@ class FieldFrame(Frame):
     
     def __init__ (self, tituloCriterios, criterios, tituloValores, valores = None, habilitado = None) :
         
+        self.listaValores = []
+        self.func = None
+        
         def borrarText():
             for j in self.entries:
                 j.delete(0, END)
                 
         
         def comprobar():
-            incorrect = False
-            for k in self.entries:
-                ind = self.entries.index(k)
-                if valores != None:
-                    if valores[ind] == "int":
-                        try:
-                            numero_entero = int(k.get())
-                        except ValueError:
-                            incorrect = True
-                            print(f"Debe ingresar un valor correcto en la casilla {criterios[ind]}")
-                    elif type(k.get()).__name__ != valores[ind]:
-                        print(f"Debe ingresar un valor correcto en la casilla {criterios[ind]}")
-                        incorrect = True
-            if incorrect == False:
-                print("Lo lograste")
+            # incorrect = False
+            # for k in self.entries:
+            #     ind = self.entries.index(k)
+            #     if valores != None:
+            #         if valores[ind] == "int":
+            #             try:
+            #                 numero_entero = int(k.get())
+            #             except ValueError:
+            #                 incorrect = True
+            #                 print(f"Debe ingresar un valor correcto en la casilla {criterios[ind]}")
+            #         elif type(k.get()).__name__ != valores[ind]:
+            #             print(f"Debe ingresar un valor correcto en la casilla {criterios[ind]}")
+            #             incorrect = True
+            # if incorrect == False:
+            entriesValues = []
+            for l in self.entries:
+                entriesValues.append(l.get())
+            self.listaValores = entriesValues
+            if self.func != None:
+                print(self.listaValores)
+                self.func(self.listaValores)
         
         self.entries = []
         
@@ -48,7 +57,8 @@ class FieldFrame(Frame):
             
             entry = Entry(self.p1)
             entry.grid(row=ind+1, column=1, padx=10, pady=10)
-            entry.insert(0, i)
+            if valores != None:
+                entry.insert(0, valores[ind])
             self.entries.append(entry)
                 
             if habilitado != None:
@@ -65,10 +75,19 @@ class FieldFrame(Frame):
                 
                 
     def setRoot(self, root):
-        self.p1.master = root
+        self.p1.pack(in_=root)
         
+    def setFunc(self, func):
+        self.func = func
+            
     def getFrame(self):
         return self.p1
             
-        
-        
+    def getValores(self):
+        if self.listaValores != []:
+            return self.listValores
+        else:
+            print("No hay valores disponibles")
+            return None
+    
+    
