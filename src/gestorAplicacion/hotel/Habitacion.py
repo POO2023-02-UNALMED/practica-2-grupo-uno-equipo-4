@@ -1,10 +1,12 @@
 from .Hotel import Hotel
+from ..usuarios import Huesped
+from typing import List
 
 class Habitacion:
     
     def __init__(self,__id,__tipo=None,__numero_camas=None,__precio=None,__hotel=None):
         
-        #self.__calificaciones[Huesped()] = 5.0
+        self.__calificaciones[Huesped()] = 5.0
         self.__id = __id
         self.__calificaciones = {}
         
@@ -19,7 +21,28 @@ class Habitacion:
             
         if __hotel is not None:
             self.__hotel  = __hotel
-    
+
+    def calcularPromedio(self) -> float:
+        prom = 0
+        cont  = 0
+        for clave,valor in self.__calificaciones.items():
+            prom = prom + valor
+            cont = cont + 1
+        return prom/cont
+
+    def rangoPrecio(self,totalHabitaciones) -> List:
+        rango = []
+        for i  in totalHabitaciones:
+            if abs(i.getPrecio())-self.__precio:
+                rango.append(i)
+        return rango
+
+    def mejorCalificadas(self,habitaciones) -> List:
+        rango =  []
+        for i in habitaciones:
+            if i.calcularPromedio() >= 3:
+                rango.append(i)
+
     def  addCalificacion(self, __huesped,__calificacion):
         self.__calificaciones[__huesped] = __calificacion
         
@@ -105,7 +128,10 @@ class Habitacion:
         return  self.__motivos_calificaciones
     
     def setMotivosCalificaciones(self, __motivos_calificaciones):
-        self.__motivos_calificaciones = __motivos_calificaciones
+        if self.__motivos_calificaciones is None:
+            self.__motivos_calificaciones[__motivos_calificaciones] = 1
+        else:
+            self.__motivos_calificaciones[__motivos_calificaciones] =  self.__motivos_calificaciones[__motivos_calificaciones] + 1
         
     @property
     def getSugerencias(self):
