@@ -180,7 +180,7 @@ class Reservar():
                         s += k
                     
                     prom = s/len(calificaciones)
-
+                    prom = round(prom, 2)
                     
                     cls.resultadoHotel.insert("", tk.END, text=i.getId(), values=(i.getTipo(), i.getNumeroCamas(), i.getPrecio(), prom,i.getReservada()))
                 

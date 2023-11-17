@@ -1,14 +1,15 @@
 from .Hotel import Hotel
-from ..usuarios import Huesped
+from ..usuarios.Huesped import Huesped
 from typing import List
 
 class Habitacion:
     
     def __init__(self,_id,_tipo=None,_numero_camas=None,_precio=None,__hotel=None):
         
-        self.__calificaciones[Huesped()] = 5.0
-        self.__id = _id
-        self.__calificaciones = {}
+        self._reservada = False
+        self._id = _id
+        self._calificaciones = {}
+        self._calificaciones[Huesped()] = 5.0
         
         if _tipo is not None:
             self._tipo = _tipo
@@ -21,6 +22,7 @@ class Habitacion:
             
         if __hotel is not None:
             self.__hotel  = __hotel
+            
 
     def calcularPromedio(self) -> float:
         prom = 0
