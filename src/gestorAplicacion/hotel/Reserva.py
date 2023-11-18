@@ -1,3 +1,5 @@
+from .Hotel import Hotel
+
 class Reserva:
     def __init__(self,_huesped,_habitacion,_fechaEntrada,_fechaSalida,_costo):
 
@@ -43,7 +45,7 @@ class Reserva:
     def getCiudad(self):
         return self._ciudad
     
-    def setHotel(self,hotel):
+    def setHotel(self,hotel) -> Hotel:
         self._hotel = hotel
 
     def getHotel(self):

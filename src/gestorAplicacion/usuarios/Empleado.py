@@ -1,4 +1,4 @@
-from PresentacionBono import PresentacionBono
+from .PresentacionBono import PresentacionBono
 from .Usuario import Usuario
 class Empleado (Usuario, PresentacionBono):
     def __init__(self, nombre, telefono, username, password, cuentaBancaria, hotel, estado_empleado = False, salario=0):

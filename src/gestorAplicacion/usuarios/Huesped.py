@@ -2,6 +2,7 @@ from .Usuario import Usuario
 from .Preferencia import Preferencia
 from .PresentacionBono import PresentacionBono
 from baseDatos.Base import Base
+from ..hotel import Reserva
 
 class Huesped(Usuario, PresentacionBono):
     def __init__(self,vip=None,preferencias=None, nombre=None, telefono=None, username=None, password=None, cuentaBancaria=None):
@@ -24,7 +25,7 @@ class Huesped(Usuario, PresentacionBono):
     def setVip(self,vip):
         self._vip = vip
 
-    def getReserva(self):
+    def getReserva(self) -> Reserva:
         return self._reserva
    
     def setReserva(self, value):
