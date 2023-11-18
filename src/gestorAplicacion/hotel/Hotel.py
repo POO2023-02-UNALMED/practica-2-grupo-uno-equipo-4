@@ -27,7 +27,24 @@ class Hotel:
         if __empleados is not None:
             for  i  in __empleados:
                i.setHotel(self)
-    
+
+    def calcularPromedioHotel(self):
+        totalHabitaciones = 0
+        totalEmpleados = 0
+        totalServicios = 0
+        for  i in self.getHabitaciones():
+            totalHabitaciones = totalHabitaciones+i.calcularPromedio()
+        for i in self.getEmpleados():
+            totalEmpleados = totalEmpleados + i.promedioCalificaciones(i)
+        for i in self.getServicios():
+            totalServicios = totalServicios + i.promedioCalificaciones(i)
+        totalHabitaciones = totalHabitaciones/len(self._habitaciones)
+        totalServicios = totalServicios/len(self._servicios)
+        totalEmpleados = totalEmpleados/len(self.__empleados)
+        return (totalEmpleados+totalServicios+totalHabitaciones)/3
+
+    def addServicioExtra(self, servicio):
+        self._servicios.append(servicio)
     def addHabitacion(self, habitacion):
         self._habitaciones.append(habitacion)
       

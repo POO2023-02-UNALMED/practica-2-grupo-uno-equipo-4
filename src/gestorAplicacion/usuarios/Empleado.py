@@ -1,4 +1,4 @@
-from gestorAplicacion.usuarios.PresentacionBono import PresentacionBono
+from PresentacionBono import PresentacionBono
 from .Usuario import Usuario
 class Empleado (Usuario, PresentacionBono):
     def __init__(self, nombre, telefono, username, password, cuentaBancaria, hotel, estado_empleado = False, salario=0):
@@ -10,6 +10,48 @@ class Empleado (Usuario, PresentacionBono):
         self.sugerencias = {}
         self.calificaciones = {}
         self.ultimoPago = None
+
+
+    def addCalificaciones(self,usuario,calificacion):
+        self.calificaciones[usuario] = calificacion
+
+    def addMotivos(self,motivo):
+        if self.motivosCalificacion[motivo] is not None:
+            self.motivosCalificacion[motivo] = self.motivosCalificacion[motivo] + 1
+        else:
+            self.motivosCalificacion[motivo] = 1
+
+
+    def promedioCalificaciones(cls,empleado):
+        total = 0
+        for clave, valor in empleado.getCalificaciones().items():
+            total = total + valor
+        return  total/len(empleado.getCalificaciones().items())
+
+    def mejorCalificacion(self, empleados):
+        rango = []
+        for i in empleados:
+            if self.promedioCalificaciones(i)>=3:
+                rango.append(i)
+        return rango
+
+    def rangoCalificaciones(self,empleados):
+        rango = []
+        for i in empleados:
+            for clave,valor  in i.getSugerencias().items():
+                rango.append(clave)
+        return rango
+
+    def addSugerencias(self,sugerencia):
+        if self.getSugerencias()[sugerencia] is None:
+            self.getSugerencias()[sugerencia] = 1
+        else:
+            self.getSugerencias()[sugerencia] = self.getSugerencias()[sugerencia]+1
+
+    def addSugerenciasPendientes(self, sugerencias):
+        self.sugerenciasPendientes[self.getId()] = sugerencias
+
+    def  addSugerencias(self,sugerencia):
 
     def getEstadoEmpleado(self):
         return self.estadoEmpleado
@@ -34,6 +76,12 @@ class Empleado (Usuario, PresentacionBono):
 
     def setCalificaciones(self,calificaciones):
         self.calificaciones = calificaciones
+
+    def getSugerenciasPendientes(self):
+        return self.sugerenciasPendientes
+
+    def setCalificaciones(self,sugerencias):
+        self.sugerenciasPendientes = sugerencias
 
     def getUltimoPago(self):
         return self.ultimoPago
