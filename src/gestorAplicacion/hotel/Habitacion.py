@@ -38,7 +38,7 @@ class Habitacion:
     def rangoPrecio(self,totalHabitaciones) -> List:
         rango = []
         for i  in totalHabitaciones:
-            if abs(i.getPrecio())-self.__precio:
+            if abs(i.getPrecio()-self.__precio)<=10:
                 rango.append(i)
         return rango
 
@@ -47,6 +47,16 @@ class Habitacion:
         for i in habitaciones:
             if i.calcularPromedio() >= 3:
                 rango.append(i)
+
+    def totalSugerencias(self, habitaciones)->List:
+        resultado = []
+        for i in habitaciones:
+            for clave, valor in i.getSugerencias().items():
+                resultado.append(clave)
+        return resultado
+
+    def addSugerenciasPendientes(self, sugerencia):
+        self.__sugerencias[self.getId()] = sugerencia
 
     def  addCalificacion(self, __huesped,__calificacion):
         self._calificaciones[__huesped] = __calificacion
@@ -65,7 +75,12 @@ class Habitacion:
             
     def addReservas(self,reserva):
         self.__reservas.append(reserva)
-            
+
+    def getSugerenciasPendientes(self):
+        return self.__sugerenciasPendientes
+
+    def setSugerenciasPendientes(self, sugerencias):
+        self.__sugerenciasPendientes = sugerencias
     
     def getId(self):
         return self._id
