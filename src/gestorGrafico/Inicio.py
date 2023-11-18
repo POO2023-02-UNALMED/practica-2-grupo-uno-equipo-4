@@ -179,7 +179,7 @@ class Inicio:
         self.imagenes.pack(side="top")
 
     def cambioProgramador(self, event):
-        self.contP = (self.contP + 1) % 4
+        self.contP = (self.contP + 1) % 5
         self.p = self.programadores[self.contP]
         self.bio.config(text=f"{self.p.nombre}\nBiografia: {self.p.biografia}")
 
