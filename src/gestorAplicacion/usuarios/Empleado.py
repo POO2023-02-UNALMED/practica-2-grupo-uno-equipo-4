@@ -51,7 +51,6 @@ class Empleado (Usuario, PresentacionBono):
     def addSugerenciasPendientes(self, sugerencias):
         self.sugerenciasPendientes[self.getId()] = sugerencias
 
-    def  addSugerencias(self,sugerencia):
 
     def getEstadoEmpleado(self):
         return self.estadoEmpleado
@@ -80,7 +79,7 @@ class Empleado (Usuario, PresentacionBono):
     def getSugerenciasPendientes(self):
         return self.sugerenciasPendientes
 
-    def setCalificaciones(self,sugerencias):
+    def setSugerenciasPendientes(self,sugerencias):
         self.sugerenciasPendientes = sugerencias
 
     def getUltimoPago(self):
