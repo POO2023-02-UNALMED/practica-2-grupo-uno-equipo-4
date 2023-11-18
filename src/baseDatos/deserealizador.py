@@ -6,7 +6,7 @@ from .Base import Base
 class Deserializador:
     @classmethod
     def deserializador(cls):
-        file = open("src/baseDatos/temp.pkl", "rb")
+        file = open("src/baseDatos/temp/administradores.pkl", "rb")
         try :
             pcs = pickle.load(file)
             Base.setAdministradores(pcs)
