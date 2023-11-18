@@ -1,14 +1,14 @@
 from .Hotel import Hotel
-from ..usuarios import Huesped
+from ..usuarios.Huesped import Huesped
 from typing import List
 
 class Habitacion:
     
     def __init__(self,__id,__tipo=None,__numero_camas=None,__precio=None,__hotel=None):
         
-        self.__calificaciones[Huesped()] = 5.0
         self.__id = __id
         self.__calificaciones = {}
+        self.__calificaciones[Huesped()] = 5.0
         
         if __tipo is not None:
             self.__tipo = __tipo
@@ -109,7 +109,7 @@ class Habitacion:
     def setReservas(self, __reservas):
         self.__reservas = __reservas
         
-    @property
+    
     def getCalificaciones(self):
         return self.__calificaciones
 

@@ -20,12 +20,12 @@ class Hotel:
             
         if __empleados is not None:
             self.__empleados = __empleados
-        
-        for i  in  __habitaciones:
-            i.setHotel(self)
-        
-        for  i  in __empleados:
-           i.setHotel(self)
+        if __habitaciones is not None:
+            for i  in  __habitaciones:
+                i.setHotel(self)
+        if __empleados is not None:
+            for  i  in __empleados:
+               i.setHotel(self)
     
     def addHabitacion(self, habitacion):
         self.__habitaciones.append(habitacion)

@@ -18,7 +18,7 @@ class Recomendaciones():
         ventana.geometry("+0+0")
         ventana.title("Tipo de recomendacion")
         ventana.grid_columnconfigure((0,1), minsize=80)
-        labelTitulo = tk.Label(ventana,text="Recomendaciones",font=("arial", 30))
+        labelTitulo = tk.Label(ventana,text="Recomendaciones",font=("arial", 30),fg="red")
         labelSubtitulo = tk.Label(ventana,text="Elige el tipo de recomendación: ",font=("arial", 30))
         labelTitulo.grid(row=0,column=2,columnspan=2,pady=20)
         labelSubtitulo.grid(row=3,column=2,pady=20,padx=20,sticky="E")
@@ -45,30 +45,32 @@ class Recomendaciones():
         ventana.geometry("+0+0")
         ventana.title("Elegir Ciudad")
         ventana.grid_columnconfigure((0,1), minsize=80)
-        labelTitulo = tk.Label(ventana,text="Recomendaciones",font=("arial", 30))
+        labelTitulo = tk.Label(ventana,text="Recomendaciones",font=("arial", 30),fg="red")
         labelTitulo.grid(row=0,column=2,columnspan=2,pady=20)
         labelSubtitulo = tk.Label(ventana,text="Elige la ciudad: ",font=("arial", 30))
         labelSubtitulo.grid(row=3,column=2,pady=20,padx=20,sticky="E")
-        valorDefecto = tk.StringVar(value="Ciudad")
         hoteles = Base.getHoteles()
         ciudades = []
         for hotel in hoteles:
-            ciudades.append(hotel.getCiudad())
+            ciudad = hotel.getCiudad()
+            if ciudad not in ciudades:
+                ciudades.append(hotel.getCiudad())
+        valorDefecto = tk.StringVar(value="Ciudad")
         combo = ttk.Combobox(ventana,values=ciudades,textvariable=valorDefecto,font=("arial", 30),state="readonly")
         combo.grid(row=3,column=3,sticky="w",pady=20)
         atras = tk.Button(ventana,text="Atras",font=("arial", 30),command=lambda:(Recomendaciones._ventanaElegirCiudad.destroy(),self.inicio()))
         atras.grid(row=4,column=2,pady=50)
-        siguiente = tk.Button(ventana,text="Siguiente",font=("arial", 30),command=lambda:self._tipoRecomendacion(tipoRecomendacion))
+        siguiente = tk.Button(ventana,text="Siguiente",font=("arial", 30),command=lambda:self._tipoRecomendacion(tipoRecomendacion,combo.get()))
         siguiente.grid(row=4,column=3,pady=50)
     
-    #TODO:Hacer cuadricula con los hoteles que permita ingresar a ver las habitaciones
-    def _tipoRecomendacion(self,tipoRecomendacion):
+    #TODO:idea para el manejo de errores
+    def _tipoRecomendacion(self,tipoRecomendacion,ciudad):
         Recomendaciones._ventanaElegirCiudad.destroy()
         recomendaciones = {}
         if(tipoRecomendacion=="Por preferencias"):
-            recomendaciones = self._huesped.recomendacionHotelesPorSimilar()
+            recomendaciones = self._huesped.recomendacionHotelesPorSimilar(ciudad)
         else:
-            recomendaciones = self._huesped.recomendacionHotelesPorHistorial()
+            recomendaciones = self._huesped.recomendacionHotelesPorHistorial(ciudad)
         Recomendaciones._ventanaTipoRecomendacion = tk.Tk() 
         ventana = Recomendaciones._ventanaTipoRecomendacion
         anchoPantalla = ventana.winfo_screenwidth()
@@ -77,8 +79,22 @@ class Recomendaciones():
         ventana.geometry("+0+0")
         ventana.title("Recomendacion")
         ventana.grid_columnconfigure((0,1), minsize=80)
-        labelTitulo = tk.Label(ventana,text="Recomendaciones",font=("arial", 30))
+        labelTitulo = tk.Label(ventana,text="Recomendaciones",font=("arial", 30),fg="red")
         labelTitulo.grid(row=0,column=2,columnspan=2,pady=20)
+        posiciones= 2
+        for key,values in recomendaciones.items():
+            labelHotel = tk.Label(ventana,text=key.getNombre(),font=("arial",30),fg="blue")
+            labelHotel.grid(row=posiciones,column=1)
+            posiciones +=1
+            for value in values:
+                labelHabitacion = tk.Label(ventana,text=value.getTipo(),font=("arial",30))
+                labelHabitacion.grid(row=posiciones,column=2)
+                posiciones+=1
+        nuevaRecomendacion = tk.Button(ventana,text="Solicitar nueva recomendación",font=("arial", 30),command=lambda:(Recomendaciones._ventanaTipoRecomendacion.destroy(),self.inicio()))
+        nuevaRecomendacion.grid(row=posiciones,column=2,pady=50)
+        salir = tk.Button(ventana,text="Siguiente",font=("arial", 30))
+        salir.grid(row=posiciones,column=3,pady=50,padx=50)
+            
 
         
         

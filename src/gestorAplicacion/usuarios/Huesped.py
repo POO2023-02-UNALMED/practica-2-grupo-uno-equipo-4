@@ -98,7 +98,8 @@ class Huesped(Usuario, PresentacionBono):
     #Método que se usa en recomendacion hoteles por similar(). 
     def _recomendacionHabitacionPorSimilar(self,hotel,preferencia):
         habitacionesHotel = hotel.getHabitaciones()
-        habitaciones = [habitacion for habitacion in habitacionesHotel if habitacion.getTipo()==preferencia.getTipoHabitacion()]
+        tiposHabitacionesPreferencias = preferencia.getTiposHabitaciones()
+        habitaciones = [habitacion for habitacion in habitacionesHotel if habitacion.getTipo() in tiposHabitacionesPreferencias]
         return habitaciones
         
     #Para recomendar hoteles basado en las preferencias del huesped

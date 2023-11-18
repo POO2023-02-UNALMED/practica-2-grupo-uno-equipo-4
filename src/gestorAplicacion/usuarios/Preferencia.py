@@ -1,12 +1,12 @@
 class Preferencia:
-    def __init__(self,ciudad=None,nombreHotel=None,tipoHabitacion=None):
+    def __init__(self,ciudad=None,nombreHotel=None,tiposHabitaciones=None):
         if ciudad is not None:
             self._ciudad = ciudad
         if nombreHotel is not None:
             self._nombreHotel = nombreHotel
 
-        if tipoHabitacion is not None:
-            self._tipoHabitacion = tipoHabitacion
+        if tiposHabitaciones is not None:
+            self._tiposHabitaciones = tiposHabitaciones
     
     def getCiudad(self):
         return self._ciudad
@@ -14,5 +14,5 @@ class Preferencia:
     def getNombreHotel(self):
         return self._nombreHotel
     
-    def getTipoHabitacion(self):
-        return self._tipoHabitacion
+    def getTiposHabitaciones(self):
+        return self._tiposHabitaciones

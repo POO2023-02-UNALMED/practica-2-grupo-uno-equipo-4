@@ -1,48 +1,69 @@
 class Reserva:
-    def __init__(self,__huesped,__habitacion,__fechaEntrada,__fechaSalida,__costo):
+    def __init__(self,_huesped,_habitacion,_fechaEntrada,_fechaSalida,_costo,_hotel,_ciudad):
 
-        self.__calificacionHotel = 0
-        self.__calificacionHabitacion = 0
+        self._calificacionHotel = 0
+        self._calificacionHabitacion = 0
+        self._huesped = _huesped
+        self._habitacion = _habitacion
+        self._fechaEntrada = _fechaEntrada
+        self._fechaSalida = _fechaSalida
+        self._costo  = _costo
+        self._hotel = _hotel
+        self._ciudad = _ciudad
 
-        self.__huesped = __huesped
-        self.__habitacion = __habitacion
-        self.__fechaEntrada = __fechaEntrada
-        self.__fechaSalida = __fechaSalida
-        self.__costo  = __costo
-
-    @property
+    
     def getHuesped(self):
-        return self.__huesped
+        return self._huesped
 
-    def setHuesped(self,__huesped):
-        self.__huesped = __huesped
+    def setHuesped(self,_huesped):
+        self._huesped = _huesped
 
-    @property
     def getHabitacion(self):
-        return self.__habitacion
+        return self._habitacion
 
-    def setHabitacion(self,__habitacion):
-        self.__habitacion = __habitacion
+    def setHabitacion(self,_habitacion):
+        self._habitacion = _habitacion
 
-    @property
     def getFechaEntrada(self):
-        return self.__fechaEnrada
+        return self._fechaEnrada
 
-    def setFechaEntrada(self,__fechaEntrada):
-        self.__fechaEntrada = __fechaEntrada
+    def setFechaEntrada(self,_fechaEntrada):
+        self._fechaEntrada = _fechaEntrada
 
-    @property
     def getFechaSalida(self):
-        return self.__fechaSalida
+        return self._fechaSalida
 
-    def setFechaSalida(self, __fechaSalida):
-        self.__fechaSalida = __fechaSalida
+    def setFechaSalida(self, _fechaSalida):
+        self._fechaSalida = _fechaSalida
 
-    @property
     def getCosto(self):
-        return self.__costo
+        return self._costo
 
-    def setCosto(self, __costo):
-        self.__costo = __costo
+    def setCosto(self, _costo):
+        self._costo = _costo
+
+    def getCiudad(self):
+        return self._ciudad
+    
+    def setHotel(self,hotel):
+        self._hotel = hotel
+
+    def getHotel(self):
+        return self._hotel
+    
+    def setCiudad(self,ciudad):
+        self._ciudad = ciudad
+
+    def setCalificacionHotel(self,calificacion):
+        self._calificacionHotel = calificacion
+    
+    def getCalificacionHotel(self):
+        return self._calificacionHotel
+    
+    def setCalificacionHabitacion(self,calificacion):
+        self._calificacionHabitacion = calificacion
+
+    def getCalificacionHabitacion(self):
+        return self._calificacionHabitacion
             
         
