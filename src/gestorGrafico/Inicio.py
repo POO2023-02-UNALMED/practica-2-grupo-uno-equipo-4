@@ -24,6 +24,23 @@ class Inicio:
                             "Soy de la carrera de Ciencias de la Computación. Nací en medellín Colombia",
                             [path+"\\imagenes\\david1.png", path+"\\imagenes\\david2.png", 
                             path+"\\imagenes\\david3.png", path+"\\imagenes\\david4.png"])
+        
+        camilo = Programador("Yohan Camilo Sanchez Meza",
+                            "Soy de la carrera de Ingeniería de Sistemas.",
+                            [path+"\\imagenes\\david1.png", path+"\\imagenes\\david2.png", 
+                            path+"\\imagenes\\david3.png", path+"\\imagenes\\david4.png"])
+        
+        alejandra = Programador("Alejandra Toro Grisales",
+                            "Soy de la carrera de Ciencias de la Computación.")
+        
+        pablo = Programador("Juan Pablo Rivera Alvarez",
+                            "Soy de la carrera de Ciencias de la Computación.")
+        
+        pablo = Programador("Juan Pablo Rivera Alvarez",
+                            "Soy de la carrera de Ciencias de la Computación.")
+        
+        jhonDow = Programador("Samuel Castaño Alfonso",
+                            "Soy de la carrera de Ingeniería de Sistemas.")
 
         self.programadores = [david]
         
