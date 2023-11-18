@@ -143,8 +143,8 @@ class Inicio:
         
     def iniciar(self, event):
         self.ventana.cleanRoot()
-        #Login.login(self.ventana)
-        Calificar.seleccionar(self.ventana)
+        Login.login(self.ventana)
+        #3Calificar.seleccionar(self.ventana)
 
     def registrar(self, event):
         self.ventana.cleanRoot()

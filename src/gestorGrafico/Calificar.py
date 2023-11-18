@@ -83,6 +83,16 @@ class Calificar :
         #username_label.grid(row=1, column=0, padx=1, pady=1)
         #username_entry = tk.Entry(P2)
         #username_entry.grid(row=1, column=1, padx=1, pady=1)
+        conts = 6
+        for servicio  in huesped.getReserva().getHotel().getServicios():
+            etiqueta4 = tk.Label(P2, text=servicio.getTipoServicio(), font=("arial", 10))
+            etiqueta4.grid(row=4, column=0, padx=1, pady=1)
+            types = [1,2,3,4,5]
+            usType5 = Combobox(P2, values=types, state="readonly",font=("arial", 10))
+            usType5.set("Calificacion servicio")
+            usType5.grid(row=conts, column=1, padx=1, pady=1)
+            conts = conts  + 1
+            
     
    
         
