@@ -27,22 +27,26 @@ class Inicio:
         
         camilo = Programador("Yohan Camilo Sanchez Meza",
                             "Soy de la carrera de Ingeniería de Sistemas.",
-                            [path+"\\imagenes\\david1.png", path+"\\imagenes\\david2.png", 
-                            path+"\\imagenes\\david3.png", path+"\\imagenes\\david4.png"])
+                            [path+"\\imagenes\\Camilo1.png", path+"\\imagenes\\Camilo2.png", 
+                            path+"\\imagenes\\Camilo3.png", path+"\\imagenes\\Camilo4.png"])
         
         alejandra = Programador("Alejandra Toro Grisales",
-                            "Soy de la carrera de Ciencias de la Computación.")
+                            "Soy de la carrera de Ciencias de la Computación.",
+                            [path+"\\imagenes\\Alejandra1.png", path+"\\imagenes\\Alejandra2.png", 
+                            path+"\\imagenes\\Alejandra3.png", path+"\\imagenes\\Alejandra4.png"])
         
         pablo = Programador("Juan Pablo Rivera Alvarez",
-                            "Soy de la carrera de Ciencias de la Computación.")
+                            "Soy de la carrera de Ciencias de la Computación.",
+                            [path+"\\imagenes\\Pablo1.png", path+"\\imagenes\\Pablo2.png", 
+                            path+"\\imagenes\\Pablo3.png", path+"\\imagenes\\Pablo4.png"])
         
-        pablo = Programador("Juan Pablo Rivera Alvarez",
-                            "Soy de la carrera de Ciencias de la Computación.")
         
-        jhonDow = Programador("Samuel Castaño Alfonso",
-                            "Soy de la carrera de Ingeniería de Sistemas.")
+        jhonDoe = Programador("Samuel Castaño Alfonso",
+                            "Soy de la carrera de Ingeniería de Sistemas.",
+                            [path+"\\imagenes\\JohnDoe1.png", path+"\\imagenes\\JohnDoe2.png", 
+                            path+"\\imagenes\\JohnDoe3.png", path+"\\imagenes\\JohnDoe4.png"])
 
-        self.programadores = [david]
+        self.programadores = [david, camilo, alejandra, pablo, jhonDoe]
         
         imagenp1 = tk.PhotoImage(file = path+"\\imagenes\\logo1.png")
         imagenp1 = imagenp1.subsample(x= 2, y = 1)
