@@ -234,7 +234,9 @@ class Usmenu():
 
         ##############################################
 
-        
+        #
+        #Ver saldo del hotel
+        #
 
         def verSaldoHotel():
 
@@ -268,6 +270,70 @@ class Usmenu():
             volver = Button(root, text="Volver", command=volver)
             volver.pack(pady=10)
 
+        #
+        #Registrar nueva habitación
+        #
+
+        def regisHabitacion():
+
+            def volver():
+                cls.menu(root, us)
+
+            root.cleanRoot()
+            root.title("CosmoReserve")
+            menuBar = Menu(root)
+            root.config(menu=menuBar)
+            
+            archivo = Menu(menuBar, tearoff=False)                              #opcion archivo 
+            menuBar.add_cascade(label="Archivo", menu=archivo)
+            archivo.add_command(label="Aplicación", command=root.aplicacion)
+            archivo.add_command(label="Salir", command=root.salir)
+            
+            prosCon = Menu(menuBar, tearoff=False)                           #opcion procesos y consultas
+            menuBar.add_cascade(label="Procesos y Consultas", menu=prosCon)
+            
+            ayuda = Menu(menuBar, tearoff=False)                           #opcion ayuda
+            menuBar.add_cascade(label="Ayuda", menu=ayuda)
+            ayuda.add_command(label="Acerca de", command=root.ayuda)
+
+            volver = Button(root, text="Volver", command=volver)
+            volver.pack(pady=10)
+
+            titulo = tk.Label(root, text="Registrar nueva habitación", font=("Arial",20))
+            titulo.pack(fill="both", pady=10)
+
+            respuesta = "Hotel al cual se le va a registrar la habitación: " + us.getHotel().getNombre()
+
+            titulo = tk.Label(root, text=respuesta, font=("Arial",20))
+            titulo.pack(fill="both", pady=10)
+
+        #
+        #Cambiar el saldo del hotel
+        #
+
+        def cambiarSaldoHot():
+            pass
+
+        #
+        #Fecha de último pago
+        #
+
+        def fechUltimoPag():
+
+            #
+            #Borrar último pago
+            #
+
+            def delteUltimoPago():
+                pass
+
+        
+
+
+        #
+        #Administrador después del login
+        #
+
         if not cls.fTime:
             
             titulo = "Bienvenido " + us.getNombre()
@@ -286,11 +352,19 @@ class Usmenu():
             cambiarSaldoHotel.pack(pady=10)
             ultimoPago = Button(text="Ver la fecha del último pago")
             ultimoPago.pack(pady=10)
+
+        #
+        # Funcionalidada para pagar empleados
+        #
         
         
         def pagarEmpleados():
             def volver():
                 cls.menu(root, us)
+
+            #
+            #Pagar a los empleados - messagebox
+            #
 
             def pagar():
 
@@ -358,6 +432,10 @@ class Usmenu():
 
             volverPage = Button(root, text="Volver", command=volver)
             volverPage.pack(pady=10)
+
+        #
+        #Agregar la funcionalidad al menú
+        #
 
 
         prosCon.add_command(label="Pagar empleados", command=pagarEmpleados)   
