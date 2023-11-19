@@ -124,7 +124,8 @@ class Signup():
             preferencias = []
             preferencia = Preferencia(city_combobox.get(), hotels_combobox.get(), habitaciones_combobox.get())
             preferencias.append(preferencia)
-            huesped = Huesped (bool(is_vip_var), preferencias, nombre_entry.get(), telefono_entry.get(), username_entry.get(), password_entry.get(), CuentaBancaria(saldo_entry.get(), banco_entry.get()))
+            saldo = int(saldo_entry.get())
+            huesped = Huesped (is_vip_var.get(), preferencias, nombre_entry.get(), telefono_entry.get(), username_entry.get(), password_entry.get(), CuentaBancaria(saldo, banco_entry.get()))
             Base.addHuespedes(huesped)
         
             if (is_bono_var):
@@ -185,7 +186,7 @@ class Signup():
         hotels_combobox.grid(column=1, row=8, padx=1, pady=1)
         
         
-        listaHabitaciones = ["simple", "doble", "familiar", "vipsimple", "vipdoble", "vipfamiliar"]
+        listaHabitaciones = ["simple", "doble", "familiar", "simplevip", "doblevip", "familiarvip"]
         habitaciones_label = tk.Label(P3, text="Elija el tipo de habitación que prefiere de la siguiente lista:")
         habitaciones_label.grid(column=0, row=9, padx=1, pady=1)
 
@@ -291,7 +292,8 @@ class Signup():
             for x in hoteles:
                 if x.getNombre() == selectedHotel:
                     hotel = x
-            administrador = Administrador(nombre_entry.get(), telefono_entry.get(), username_entry.get(), password_entry.get(), CuentaBancaria(saldo_entry.get(), banco_entry.get()), hotel)
+            saldo = int(saldo_entry.get())
+            administrador = Administrador(nombre_entry.get(), telefono_entry.get(), username_entry.get(), password_entry.get(), CuentaBancaria(saldo, banco_entry.get()), hotel)
             Base.addAdministradores(administrador)
             
             root.cleanRoot()
@@ -402,10 +404,11 @@ class Signup():
             for x in hoteles:
                 if x.getNombre() == selectedHotel:
                     hotel = x
-            empleado = Empleado(nombre_entry.get(), telefono_entry.get(), username_entry.get(), password_entry.get(), CuentaBancaria(saldo_entry.get(), banco_entry.get()), hotel)
+            saldo = int(saldo_entry.get())
+            empleado = Empleado(nombre_entry.get(), telefono_entry.get(), username_entry.get(), password_entry.get(), CuentaBancaria(saldo, banco_entry.get()), hotel)
             Base.addEmpleados(empleado)
             
-            if (is_bono_var):
+            if (is_bono_var.get()):
                 empleado.ofrecerBono()
             cls.intro(empleado)
             
@@ -452,3 +455,5 @@ class Signup():
         endRegist = tk.Button(P2, text="Enviar")
         endRegist.place(relx=0.5, rely=0.5, anchor="n")
         endRegist.bind("<Button-1>", terminar)
+        
+    

@@ -1,7 +1,11 @@
+from datetime import datetime, date
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
 from baseDatos.Base import Base
 from gestorGrafico.FieldFrame import FieldFrame
+from gestorAplicacion.hotel.Habitacion import Habitacion
+from gestorAplicacion.hotel.Reserva import Reserva
 
 class Reservar():
     
@@ -11,10 +15,11 @@ class Reservar():
     p2 = None
     resultados = None
     typestOptions = None
+    rootMaster = None
     
     @classmethod
     def reservar(cls, huesped, root):
-        
+        cls.rootMaster = root
         def seleccionar():
             hotelNom = cls.resultadoHotel.item(cls.resultadoHotel.selection(), "text")
             for i in Base.getHoteles():
@@ -54,8 +59,8 @@ class Reservar():
                         if not j.getReservada():
                             c += 1
                     cls.resultadoHotel.insert("", tk.END, text=i.getNombre(), values=(i.getCiudad(), c, ",".join(i.getServicios())))
-                    cls.enviarFiltroHotel = tk.Button(cls.p2, text="Seleccionar", command=seleccionar)
-                    cls.enviarFiltroHotel.pack(pady=2)
+                cls.enviarFiltroHotel = tk.Button(cls.p2, text="Seleccionar", command=seleccionar)
+                cls.enviarFiltroHotel.pack(pady=2)
             
             
 
@@ -129,9 +134,11 @@ class Reservar():
         def seleccionar():
             habId = cls.resultadoHotel.item(cls.resultadoHotel.selection(), "text")
             habitaciones = hotel.getHabitaciones()
+            print(habitaciones)
             for i in habitaciones:
                 if i.getId() == habId:
                     selectedRoom = i
+            print(selectedRoom)
             cls.realizarReserva(selectedRoom, huesped)
             
         
@@ -152,8 +159,7 @@ class Reservar():
             else:
                 habitaciones = Base.sortRooms(hotel)
                 
-                
-                
+            
             cls.resultadoHotel = ttk.Treeview(cls.p2, columns=("Camas", "Tipo", "Precio", "Calificación", "Reservada"), selectmode='browse')
             cls.resultadoHotel.pack(pady=2)
             cls.resultadoHotel.heading("#0", text="Id")
@@ -250,6 +256,155 @@ class Reservar():
     
     @classmethod
     def realizarReserva(cls, habitacion, huesped):
+        from gestorGrafico.Usmenu import Usmenu
+        def continuarFechas(fechas):
+            fechaActual = datetime.now().date()
+            ingreso_valido = True
+            
+            if len(fechas) == 4:
+                fechaIni = fechas[2]
+                fechaFin = fechas[3]
+            else:
+                fechaIni = fechas[0]
+                fechaFin = fechas[1]
+            
+            if fechaIni.count("/") != 2:
+                print("Error. Debe ingresar una fecha correcta")
+                ingreso_valido = False
+            if fechaFin.count("/") != 2:
+                print("Error. Debe ingresar una fecha correcta")
+                ingreso_valido = False
+            
+            if ingreso_valido:
+                fIni = fechaIni.split("/")
+                fFin = fechaFin.split("/")
+                try:
+                    diaIni = int(fIni[0])
+                    mesIni = int(fIni[1])
+                    anioIni = int(fIni[2])
+                    diaFin = int(fFin[0])
+                    mesFin = int(fFin[1])
+                    anioFin = int(fFin[2])
+                except ValueError:
+                    print("Error. Debe ingresar una fecha correcta")
+                    ingreso_valido = False
+                    
+            if ingreso_valido:
+                if diaIni < 1 or diaIni > 31:
+                    ingreso_valido = False
+                    print("Error. Debe ingresar una fecha correcta")
+                
+                if mesIni < 1 or mesIni > 12:
+                    ingreso_valido = False
+                    print("Error. Debe ingresar una fecha correcta")
+
+            if ingreso_valido:
+                fechaInicio = date(anioIni, mesIni, diaIni)
+                print(fechaInicio.strftime("%Y-%m-%d"))
+                print(fechaActual.strftime("%Y-%m-%d"))
+                if fechaActual > fechaInicio:
+                    print("Holiiiiiiii")
+                    print("Error. Debe ingresar una fecha correcta")
+                    ingreso_valido = False
+        
+            
+            if ingreso_valido:
+                print("Holaaaaaaaaaaa")
+                if diaFin < 1 or diaFin > 31:
+                    print("Error. Debe ingresar una fecha correcta")
+                    ingreso_valido = False
+                
+                if mesFin < 1 or mesFin > 12:
+                    print("Error. Debe ingresar una fecha correcta")
+                    ingreso_valido = False
+
+            if ingreso_valido:
+                fechaFinal = date(anioFin, mesFin, diaFin)
+                if fechaActual > fechaFinal or fechaInicio >= fechaFinal:
+                    print("Error. Debe ingresar una fecha correcta (mayor a la fecha de inicio)")
+                    ingreso_valido = False
+                
+            if ingreso_valido:
+                for x in habitacion.getReservas():
+                    fReIni = x.getFechaEntrada().split("/")
+                    fReFin = x.getFechaSalida().split("/")
+                    
+                    fechaReIni = date(int(fReIni[2]), int(fReIni[1]), int(fReIni[0]))
+                    fechaReFin = date(int(fReFin[2]), int(fReFin[1]), int(fReFin[0]))
+                    
+                    if fechaReIni == fechaInicio or fechaReFin == fechaFinal or fechaReIni == fechaFinal or fechaReFin == fechaInicio \
+                            or ((fechaReIni < fechaInicio and fechaReFin > fechaFinal) and fechaReFin < fechaFinal) \
+                            or (fechaReIni > fechaInicio and (fechaReFin < fechaFinal and fechaReFin > fechaFinal)) \
+                            or (fechaReIni < fechaInicio and fechaReFin > fechaFinal) \
+                            or (fechaReIni > fechaInicio and fechaReFin < fechaFinal):
+                        print(f"Error. Su fecha se está intersecando con las fechas de la siguiente reserva:\n"
+                            f"Fecha de inicio: {x.getFechaEntrada()}\n"
+                            f"Fecha de fin: {x.getFechaSalida()}\n")
+                        ingreso_valido = False
+                        break
+            
+            if ingreso_valido:
+                if huesped.getReserva() is not None or huesped.getReserva() == False:
+                    print("Ya tiene una reserva en nuestra cadena de hoteles. No puede realizar otra")
+                    ingreso_valido = False
+                else:
+                    cobroHabitacion = (fechaFinal.day - fechaInicio.day) * habitacion.getPrecio()
+                    CB = huesped.getCuentaBancaria()
+                    saldo = CB.getSaldo()
+                    if saldo < cobroHabitacion:
+                        print("No tiene el saldo suficiente para pagar la reserva. Intente de nuevo")  
+                        ingreso_valido = False  
+        
+            if ingreso_valido:
+                respuesta = messagebox.askyesno("Confirmación", "¿Está seguro que quiere realizar la reserva?")
+                
+                if respuesta:
+                    hot = habitacion.getHotel()
+                    for hotel in Base.getHoteles():
+                        historial = hotel.getHistorialClientes()
+                        for hue in historial:
+                            if hue.getUsername() == huesped.getUsername():
+                                messagebox.showinfo("Bono", "Como ya ha reservado habitaciones en este hotel, se le hará un descuento de 80000$")
+                                cobroHabitacion -= 80000
+                                habitacion.getHotel().addHistorialClientes(huesped)
+
+                    CB.retirar(cobroHabitacion)
+                    HBC = hot.getCuentaBancaria()
+                    HBC.depositar(cobroHabitacion)
+                    hotName = hot.getNombre()
+                    hotCity = hot.getCiudad()
+                    
+                    messagebox.showinfo("Mensaje", f"Se le han descontado {cobroHabitacion}$ de su cuenta bancaria")
+                    reserva = Reserva(huesped, habitacion, fechaIni, fechaFin, cobroHabitacion)
+                    huesped.setReserva(reserva)
+                    
+                    reservas = habitacion.getReservas()
+                    reservas.append(reserva)
+                    
+                    if fechaInicio == fechaActual:
+                        habitacion.setReservada(True)
+                        textFin = ("Hoy mismo comienza su estadía. Disfrute\n\n"+
+                        "Información:\n\n"+
+                        f"Hotel: {hotName}\n\n"+
+                        f"Ciudad: {hotCity}\n\n"+
+                        f"Fecha de inicio: {fechaIni}\n\n"+
+                        f"Fecha de fin: {fechaFin}\n\n"+
+                        f"Costo total: {cobroHabitacion}")
+                    else:
+                        textFin = ("Información:\n\n"+
+                        f"Hotel: {hotName}\n\n"+
+                        f"Ciudad: {hotCity}\n\n"+
+                        f"Fecha de inicio: {fechaIni}\n\n"+
+                        f"Fecha de fin: {fechaFin}\n\n"+
+                        f"Costo total: {cobroHabitacion}")
+                    messagebox.showinfo("Reserva exitosa", textFin)
+                    
+                for w in cls.rootMaster.winfo_children():
+                    w.destroy()
+                    
+                Usmenu.menu(cls.rootMaster, huesped)
+
+        
         for w in cls.p2.winfo_children() :
             w.destroy()
             
@@ -257,12 +412,22 @@ class Reservar():
         cls.resultados.insert(tk.END, f"Se ha seleccionado una habitación con Id {habitacion.getId()} y tipo {habitacion.getTipo()}", "centrado")
         cls.resultados.tag_configure("centrado", justify="center")
         
-        titleReserva = tk.Label(cls.p2, text="Ingrese las fechas en las que se hospedará")
+        titleReserva = tk.Label(cls.p2, text="Ingrese las fechas en las que se hospedará en formato dd/mm/aa")
         titleReserva.pack(pady=10)
         
-        # if habitacion.getReservada:
-        #     criterios = ["Fecha de inicio actual", "Fecha de salida actual", ""]
-        # else:
-            
-        # datesFrame = FieldFrame("Fechas", )
+        reservaActual = Habitacion.compararReservas(habitacion)
+        if reservaActual != None:
+            criterios = ["Fecha de inicio actual", "Fecha de salida actual", "Fecha de inicio", "Fecha de salida"]
+            valores = [reservaActual.getFechaEntrada(), reservaActual.getFechaSalida(),"Fecha de inicio", "Fecha de salida"]
+            habilitado = ["Fecha de inicio actual", "Fecha de salida actual"]
+            datesFrame = FieldFrame("Criterios", criterios, "Fechas", valores, habilitado)
+        else:
+           criterios = ["Fecha de inicio", "Fecha de salida"] 
+           valores = ["Fecha de inicio", "Fecha de salida"]
+           datesFrame = FieldFrame("Criterios", criterios, "Fechas", valores)
         
+        datesFrame.setRoot(cls.p2)
+        datesFrame.getFrame().pack(pady=10)
+        datesFrame.setFunc(continuarFechas)
+        
+    

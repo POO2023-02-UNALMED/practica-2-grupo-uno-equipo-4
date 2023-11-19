@@ -1,3 +1,4 @@
+from datetime import datetime
 from .Hotel import Hotel
 from ..usuarios.Huesped import Huesped
 from ..usuarios.Huesped import Huesped
@@ -11,6 +12,7 @@ class Habitacion:
         self._id = _id
         self._calificaciones = {}
         self._calificaciones[Huesped()] = 5.0
+        self.__reservas = []
         
         if _tipo is not None:
             self._tipo = _tipo
@@ -71,7 +73,6 @@ class Habitacion:
     def setId(self, _id):
         self._id = _id
         
-    @property
     def getHotel(self):
         return self.__hotel
     
@@ -105,7 +106,7 @@ class Habitacion:
     def setReserva(self, __reserva):
         self.__reserva = __reserva
         
-    @property
+    
     def getReservas(self):
         return self.__reservas
 
@@ -142,3 +143,35 @@ class Habitacion:
     
     def setSugerencias(self, __sugerencias):
         self.__sugerencias = __sugerencias
+        
+    @classmethod
+    def compararReservas(cls, habitacion):
+        c = 0
+        fecha1 = datetime.now()
+        fecha2 = datetime.now()
+        feC = []
+        feN = []
+        fechaC = ""
+        r = None
+
+        reservas = habitacion.__reservas
+        for x in reservas:
+            if c == 0:
+                fechaC = x.getFechaEntrada()
+                r = x
+                c += 1
+                continue
+            
+            fechaN = x.getFechaEntrada()
+            feN = fechaN.split("/")
+            feC = fechaC.split("/")
+            
+            fecha1 = datetime(int(feC[2]), int(feC[1]), int(feC[0]))
+            fecha2 = datetime(int(feN[2]), int(feN[1]), int(feN[0]))
+            
+            if fecha1 < fecha2:
+                fechaC = fechaN
+                r = x
+            c += 1
+        return r
+            

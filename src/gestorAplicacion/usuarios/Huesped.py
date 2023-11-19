@@ -43,7 +43,7 @@ class Huesped(Usuario, PresentacionBono):
         return self._enReserva
 
     
-    def enReserva(self, value):
+    def setEnReserva(self, value):
         self._enReserva = value
 
     def getPreferencias(self):

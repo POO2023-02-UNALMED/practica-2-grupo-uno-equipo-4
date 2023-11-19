@@ -102,6 +102,7 @@ class Base(ABC):
                 tipoHab = hab.getTipo()
                 if "vip" in tipoHab and not huesped.isVip():
                     print("No puede acceder a esta habitación, pues no es VIP")
+                    foundHotel = False
                 else:    
                     habitacion = hab
                     foundHotel = True

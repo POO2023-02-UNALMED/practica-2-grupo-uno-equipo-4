@@ -96,7 +96,7 @@ class CuentaBancaria():
     def getSaldo(self):
         return self.saldo
     
-    def getSaldo(self, saldo):
+    def setSaldo(self, saldo):
         self.saldo = saldo
 
     def getUltimoPago(self):

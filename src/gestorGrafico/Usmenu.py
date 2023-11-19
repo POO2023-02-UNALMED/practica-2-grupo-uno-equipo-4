@@ -1,5 +1,6 @@
+from datetime import datetime, date
 import sys
-from tkinter import Button, Menu
+from tkinter import Button, Menu, messagebox
 import tkinter as tk
 from tkinter.ttk import Combobox
 from gestorGrafico import Root
@@ -11,7 +12,7 @@ from gestorAplicacion.hotel.Hotel import Hotel
 from gestorAplicacion.usuarios.Administrador import Administrador
 from gestorAplicacion.usuarios.Empleado import Empleado
 from gestorGrafico.FieldFrame import FieldFrame
-from gestorGrafico.Reservar import Reservar
+
 
 #@autor: David Restrepo
 
@@ -114,25 +115,52 @@ class Usmenu():
             
     @classmethod
     def sistemaHuesped(cls, root, us, prosCon):
+        from gestorGrafico.Reservar import Reservar
+        def isIni():                                            #logica para ver si ya se acabo o empezó la estadía
+            fecha_actual = datetime.now()
+            for hotel in Base.getHoteles():
+                for habitacion in hotel.getHabitaciones():
+                    if not habitacion.getReservada():
+                        for reserv in habitacion.getReservas():
+                            f_ini = reserv.getFechaEntrada().split("/")
+                            fecha_ini = datetime(int(f_ini[2]), int(f_ini[1]), int(f_ini[0]))
+                            if fecha_ini.date() == fecha_actual.date():
+                                habitacion.setReservada(True)
+                                return True
+            
+            return False
+        
+        def isFin():
+            fecha_actual = datetime.now()
+            for hotel in Base.getHoteles():
+                for habitacion in hotel.getHabitaciones():
+                    if habitacion.getReservada():
+                        for reserv in habitacion.getReservas():
+                            f_fin = reserv.getFechaSalida().split("/")
+                            fecha_fin = datetime(int(f_fin[2]), int(f_fin[1]), int(f_fin[0]))
+                            
+                            if fecha_actual.date() == fecha_fin.date():
+                                habitacion.setReservada(False)
+                                return True
+
+            return False
+        
+        
         def reservar():                             #Poner esto al inicio de cada funcionalidad (borra la información anterior)
             if cls.fTime:
                 cls.pl.destroy()
                 cls.pr.destroy()
             
-            
-            
             Reservar.reservar(us, root)
+        
+        if (isIni()):
+                messagebox.showinfo("Empieza tu reserva", "Su Reserva ha comenzado, disfrute.")
                 
-                        
-            # criterios = ["nombre", "contra", "hola"]                  //Prueba FieldFrame
-            # vals = ["str", "str", "int"]
-            # desabilitados = ["contra"]
-            # p1 = tk.Frame(root, background="white")
-            # p1.pack(expand=True, fill="both")
-            # form = FieldFrame("cri", criterios, "vals", vals, desabilitados)
-            # form.setRoot(p1)
-            # form.getFrame().place(anchor="center", relx=0.5, rely=0.5)
-            
+        if (isFin()):
+            reserva = us.getReserva()
+            costo = reserva.getCosto()
+            messagebox.showinfo("Termina tu reserva", "Su Reserva ha terminado.\n\n"+
+                                f"Costo total: {costo}") 
             
         prosCon.add_command(label="Reservar", command=reservar)             #Aquí se le agrega los commandos que llevan a las diferentes funcioanlidades
         

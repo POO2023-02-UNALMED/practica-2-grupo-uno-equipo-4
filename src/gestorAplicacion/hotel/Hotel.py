@@ -5,6 +5,7 @@ class Hotel:
     def __init__(self,__cuenta_bancaria,__nombre=None,__ciudad=None,__servicios=None,_habitaciones=None,__empleados=None):
         
         self.__cuenta_bancaria = __cuenta_bancaria
+        self.__historial_clientes = []
             
         if __nombre is  not None:
             self.__nombre = __nombre
@@ -52,7 +53,7 @@ class Hotel:
     def addTotalHoteles(cls, _total_hoteles):
         cls._total_hoteles = _total_hoteles
     
-    @property
+    
     def getCuentaBancaria(self):
         return self.__cuenta_bancaria
     
@@ -96,7 +97,6 @@ class Hotel:
     def setEmpleados(self, __empleados):
         self.__empleados = __empleados
         
-    @property
     def getHistorialClientes(self):
         return  self.__historial_clientes
     
