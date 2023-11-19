@@ -19,6 +19,7 @@ from gestorAplicacion.hotel.TipoHabitacion import TipoHabitacion
 from gestorAplicacion.usuarios.Huesped import Huesped
 from gestorAplicacion.usuarios.Administrador import Administrador
 from gestorAplicacion.usuarios.Empleado import Empleado
+from gestorAplicacion.hotel.ServiciosExtra import ServiciosExtra
 
 #@autor: David Restrepo
 
@@ -26,8 +27,8 @@ from gestorAplicacion.usuarios.Empleado import Empleado
 if __name__ == '__main__' :
     Deserializador.deserializador()
 
-    cuentaBancaria = CuentaBancaria(1000000, "b")
-    habitaciones = []
+    # cuentaBancaria = CuentaBancaria(1000000, "b")
+    # habitaciones = []
     # hab1 = Habitacion(1, "simple", TipoHabitacion.asign_camas(TipoHabitacion.SIMPLE), TipoHabitacion.asign_precio(TipoHabitacion.SIMPLE))
     # hab1.addCalificacion(Huesped(), 3)
     # hab1.addCalificacion(Huesped(), 2)
@@ -40,10 +41,8 @@ if __name__ == '__main__' :
     # habitaciones.append(hab1)
     # habitaciones.append(hab2)
     # habitaciones.append(hab3)
-    #hotel = Hotel(cuentaBancaria, "Hotel1", "Medellín", [], habitaciones, [])
-    #Base.addHoteles(hotel)
-
-
+    # hotel = Hotel(cuentaBancaria, "Hotel1", "Medellín", [], habitaciones, [])
+    # Base.addHoteles(hotel)
     #PRUEBAS RECOMENDACIONES
     #habs = []
     #hab1 = Habitacion(1,"simple",1,1000)

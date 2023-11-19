@@ -2,9 +2,9 @@ from .PresentacionBono import PresentacionBono
 from .Usuario import Usuario
 from gestorAplicacion.hotel.Hotel import Hotel
 class Empleado (Usuario, PresentacionBono):
-    def __init__(self, nombre, telefono, username, password, cuentaBancaria, hotel, estado_empleado = False, salario=0):
+    def __init__(self, nombre, telefono, username, password, cuentaBancaria, hotel=None, estado_empleado = False, salario=0):
         super().__init__(nombre, telefono, username, password, cuentaBancaria)
-        self.hotel = hotel
+        
         self.salario = salario
         self.estadoEmpleado = estado_empleado
         self.motivosCalificacion = {}
@@ -12,7 +12,9 @@ class Empleado (Usuario, PresentacionBono):
         self.calificaciones = {}
         self.ultimoPago = None
 
-        hotel.addEmpleados(self)
+        if hotel is not None:
+            self.hotel = hotel
+            hotel.addEmpleados(self)
 
 
     def addCalificaciones(self,usuario,calificacion):
@@ -93,6 +95,12 @@ class Empleado (Usuario, PresentacionBono):
 
     def getSalario(self):
         return self.salario
+    
+    def getHotel(self):
+        return self.hotel
+    
+    def setHotel(self,hotel):
+        self.hotel = hotel
     
     def setSalario(self, salario):
         self.salario = salario

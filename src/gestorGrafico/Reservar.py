@@ -48,9 +48,9 @@ class Reservar():
                 cls.enviarFiltroHotel.destroy()
                 
             if cls.selectedHotelFilter == 0:
-                hoteles = Base.filtrarPorNombre(valores)
+                hoteles = Base.filtrarPorNombre(valores, cls.resultados)
             elif cls.selectedHotelFilter == 1:
-                hoteles = Base.filtrarPorCiudad(valores)
+                hoteles = Base.filtrarPorCiudad(valores, cls.resultados)
             else:
                 hoteles = []
                 for i in Base.getHoteles():
@@ -136,7 +136,7 @@ class Reservar():
         filtconfirm = tk.Button(cls.p2, text="Confirmar", command=filtrar)
         filtconfirm.grid(row=1, column=0, sticky="nsew")
         
-        cls.resultados = tk.Text(p1, background="gray", fg="white", font=("Arial", 20))
+        cls.resultados = tk.Text(p1, background="gray", fg="white", font=("Arial", 15))
         cls.resultados.place(anchor="s", rely=0.997, relx=0.5, relheight=0.1, relwidth=1) 
         
         
@@ -162,7 +162,7 @@ class Reservar():
                 cls.enviarFiltroHotel.destroy()
                 
             if cls.selectedHotelFilter == 0:
-                habitaciones = Base.filtrarPorId(valores, hotel, huesped)
+                habitaciones = Base.filtrarPorId(valores, hotel, huesped, cls.resultados)
             elif cls.selectedHotelFilter == 1:
                 tipo = cls.typestOptions.get()
                 for w in cls.p2.winfo_children() :
@@ -384,6 +384,10 @@ class Reservar():
             if ingreso_valido:
                 if huesped.getReserva() is not None or huesped.getReserva() == False:
                     print("Ya tiene una reserva en nuestra cadena de hoteles. No puede realizar otra")
+                    cls.resultados.delete("1.0", tk.END)            
+                    cls.resultados.insert(tk.END, "Ya tiene una reserva en nuestra cadena de hoteles. No puede realizar otra", "centrado")
+                    cls.resultados.tag_configure("centrado", justify="center")
+                    
                     ingreso_valido = False
                 else:
                     cobroHabitacion = (fechaFinal.day - fechaInicio.day) * habitacion.getPrecio()
@@ -404,10 +408,13 @@ class Reservar():
                     for hotel in Base.getHoteles():
                         historial = hotel.getHistorialClientes()
                         for hue in historial:
-                            if hue.getUsername() == huesped.getUsername():
+                            oriUser = huesped.getUsername()
+                            plantUser = hue.getUsername()
+                            if plantUser == oriUser:
                                 messagebox.showinfo("Bono", "Como ya ha reservado habitaciones en este hotel, se le hará un descuento de 80000$")
                                 cobroHabitacion -= 80000
-                                habitacion.getHotel().addHistorialClientes(huesped)
+                                hotelito = habitacion.getHotel()
+                                hotelito.addHistorialClientes(huesped)
 
                     CB.retirar(cobroHabitacion)
                     HBC = hot.getCuentaBancaria()
