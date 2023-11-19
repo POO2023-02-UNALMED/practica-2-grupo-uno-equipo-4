@@ -6,6 +6,11 @@ from baseDatos.Base import Base
 from gestorGrafico.FieldFrame import FieldFrame
 from gestorAplicacion.hotel.Habitacion import Habitacion
 from gestorAplicacion.hotel.Reserva import Reserva
+from errores.ErrorNoDate import ErrorNoDate
+from errores.ErrorEmpty import ErrorEmpty
+from errores.ErrorEnterDates import ErrorEnterDate
+from errores.ErrorDateIntersection import ErrorDateIntersection
+from errores.ErrorNoCash import ErrorNoCash
 
 class Reservar():
     
@@ -278,9 +283,15 @@ class Reservar():
             if fechaIni.count("/") != 2:
                 print("Error. Debe ingresar una fecha correcta")
                 ingreso_valido = False
+                er = ErrorNoDate("Fecha de inicio", fechaIni)
+                txt = er.mostrarMensaje()
+                messagebox.showerror("Error", txt)
             if fechaFin.count("/") != 2:
                 print("Error. Debe ingresar una fecha correcta")
                 ingreso_valido = False
+                er = ErrorNoDate("Fecha de salida", fechaFin)
+                txt = er.mostrarMensaje()
+                messagebox.showerror("Error", txt)
             
             if ingreso_valido:
                 fIni = fechaIni.split("/")
@@ -295,41 +306,58 @@ class Reservar():
                 except ValueError:
                     print("Error. Debe ingresar una fecha correcta")
                     ingreso_valido = False
+                    er = ErrorNoDate("Fecha de inicio o salida", fechaIni)
+                    txt = er.mostrarMensaje()
+                    messagebox.showerror("Error", txt)
                     
             if ingreso_valido:
                 if diaIni < 1 or diaIni > 31:
                     ingreso_valido = False
+                    er = ErrorEnterDate("Fecha de inicio", fechaIni)
+                    txt = er.mostrarMensaje()
+                    messagebox.showerror("Error", txt)
                     print("Error. Debe ingresar una fecha correcta")
                 
                 if mesIni < 1 or mesIni > 12:
                     ingreso_valido = False
+                    er = ErrorEnterDate("Fecha de inicio", fechaIni)
+                    txt = er.mostrarMensaje()
+                    messagebox.showerror("Error", txt)
                     print("Error. Debe ingresar una fecha correcta")
 
             if ingreso_valido:
                 fechaInicio = date(anioIni, mesIni, diaIni)
-                print(fechaInicio.strftime("%Y-%m-%d"))
-                print(fechaActual.strftime("%Y-%m-%d"))
                 if fechaActual > fechaInicio:
-                    print("Holiiiiiiii")
-                    print("Error. Debe ingresar una fecha correcta")
                     ingreso_valido = False
+                    er = ErrorEnterDate("Fecha de inicio", fechaIni)
+                    txt = er.mostrarMensaje()
+                    messagebox.showerror("Error", txt)
+                    print("Error. Debe ingresar una fecha correcta")
         
             
             if ingreso_valido:
-                print("Holaaaaaaaaaaa")
                 if diaFin < 1 or diaFin > 31:
                     print("Error. Debe ingresar una fecha correcta")
                     ingreso_valido = False
+                    er = ErrorEnterDate("Fecha de salida", fechaFin)
+                    txt = er.mostrarMensaje()
+                    messagebox.showerror("Error", txt)
                 
                 if mesFin < 1 or mesFin > 12:
                     print("Error. Debe ingresar una fecha correcta")
                     ingreso_valido = False
+                    er = ErrorEnterDate("Fecha de salida", fechaFin)
+                    txt = er.mostrarMensaje()
+                    messagebox.showerror("Error", txt)
 
             if ingreso_valido:
                 fechaFinal = date(anioFin, mesFin, diaFin)
                 if fechaActual > fechaFinal or fechaInicio >= fechaFinal:
                     print("Error. Debe ingresar una fecha correcta (mayor a la fecha de inicio)")
                     ingreso_valido = False
+                    er = ErrorEnterDate("Fecha de salida", fechaFin)
+                    txt = er.mostrarMensaje()
+                    messagebox.showerror("Error", txt)
                 
             if ingreso_valido:
                 for x in habitacion.getReservas():
@@ -347,6 +375,9 @@ class Reservar():
                         print(f"Error. Su fecha se está intersecando con las fechas de la siguiente reserva:\n"
                             f"Fecha de inicio: {x.getFechaEntrada()}\n"
                             f"Fecha de fin: {x.getFechaSalida()}\n")
+                        er = ErrorDateIntersection(fReIni, fReFin)
+                        txt = er.mostrarMensaje()
+                        messagebox.showerror("Error", txt)
                         ingreso_valido = False
                         break
             
@@ -359,6 +390,9 @@ class Reservar():
                     CB = huesped.getCuentaBancaria()
                     saldo = CB.getSaldo()
                     if saldo < cobroHabitacion:
+                        er = ErrorNoCash(saldo, cobroHabitacion)
+                        txt = er.mostrarMensaje()
+                        messagebox.showerror("Error", txt)
                         print("No tiene el saldo suficiente para pagar la reserva. Intente de nuevo")  
                         ingreso_valido = False  
         
