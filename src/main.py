@@ -105,9 +105,9 @@ if __name__ == '__main__' :
     #reserva3.setCalificacionHotel(4)
     #huesped.addReserva(reserva3)
     #hab60.addCalificacion(huesped,5)
-    #root = Root()
-    #Inicio(root)
-    #root.mainloop()
+    root = Root()
+    Inicio(root)
+    root.mainloop()
 
 
 
