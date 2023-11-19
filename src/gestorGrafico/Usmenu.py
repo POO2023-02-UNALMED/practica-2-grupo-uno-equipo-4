@@ -16,6 +16,7 @@ from gestorAplicacion.usuarios.Administrador import Administrador
 from gestorAplicacion.usuarios.Empleado import Empleado
 from gestorGrafico.FieldFrame import FieldFrame
 from gestorGrafico.Calificar import Calificar
+from errores.ErrorValores import ErrorValores
 
 
 #@autor: David Restrepo
@@ -207,7 +208,43 @@ class Usmenu():
                 messagebox.showinfo("Reserva", textFin)
             else:
                 messagebox.showerror("Error", "No tiene reservas.")
-        
+                
+        def verCB():
+            def enviarSaldo():
+                enviesaldo = deposito.get()
+                if enviesaldo != "" or enviesaldo != "Saldo a depositar":
+                    try:
+                        enviSaldo = int(deposito.get())
+                        CB.depositar(enviSaldo)
+                        popup.destroy()
+                        newSaldo = CB.getSaldo()
+                        messagebox.showinfo("Exito", f"Has agregado correctamente {enviesaldo}$ a tu cuenta: {newSaldo}$")
+                    except ValueError:
+                        print("Error: No se pudo convertir el string a entero")
+                        er = ErrorValores(deposito.widget_name, "Entero")
+                        text = er.mostrarMensaje()
+                        messagebox.showerror("Error", text)
+                        popup.destroy()
+                else:
+                    popup.destroy()
+            
+            CB = us.getCuentaBancaria()
+            saldo = CB.getSaldo()
+            popup = tk.Toplevel(root)
+            popup.title("Cuenta Bancaria")
+            sal = tk.Label(popup, text=f"Saldo: ")
+            sal.grid(row=0,column=0, pady=8, padx=3)
+            money = tk.Label(popup, text=f"{saldo}")
+            money.grid(row=0,column=1, pady=8, padx=3)
+            an = tk.Label(popup, text="Depostiar dinero")
+            an.grid(row=1, column=0, pady=8, padx=3)
+            deposito = tk.Entry(popup)
+            deposito.insert(0, "Saldo a depositar")
+            deposito.widget_name = "saldo"
+            deposito.grid(row=1, column=1, pady=8, padx=3)
+            acept = tk.Button(popup, text="Enviar", command=enviarSaldo)
+            acept.grid(row=2, column=0, pady=8, padx=3)
+            
         
         if (isIni()):
                 messagebox.showinfo("Empieza tu reserva", "Su Reserva ha comenzado, disfrute.")
@@ -223,6 +260,7 @@ class Usmenu():
         prosCon.add_command(label="Reservar", command=reservar)             #Aquí se le agrega los commandos que llevan a las diferentes funcioanlidades
         #prosCon.add_command(label="calificar", command=Calificar.seleccionar(root,us))
         prosCon.add_command(label="Ver reserva", command=verReserva)
+        prosCon.add_command(label="Ver Cuenta Bancaria", command=verCB)
     
     
     
