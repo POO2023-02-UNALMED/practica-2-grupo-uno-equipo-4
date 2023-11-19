@@ -270,11 +270,12 @@ class Usmenu():
             volver = Button(root, text="Volver", command=volver)
             volver.pack(pady=10)
 
+
         #
-        #Registrar nueva habitación
+        #Listar habitaciones
         #
 
-        def regisHabitacion():
+        def mostrarHabitaciones():
 
             def volver():
                 cls.menu(root, us)
@@ -296,23 +297,196 @@ class Usmenu():
             menuBar.add_cascade(label="Ayuda", menu=ayuda)
             ayuda.add_command(label="Acerca de", command=root.ayuda)
 
+            respuesta = "Lista de habitaciones en el hotel" + us.getHotel().getNombre()
+            hotel = us.getHotel()
+            habitaciones = hotel.getHabitaciones()
+
+            titulo = tk.Label(root, text=respuesta, font=("Arial",20))
+            titulo.pack(fill="both", pady=10)
+            
+            num = 1
+            for i in habitaciones:
+                text = str(num) + " " + i.getTipo()
+                habitacion = tk.Label(root, text=text, font=("Arial",13))
+                habitacion.pack(fill="both", pady=10)
+
             volver = Button(root, text="Volver", command=volver)
             volver.pack(pady=10)
+
+
+        #
+        #Registrar nueva habitación
+        #
+
+        def regisHabitacion():
+
+            #
+            #Se crea el nuevo objeto habitación
+            #
+            def crearHabitacion():
+
+                tip = combo.get()
+                tipo = combo.get().split()
+
+                if tip == "" or tip == None:
+
+                    messagebox.showerror("Error", "Por favor escoga el tipo de habitación para poder registrarla en el hotel")
+    
+                elif tipo[0] in "FAMILIAR":
+
+                    habitacion = Habitacion(19, "Familiar", TipoHabitacion.asign_camas(TipoHabitacion.FAMILIAR), TipoHabitacion.asign_precio(TipoHabitacion.FAMILIAR))
+
+                elif tipo[0] in "DOBLE":
+
+                    habitacion = Habitacion(19, "Doble", TipoHabitacion.asign_camas(TipoHabitacion.DOBLE), TipoHabitacion.asign_precio(TipoHabitacion.DOBLE))
+
+                elif tipo[0] in "SIMPLE":
+
+                    habitacion = Habitacion(19, "Simple", TipoHabitacion.asign_camas(TipoHabitacion.SIMPLE), TipoHabitacion.asign_precio(TipoHabitacion.SIMPLE))
+
+                elif tipo[0] in "VIPFAMILIAR":
+
+                    habitacion = Habitacion(19, "VIPFamiliar", TipoHabitacion.asign_camas(TipoHabitacion.VIPFAMILIAR), TipoHabitacion.asign_precio(TipoHabitacion.VIPFAMILIAR))
+
+                elif tipo[0] in "VIPDOBLE":
+
+                    habitacion = Habitacion(19, "VIPDoble", TipoHabitacion.asign_camas(TipoHabitacion.VIPDOBLE), TipoHabitacion.asign_precio(TipoHabitacion.VIPDOBLE))
+
+                elif tipo[0] in "VIPSIMPLE":
+
+                    habitacion = Habitacion(19, "VIPSimple", TipoHabitacion.asign_camas(TipoHabitacion.VIPSIMPLE), TipoHabitacion.asign_precio(TipoHabitacion.VIPSIMPLE))
+
+                us.getHotel().addHabitaciones(habitacion)
+
+                messagebox.showinfo("Operación Completa", "La habitación se ha registrado correctamente")
+                volver()
+
+
+            def volver():
+                cls.menu(root, us)
+
+            root.cleanRoot()
+            root.title("CosmoReserve")
+            menuBar = Menu(root)
+            root.config(menu=menuBar)
+            
+            archivo = Menu(menuBar, tearoff=False)                              #opcion archivo 
+            menuBar.add_cascade(label="Archivo", menu=archivo)
+            archivo.add_command(label="Aplicación", command=root.aplicacion)
+            archivo.add_command(label="Salir", command=root.salir)
+            
+            prosCon = Menu(menuBar, tearoff=False)                           #opcion procesos y consultas
+            menuBar.add_cascade(label="Procesos y Consultas", menu=prosCon)
+            
+            ayuda = Menu(menuBar, tearoff=False)                           #opcion ayuda
+            menuBar.add_cascade(label="Ayuda", menu=ayuda)
+            ayuda.add_command(label="Acerca de", command=root.ayuda)
+
+            
 
             titulo = tk.Label(root, text="Registrar nueva habitación", font=("Arial",20))
             titulo.pack(fill="both", pady=10)
 
             respuesta = "Hotel al cual se le va a registrar la habitación: " + us.getHotel().getNombre()
 
-            titulo = tk.Label(root, text=respuesta, font=("Arial",20))
+            titulo = tk.Label(root, text=respuesta, font=("Arial",13))
             titulo.pack(fill="both", pady=10)
+
+            texto = tk.Label(root, text="Escoge el tipo de habitación que deseas registrar", font=("Arial",13))
+            texto.pack(fill="both", pady=10)
+
+            tipoDefecto = tk.StringVar(root, value = "Tipo de Habitación")
+
+            tiposHabitacion = []
+
+            for i in TipoHabitacion:
+                habitacion = str(i.name) + " (" + str(i.value[0]) + " camas)"
+                tiposHabitacion.append(habitacion)
+
+
+            combo =  Combobox(root, values=tiposHabitacion, textvariable=tipoDefecto)
+            combo.pack(pady=10)
+
+            asignarbtn = Button(root, text="Registrar", command=crearHabitacion)
+            asignarbtn.pack(pady=10)
+
+            volver = Button(root, text="Volver", command=volver)
+            volver.pack(pady=10)
 
         #
         #Cambiar el saldo del hotel
         #
 
         def cambiarSaldoHot():
-            pass
+
+            def cambiar():
+
+                entrada = entry.get()
+
+                if(entrada == "" or entrada == None):
+
+                    messagebox.showerror("Error", "Por favor escoga el valor para cambiar el saldo del hotel")
+
+                try:
+                    valor_entero = int(entrada)
+        
+                except ValueError:
+
+                    messagebox.showerror("Error", "Ingrese un valor entero válido")
+            
+                else:
+
+                    us.getHotel().getCuentaBancaria().setSaldo(valor_entero)
+
+                    messagebox.showinfo("Operación Completa", "La habitación se ha cambiado el saldo del hotel correctamente")
+                    volver()
+            
+            def volver():
+                cls.menu(root, us)
+
+            root.cleanRoot()
+            root.title("CosmoReserve")
+            menuBar = Menu(root)
+            root.config(menu=menuBar)
+            
+            archivo = Menu(menuBar, tearoff=False)                              #opcion archivo 
+            menuBar.add_cascade(label="Archivo", menu=archivo)
+            archivo.add_command(label="Aplicación", command=root.aplicacion)
+            archivo.add_command(label="Salir", command=root.salir)
+            
+            prosCon = Menu(menuBar, tearoff=False)                           #opcion procesos y consultas
+            menuBar.add_cascade(label="Procesos y Consultas", menu=prosCon)
+            
+            ayuda = Menu(menuBar, tearoff=False)                           #opcion ayuda
+            menuBar.add_cascade(label="Ayuda", menu=ayuda)
+            ayuda.add_command(label="Acerca de", command=root.ayuda)
+
+            titulo = tk.Label(root, text="Cambiar el saldo del Hotel", font=("Arial",20))
+            titulo.pack(fill="both", pady=10)
+
+            hotel = us.getHotel()
+            saldo = hotel.getCuentaBancaria().getSaldo()
+            respuesta = "El hotel " + us.getHotel().getNombre() + " tiene un saldo de " + str(saldo)
+
+            titulo = tk.Label(root, text=respuesta, font=("Arial",15))
+            titulo.pack(fill="both", pady=10)
+
+            frame = tk.Frame(root, width=200, height=100)
+
+            labelSaldo = tk.Label(frame, text="Nuevo saldo: ", font=("Arial",13))
+            entry = tk.Entry(frame)
+
+            labelSaldo.grid(row = 0, column=0, sticky="w")
+            entry.grid(row=0, column=1)
+
+            frame.pack(pady=10)
+
+            cambiar = Button(root, text="Cambiar", command=cambiar)
+            cambiar.pack(pady=10)
+
+            volvera = Button(root, text="Volver", command=volver)
+            volvera.pack(pady=10)
+
 
         #
         #Fecha de último pago
@@ -320,12 +494,53 @@ class Usmenu():
 
         def fechUltimoPag():
 
+            def volver():
+                cls.menu(root, us)
+
+            root.cleanRoot()
+            root.title("CosmoReserve")
+            menuBar = Menu(root)
+            root.config(menu=menuBar)
+            
+            archivo = Menu(menuBar, tearoff=False)                              #opcion archivo 
+            menuBar.add_cascade(label="Archivo", menu=archivo)
+            archivo.add_command(label="Aplicación", command=root.aplicacion)
+            archivo.add_command(label="Salir", command=root.salir)
+            
+            prosCon = Menu(menuBar, tearoff=False)                           #opcion procesos y consultas
+            menuBar.add_cascade(label="Procesos y Consultas", menu=prosCon)
+            
+            ayuda = Menu(menuBar, tearoff=False)                           #opcion ayuda
+            menuBar.add_cascade(label="Ayuda", menu=ayuda)
+            ayuda.add_command(label="Acerca de", command=root.ayuda)
+
+            fecha = str(us.getUltimoPago())
+
+            titulo = tk.Label(root, text="Ultimo Pago", font=("Arial",20))
+            titulo.pack(fill="both", pady=10)
+
+            ultimoP = "El último pago se realizó el " + fecha
+
+            titulo = tk.Label(root, text=ultimoP, font=("Arial",20))
+            titulo.pack(pady=10)
+
             #
             #Borrar último pago
             #
 
+        
             def delteUltimoPago():
-                pass
+                
+                us.reiniciarUltimoPago()
+                messagebox.showinfo("Operación Completa", "Se reinició la última fecha del pago completamente")
+                volver()
+
+
+            reiniciarUlp = Button(root, text="Reiniciar Fecha", command=delteUltimoPago)
+            reiniciarUlp.pack(pady=10)
+
+            volvera = Button(root, text="Volver", command=volver)
+            volvera.pack(pady=10)
 
         
 
@@ -346,11 +561,13 @@ class Usmenu():
 
             saldoHotel = Button(text="Ver saldo del hotel", command=verSaldoHotel)
             saldoHotel.pack(pady=10)
-            registrarHabitacion = Button(text="Registrar nueva habitación")
+            listHabitaciones = Button(text="Listar habitaciones", command=mostrarHabitaciones)
+            listHabitaciones.pack(pady=10)
+            registrarHabitacion = Button(text="Registrar nueva habitación", command=regisHabitacion)
             registrarHabitacion.pack(pady=10)
-            cambiarSaldoHotel = Button(text="Cambiar el saldo del hotel")
+            cambiarSaldoHotel = Button(text="Cambiar el saldo del hotel", command=cambiarSaldoHot)
             cambiarSaldoHotel.pack(pady=10)
-            ultimoPago = Button(text="Ver la fecha del último pago")
+            ultimoPago = Button(text="Ver la fecha del último pago", command=fechUltimoPag)
             ultimoPago.pack(pady=10)
 
         #

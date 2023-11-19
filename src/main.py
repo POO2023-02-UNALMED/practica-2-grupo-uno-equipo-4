@@ -42,6 +42,8 @@ if __name__ == '__main__' :
     # habitaciones.append(hab3)
     #hotel = Hotel(cuentaBancaria, "Hotel1", "Medellín", [], habitaciones, [])
     #Base.addHoteles(hotel)
+
+
     #PRUEBAS RECOMENDACIONES
     #habs = []
     #hab1 = Habitacion(1,"simple",1,1000)
@@ -105,6 +107,37 @@ if __name__ == '__main__' :
     #reserva3.setCalificacionHotel(4)
     #huesped.addReserva(reserva3)
     #hab60.addCalificacion(huesped,5)
+
+
+    #Pruebas Administrador
+    # cuentaBancariaH = CuentaBancaria(1000000, "b")
+    # cuentaBancariaA = CuentaBancaria(1000000, "b")
+    # cuentaBancariaE1 = CuentaBancaria(1000000, "b")
+    # cuentaBancariaE2 = CuentaBancaria(1000000, "b")
+
+    # habitaciones = []
+    # hab1 = Habitacion(1, "simple", TipoHabitacion.asign_camas(TipoHabitacion.SIMPLE), TipoHabitacion.asign_precio(TipoHabitacion.SIMPLE))
+    # hab1.addCalificacion(Huesped(), 3)
+    # hab1.addCalificacion(Huesped(), 2)
+    # hab2 = Habitacion(2, "doble", TipoHabitacion.asign_camas(TipoHabitacion.DOBLE), TipoHabitacion.asign_precio(TipoHabitacion.DOBLE))
+    # hab2.addCalificacion(Huesped(), 3)
+    # hab2.addCalificacion(Huesped(), 3)
+
+    # habitaciones.append(hab1)
+    # habitaciones.append(hab2)
+
+    # hotel = Hotel(cuentaBancariaH, "Hotel1", "Medellín", [], habitaciones, [])
+
+    # administrador1 = Administrador("Camilo", 12345, "kmi", "12345", cuentaBancariaA, hotel)
+
+    # empleado1 = Empleado("Juan", 12344, "juanjo", "12345", cuentaBancariaE1, hotel, True, 3000)
+    # empleado2 = Empleado("Carlos", 12333, "calitos", "12345", cuentaBancariaE2, hotel, True, 300)
+
+    # Base.addHoteles(hotel)
+    # Base.addAdministradores(administrador1)
+    # Base.addEmpleados(empleado1)
+    # Base.addEmpleados(empleado2)
+
     root = Root()
     Inicio(root)
     root.mainloop()
