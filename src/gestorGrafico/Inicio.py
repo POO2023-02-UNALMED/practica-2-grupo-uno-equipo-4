@@ -97,7 +97,7 @@ class Inicio:
         archivo.add_command(label="Descripción de la aplicación", command=descripcion)
         archivo.add_command(label="Salir", command=salir)
         root.config(menu=barra_menu)
-        barra_menu.add_cascade(menu=archivo, label="Archivo")
+        barra_menu.add_cascade(menu=archivo, label="Inicio")
         
         
         self.P4 = tk.Frame(self.P1)
