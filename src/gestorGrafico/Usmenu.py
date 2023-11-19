@@ -191,7 +191,7 @@ class Usmenu():
             #Calificar.seleccionar(root,us)
         
         prosCon.add_command(label="Reservar", command=reservar)             #Aquí se le agrega los commandos que llevan a las diferentes funcioanlidades
-        prosCon.add_command(label="calificar", command=Calificar.seleccionar(root,us))
+        #prosCon.add_command(label="calificar", command=Calificar.seleccionar(root,us))
     
     
     
