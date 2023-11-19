@@ -17,6 +17,8 @@ from gestorAplicacion.finanzas.CuentaBancaria import CuentaBancaria
 from gestorAplicacion.hotel.Habitacion import Habitacion
 from gestorAplicacion.hotel.TipoHabitacion import TipoHabitacion
 from gestorAplicacion.usuarios.Huesped import Huesped
+from gestorAplicacion.usuarios.Administrador import Administrador
+from gestorAplicacion.usuarios.Empleado import Empleado
 
 #@autor: David Restrepo
 
@@ -40,7 +42,6 @@ if __name__ == '__main__' :
     # habitaciones.append(hab3)
     # hotel = Hotel(cuentaBancaria, "Hotel1", "Medellín", [], habitaciones, [])
     # Base.addHoteles(hotel)
-
 
     root = Root()
     Inicio(root)

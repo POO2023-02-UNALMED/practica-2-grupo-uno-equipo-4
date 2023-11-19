@@ -10,6 +10,7 @@ from gestorGrafico.Programador import Programador
 from gestorGrafico.Signup import Signup
 from gestorGrafico.Login import Login
 from gestorGrafico.Calificar import Calificar
+from baseDatos.serializador import Serializador
 
 path = os.path.join(pathlib.Path(__file__).parent.absolute())
 
@@ -17,6 +18,10 @@ path = os.path.join(pathlib.Path(__file__).parent.absolute())
 
 class Inicio:
     def __init__(self, root:Root):
+        def salir():
+            Serializador.serializador()
+            sys.exit()
+        
         def descripcion():
             self.desc.pack(side="top", fill="both")
         
@@ -90,7 +95,7 @@ class Inicio:
         barra_menu = Menu()
         archivo = Menu(barra_menu, tearoff=False)
         archivo.add_command(label="Descripción de la aplicación", command=descripcion)
-        archivo.add_command(label="Salir", command=sys.exit)
+        archivo.add_command(label="Salir", command=salir)
         root.config(menu=barra_menu)
         barra_menu.add_cascade(menu=archivo, label="Archivo")
         
