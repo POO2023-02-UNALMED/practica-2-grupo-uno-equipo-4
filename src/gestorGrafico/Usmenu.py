@@ -17,6 +17,7 @@ from gestorAplicacion.usuarios.Empleado import Empleado
 from gestorGrafico.FieldFrame import FieldFrame
 
 
+
 #@autor: David Restrepo
 
 class Usmenu():
@@ -118,7 +119,7 @@ class Usmenu():
     @classmethod
     def sistemaHuesped(cls, root, us, prosCon):
         from gestorGrafico.Reservar import Reservar
-        
+        from gestorGrafico.Recomendaciones import Recomendaciones
         def volver():
             cls.menu(root, us)
         
@@ -175,7 +176,53 @@ class Usmenu():
             prosCon.add_command(label="Reservar", command=reservar)
             
             Reservar.reservar(us, root, archivo)
-        
+
+        #RECOMENDACIONES
+
+        def recomendacionesMenu():
+            root.cleanRoot()
+            root.title("CosmoReserve")
+            menuBar = Menu(root)
+            root.config(menu=menuBar)
+            
+            archivo = Menu(menuBar, tearoff=False)                          
+            menuBar.add_cascade(label="Archivo", menu=archivo)
+            archivo.add_command(label="Aplicación", command=root.aplicacion)
+            archivo.add_command(label="Volver al menú", command=volver)
+            archivo.add_command(label="Salir", command=root.salir)
+            
+            prosCon = Menu(menuBar, tearoff=False)                           
+            menuBar.add_cascade(label="Procesos y Consultas", menu=prosCon)
+            
+            ayuda = Menu(menuBar, tearoff=False)                           
+            menuBar.add_cascade(label="Ayuda", menu=ayuda)
+            ayuda.add_command(label="Acerca de", command=root.ayuda)
+            prosCon.add_command(label="Rcomendaciones", command=recomendacionesMenu)
+            recomendaciones = Recomendaciones(us,root)
+            recomendaciones.inicio()
+
+        #AGREGAR_PREFERENCIA
+        def agregarPreferencia():
+            root.cleanRoot()
+            root.title("CosmoReserve")
+            menuBar = Menu(root)
+            root.config(menu=menuBar)
+            
+            archivo = Menu(menuBar, tearoff=False)                          
+            menuBar.add_cascade(label="Archivo", menu=archivo)
+            archivo.add_command(label="Aplicación", command=root.aplicacion)
+            archivo.add_command(label="Volver al menú", command=volver)
+            archivo.add_command(label="Salir", command=root.salir)
+            
+            prosCon = Menu(menuBar, tearoff=False)                           
+            menuBar.add_cascade(label="Procesos y Consultas", menu=prosCon)
+            
+            ayuda = Menu(menuBar, tearoff=False)                           
+            menuBar.add_cascade(label="Ayuda", menu=ayuda)
+            ayuda.add_command(label="Acerca de", command=root.ayuda)
+            prosCon.add_command(label="Agregar preferencia", command=agregarPreferencia)
+            recomendaciones = Recomendaciones(us,root)
+            recomendaciones.agregarPreferencia()
         
         
         if (isIni()):
@@ -189,9 +236,10 @@ class Usmenu():
                                 f"Costo total: {costo}") 
             
         
-        prosCon.add_command(label="Reservar", command=reservar)             #Aquí se le agrega los commandos que llevan a las diferentes funcioanlidades
-        
-    
+        prosCon.add_command(label="Reservar", command=reservar)   
+        prosCon.add_command(label="Recomendaciones",command=recomendacionesMenu)          #Aquí se le agrega los commandos que llevan a las diferentes funcioanlidades
+        prosCon.add_command(label="Agregar preferencia",command=agregarPreferencia) 
+
     
     
     
