@@ -100,7 +100,7 @@ class Administrador(Usuario):
 
     def pagarEmpleados(self):
 
-        empleados = self.hotel.getEmpleados()
+        empleados = self.hotel.getEmpleado()
 
         ultimoPago = self.getUltimoPago()
         actual = datetime.now().date()
@@ -118,23 +118,34 @@ class Administrador(Usuario):
                 diferienciaDias = (actual - ultimoPago).days
 
         if diferienciaDias < 30:
-            return "Ya se realizó un pago dentro de los últimos 30 días, espera que se cumpla el tiempo para volver a realizarlo"
+            return 1
         
         else:
 
             if (self.puedePagarHotel(empleados)):
 
                 for empleado in empleados:
-                    CuentaBancaria.transfarencia(self.hotel.getCuentaBancaria, empleado.getCuentaBancaria, empleado.getSalario)
+                    CuentaBancaria.transfarencia(self.hotel.getCuentaBancaria(), empleado.getCuentaBancaria(), empleado.getSalario())
                     empleado.setUltimoPago(actual)
 
                 CuentaBancaria.transfarencia(self.getHotel().getCuentaBancaria(), self.getCuentaBancaria(), self.getSalario())
                 self.setUltimoPago(actual)
 
-                return "El pago a los empleados ha sido exitoso"
+                return 0
             
             else:
-                return "Saldo en cuenta de hotel insuficiente para hacer el pago"
+                return 2
+            
+    def saldoAPagarHotel(self, empleados):
+
+        saldoAPagar = 0
+
+        for empleado in empleados:
+            saldoAPagar += empleado.getSalario()
+
+        saldoAPagar += self.salario
+
+        return saldoAPagar
 
 
     def getTotalAdministradores(self):

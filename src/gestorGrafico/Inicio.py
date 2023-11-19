@@ -10,6 +10,7 @@ from gestorGrafico.Programador import Programador
 from gestorGrafico.Signup import Signup
 from gestorGrafico.Login import Login
 from gestorGrafico.Calificar import Calificar
+from baseDatos.serializador import Serializador
 
 path = os.path.join(pathlib.Path(__file__).parent.absolute())
 
@@ -17,6 +18,10 @@ path = os.path.join(pathlib.Path(__file__).parent.absolute())
 
 class Inicio:
     def __init__(self, root:Root):
+        def salir():
+            Serializador.serializador()
+            sys.exit()
+        
         def descripcion():
             self.desc.pack(side="top", fill="both")
         
@@ -24,8 +29,29 @@ class Inicio:
                             "Soy de la carrera de Ciencias de la Computación. Nací en medellín Colombia",
                             [path+"\\imagenes\\david1.png", path+"\\imagenes\\david2.png", 
                             path+"\\imagenes\\david3.png", path+"\\imagenes\\david4.png"])
+        
+        camilo = Programador("Yohan Camilo Sanchez Meza",
+                            "Soy de la carrera de Ingeniería de Sistemas.",
+                            [path+"\\imagenes\\Camilo1.png", path+"\\imagenes\\Camilo2.png", 
+                            path+"\\imagenes\\Camilo3.png", path+"\\imagenes\\Camilo4.png"])
+        
+        alejandra = Programador("Alejandra Toro Grisales",
+                            "Soy de la carrera de Ciencias de la Computación.",
+                            [path+"\\imagenes\\Alejandra1.png", path+"\\imagenes\\Alejandra2.png", 
+                            path+"\\imagenes\\Alejandra3.png", path+"\\imagenes\\Alejandra4.png"])
+        
+        pablo = Programador("Juan Pablo Rivera Alvarez",
+                            "Soy de la carrera de Ciencias de la Computación.",
+                            [path+"\\imagenes\\Pablo1.png", path+"\\imagenes\\Pablo2.png", 
+                            path+"\\imagenes\\Pablo3.png", path+"\\imagenes\\Pablo4.png"])
+        
+        
+        jhonDoe = Programador("Samuel Castaño Alfonso",
+                            "Soy de la carrera de Ingeniería de Sistemas.",
+                            [path+"\\imagenes\\JohnDoe1.png", path+"\\imagenes\\JohnDoe2.png", 
+                            path+"\\imagenes\\JohnDoe3.png", path+"\\imagenes\\JohnDoe4.png"])
 
-        self.programadores = [david]
+        self.programadores = [david, camilo, alejandra, pablo, jhonDoe]
         
         imagenp1 = tk.PhotoImage(file = path+"\\imagenes\\logo1.png")
         imagenp1 = imagenp1.subsample(x= 2, y = 1)
@@ -69,7 +95,7 @@ class Inicio:
         barra_menu = Menu()
         archivo = Menu(barra_menu, tearoff=False)
         archivo.add_command(label="Descripción de la aplicación", command=descripcion)
-        archivo.add_command(label="Salir", command=sys.exit)
+        archivo.add_command(label="Salir", command=salir)
         root.config(menu=barra_menu)
         barra_menu.add_cascade(menu=archivo, label="Archivo")
         
@@ -158,7 +184,7 @@ class Inicio:
         self.imagenes.pack(side="top")
 
     def cambioProgramador(self, event):
-        self.contP = (self.contP + 1) % 4
+        self.contP = (self.contP + 1) % 5
         self.p = self.programadores[self.contP]
         self.bio.config(text=f"{self.p.nombre}\nBiografia: {self.p.biografia}")
 

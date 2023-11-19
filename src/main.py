@@ -7,6 +7,8 @@ from gestorAplicacion.hotel.Hotel import Hotel
 from gestorAplicacion.hotel.Habitacion import Habitacion
 from gestorAplicacion.usuarios.Preferencia import Preferencia
 from gestorAplicacion.hotel.Reserva import Reserva
+from gestorAplicacion.usuarios.Administrador import Administrador
+from gestorAplicacion.usuarios.Empleado import Empleado
 from baseDatos.deserealizador import Deserializador
 from baseDatos.serializador import Serializador
 from baseDatos.Base import Base
@@ -15,6 +17,8 @@ from gestorAplicacion.finanzas.CuentaBancaria import CuentaBancaria
 from gestorAplicacion.hotel.Habitacion import Habitacion
 from gestorAplicacion.hotel.TipoHabitacion import TipoHabitacion
 from gestorAplicacion.usuarios.Huesped import Huesped
+from gestorAplicacion.usuarios.Administrador import Administrador
+from gestorAplicacion.usuarios.Empleado import Empleado
 
 #@autor: David Restrepo
 

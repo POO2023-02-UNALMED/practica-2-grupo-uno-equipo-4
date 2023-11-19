@@ -9,6 +9,9 @@ from gestorAplicacion.usuarios.Preferencia import Preferencia
 from gestorAplicacion.usuarios.Huesped import Huesped
 from gestorAplicacion.finanzas.CuentaBancaria import CuentaBancaria
 from gestorAplicacion.hotel.Hotel import Hotel
+from gestorAplicacion.hotel.Habitacion import Habitacion
+from gestorAplicacion.hotel.TipoHabitacion import TipoHabitacion
+from gestorAplicacion.finanzas.CuentaBancaria import CuentaBancaria
 from gestorAplicacion.usuarios.Administrador import Administrador
 from gestorAplicacion.usuarios.Empleado import Empleado
 from gestorGrafico.FieldFrame import FieldFrame
@@ -194,7 +197,171 @@ class Usmenu():
     
     @classmethod
     def sistemaAdministrador(cls, root, us, prosCon):
-        pass
+
+        ##############################################
+        #       Información pre-cargada  
+        ##############################################
+
+        # cuentaBancariaH = CuentaBancaria(1000000, "b")
+        # cuentaBancariaA = CuentaBancaria(1000000, "b")
+        # cuentaBancariaE1 = CuentaBancaria(1000000, "b")
+        # cuentaBancariaE2 = CuentaBancaria(1000000, "b")
+
+        # habitaciones = []
+        # hab1 = Habitacion(1, "simple", TipoHabitacion.asign_camas(TipoHabitacion.SIMPLE), TipoHabitacion.asign_precio(TipoHabitacion.SIMPLE))
+        # hab1.addCalificacion(Huesped(), 3)
+        # hab1.addCalificacion(Huesped(), 2)
+        # hab2 = Habitacion(2, "doble", TipoHabitacion.asign_camas(TipoHabitacion.DOBLE), TipoHabitacion.asign_precio(TipoHabitacion.DOBLE))
+        # hab2.addCalificacion(Huesped(), 3)
+        # hab2.addCalificacion(Huesped(), 3)
+
+        # habitaciones.append(hab1)
+        # habitaciones.append(hab2)
+
+        # hotel = Hotel(cuentaBancariaH, "Hotel1", "Medellín", [], habitaciones, [])
+
+        # administrador1 = Administrador("Camilo", 12345, "kmi", "12345", cuentaBancariaA, hotel)
+
+        # empleado1 = Empleado("Juan", 12344, "juanjo", "12345", cuentaBancariaE1, hotel, True, 3000)
+        # empleado2 = Empleado("Carlos", 12333, "calitos", "12345", cuentaBancariaE2, hotel, True, 300)
+
+        # Base.addHoteles(hotel)
+        # Base.addAdministradores(administrador1)
+        # Base.addEmpleados(empleado1)
+        # Base.addEmpleados(empleado2)
+
+
+
+        ##############################################
+
+        
+
+        def verSaldoHotel():
+
+            def volver():
+                cls.menu(root, us)
+
+            root.cleanRoot()
+            root.title("CosmoReserve")
+            menuBar = Menu(root)
+            root.config(menu=menuBar)
+            
+            archivo = Menu(menuBar, tearoff=False)                              #opcion archivo 
+            menuBar.add_cascade(label="Archivo", menu=archivo)
+            archivo.add_command(label="Aplicación", command=root.aplicacion)
+            archivo.add_command(label="Salir", command=root.salir)
+            
+            prosCon = Menu(menuBar, tearoff=False)                           #opcion procesos y consultas
+            menuBar.add_cascade(label="Procesos y Consultas", menu=prosCon)
+            
+            ayuda = Menu(menuBar, tearoff=False)                           #opcion ayuda
+            menuBar.add_cascade(label="Ayuda", menu=ayuda)
+            ayuda.add_command(label="Acerca de", command=root.ayuda)
+
+            hotel = us.getHotel()
+            saldo = hotel.getCuentaBancaria().getSaldo()
+            respuesta = "El hotel " + us.getHotel().getNombre() + " tiene un saldo de " + str(saldo)
+
+            titulo = tk.Label(root, text=respuesta, font=("Arial",20))
+            titulo.pack(fill="both", pady=10)
+
+            volver = Button(root, text="Volver", command=volver)
+            volver.pack(pady=10)
+
+        if not cls.fTime:
+            
+            titulo = "Bienvenido " + us.getNombre()
+
+            titulo = tk.Label(root, text=titulo, font=("Arial",20))
+            titulo.pack(fill="both", pady=10)
+
+            resumen = tk.Label(root, text="Escoge la opción que desear realizar.\nRecuerda que la funcionalidad de pagar empleados se encuentra en el menú en Procesos y consultas", font=("Arial",13))
+            resumen.pack(pady=10)
+
+            saldoHotel = Button(text="Ver saldo del hotel", command=verSaldoHotel)
+            saldoHotel.pack(pady=10)
+            registrarHabitacion = Button(text="Registrar nueva habitación")
+            registrarHabitacion.pack(pady=10)
+            cambiarSaldoHotel = Button(text="Cambiar el saldo del hotel")
+            cambiarSaldoHotel.pack(pady=10)
+            ultimoPago = Button(text="Ver la fecha del último pago")
+            ultimoPago.pack(pady=10)
+        
+        
+        def pagarEmpleados():
+            def volver():
+                cls.menu(root, us)
+
+            def pagar():
+
+                resultado = us.pagarEmpleados()
+
+                if resultado == 1:
+
+                    messagebox.showerror("Error", "No se pudo realizar el pago ya que no han pasado más de 30 días desde el último pago")
+
+                elif resultado == 2:
+
+                    messagebox.showerror("Error", "No se pudo realizar el pago ya que el hotel no tiene el saldo suficiente")
+
+                elif resultado == 0:
+
+                    messagebox.showinfo("Funcionalidad Completa", "El pago se ha realizado correctamente")
+                    volver()
+
+            root.cleanRoot()
+            root.title("CosmoReserve")
+            menuBar = Menu(root)
+            root.config(menu=menuBar)
+            
+            archivo = Menu(menuBar, tearoff=False)                              #opcion archivo 
+            menuBar.add_cascade(label="Archivo", menu=archivo)
+            archivo.add_command(label="Aplicación", command=root.aplicacion)
+            archivo.add_command(label="Salir", command=root.salir)
+            
+            prosCon = Menu(menuBar, tearoff=False)                           #opcion procesos y consultas
+            menuBar.add_cascade(label="Procesos y Consultas", menu=prosCon)
+            
+            ayuda = Menu(menuBar, tearoff=False)                           #opcion ayuda
+            menuBar.add_cascade(label="Ayuda", menu=ayuda)
+            ayuda.add_command(label="Acerca de", command=root.ayuda)
+
+            hotel = us.getHotel()
+            saldo = hotel.getCuentaBancaria().getSaldo()
+            respuesta1 = "El hotel " + us.getHotel().getNombre() + " tiene un saldo de: " + str(saldo)
+
+            if us.getUltimoPago() != None:
+
+                ultimoPago = us.getUltimoPago()
+
+            else:
+
+                ultimoPago = "No se han realizados pagos"
+
+            respuesta2 = "El último pago se realizó el: " + str(ultimoPago)
+            saldoAPagar = us.saldoAPagarHotel(hotel.getEmpleados)
+            respuesta3 = "El saldo que debe pagar el hotel es de: " + str(saldoAPagar)
+
+            titulo1 = tk.Label(root, text=respuesta1, font=("Arial",20))
+            titulo1.pack(fill="both", pady=10)
+
+            titulo2 = tk.Label(root, text=respuesta2, font=("Arial",20))
+            titulo2.pack(fill="both", pady=10)
+
+            titulo3 = tk.Label(root, text=respuesta3, font=("Arial",20))
+            titulo3.pack(fill="both", pady=10)
+
+            pagar = Button(root, text="Pagar Empleados", command=pagar)
+            pagar.pack(pady=10)
+
+            
+
+            volverPage = Button(root, text="Volver", command=volver)
+            volverPage.pack(pady=10)
+
+
+        prosCon.add_command(label="Pagar empleados", command=pagarEmpleados)   
+
         
     @classmethod
     def sistemaEmpleado(cls, root, us, prosCon):
