@@ -13,7 +13,6 @@ class Huesped(Usuario, PresentacionBono):
 
         if preferencias is not None:
             self._preferencias = preferencias
-
         self._reserva = None
         self._habitacion = None
         self._enReserva = None
@@ -83,6 +82,8 @@ class Huesped(Usuario, PresentacionBono):
 
     def agregarPreferencias(self,ciudad,nombreHotel,tipoHabitacion):
         preferencia = Preferencia(ciudad,nombreHotel,tipoHabitacion)
+        if self._preferencias is None:
+            self._preferencias = []
         self._preferencias.append(preferencia)
 
     def ofrecerBono(self):

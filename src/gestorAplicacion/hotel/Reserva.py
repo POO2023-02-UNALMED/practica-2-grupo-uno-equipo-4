@@ -11,6 +11,7 @@ class Reserva:
         self._fechaSalida = _fechaSalida
         self._costo  = _costo
 
+
     
     def getHuesped(self):
         return self._huesped
@@ -43,13 +44,13 @@ class Reserva:
         self._costo = _costo
 
     def getCiudad(self):
-        return self._ciudad
+        return self.getHotel().getCiudad()
     
     def setHotel(self,hotel) -> Hotel:
         self._hotel = hotel
 
     def getHotel(self):
-        return self._hotel
+        return self._habitacion.getHotel()
     
     def setCiudad(self,ciudad):
         self._ciudad = ciudad
