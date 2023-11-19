@@ -10,6 +10,7 @@ class Reserva:
         self._fechaEntrada = _fechaEntrada
         self._fechaSalida = _fechaSalida
         self._costo  = _costo
+        self._hotel = _habitacion.getHotel()
 
     
     def getHuesped(self):

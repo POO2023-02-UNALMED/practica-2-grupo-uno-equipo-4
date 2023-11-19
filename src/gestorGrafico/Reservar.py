@@ -404,10 +404,13 @@ class Reservar():
                     for hotel in Base.getHoteles():
                         historial = hotel.getHistorialClientes()
                         for hue in historial:
-                            if hue.getUsername() == huesped.getUsername():
+                            oriUser = huesped.getUsername()
+                            plantUser = hue.getUsername()
+                            if plantUser == oriUser:
                                 messagebox.showinfo("Bono", "Como ya ha reservado habitaciones en este hotel, se le hará un descuento de 80000$")
                                 cobroHabitacion -= 80000
-                                habitacion.getHotel().addHistorialClientes(huesped)
+                                hotelito = habitacion.getHotel()
+                                hotelito.addHistorialClientes(huesped)
 
                     CB.retirar(cobroHabitacion)
                     HBC = hot.getCuentaBancaria()

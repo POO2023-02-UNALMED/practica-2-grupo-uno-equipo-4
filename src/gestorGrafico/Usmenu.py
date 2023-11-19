@@ -124,33 +124,45 @@ class Usmenu():
             cls.menu(root, us)
         
         def isIni():                                            #logica para ver si ya se acabo o empezó la estadía
-            fecha_actual = datetime.now()
+            fecha_actual = datetime.now().date()
             for hotel in Base.getHoteles():
-                for habitacion in hotel.getHabitaciones():
-                    if not habitacion.getReservada():
-                        for reserv in habitacion.getReservas():
+                habs = hotel.getHabitaciones()
+                for habitacion in habs:
+                    res = habitacion.getReservada()
+                    if not res:
+                        reservs = habitacion.getReservas()
+                        for reserv in reservs:
                             f_ini = reserv.getFechaEntrada().split("/")
-                            fecha_ini = datetime(int(f_ini[2]), int(f_ini[1]), int(f_ini[0]))
-                            if fecha_ini.date() == fecha_actual.date():
-                                habitacion.setReservada(True)
+                            fecha_ini = datetime(int(f_ini[2]), int(f_ini[1]), int(f_ini[0])).date()
+                            if fecha_ini == fecha_actual:
                                 huesped = reserv.getHuesped()
-                                if huesped.getUsername() == us.getUsername():
+                                plantUser = huesped.getUsername()
+                                oriUser = us.getUsername()
+                                if plantUser == oriUser:
+                                    habitacion.setReservada(True)
                                     return True
+                                    
+                                
             return False
         
         def isFin():
-            fecha_actual = datetime.now()
+            fecha_actual = datetime.now().date()
             for hotel in Base.getHoteles():
-                for habitacion in hotel.getHabitaciones():
-                    if habitacion.getReservada():
-                        for reserv in habitacion.getReservas():
+                habs = hotel.getHabitaciones()
+                for habitacion in habs:
+                    res = habitacion.getReservada() 
+                    if res:
+                        reservs = habitacion.getReservas()
+                        for reserv in reservs:
                             f_fin = reserv.getFechaSalida().split("/")
-                            fecha_fin = datetime(int(f_fin[2]), int(f_fin[1]), int(f_fin[0]))
+                            fecha_fin = datetime(int(f_fin[2]), int(f_fin[1]), int(f_fin[0])).date()
                             
-                            if fecha_actual.date() == fecha_fin.date():
-                                habitacion.setReservada(False)
+                            if fecha_actual == fecha_fin:
                                 huesped = reserv.getHuesped()
-                                if huesped.getUsername() == us.getUsername():
+                                plantUser = huesped.getUsername()
+                                oriUser = us.getUsername()
+                                if plantUser == oriUser:
+                                    habitacion.setReservada(False)
                                     return True
             return False
             
@@ -177,22 +189,40 @@ class Usmenu():
             
             Reservar.reservar(us, root, archivo)
         
+        def verReserva():
+            res = us.getReserva()
+            if res != None:
+                hot = res.getHotel()
+                hotel = hot.getNombre()
+                city = hot.getCiudad()
+                fechaIni = res.getFechaEntrada()
+                fechaFin = res.getFechaSalida()
+                cobroHabitacion = res.getCosto()
+                textFin = ("Información:\n\n"+
+                            f"Hotel: {hotel}\n\n"+
+                            f"Ciudad: {city}\n\n"+
+                            f"Fecha de inicio: {fechaIni}\n\n"+
+                            f"Fecha de fin: {fechaFin}\n\n"+
+                            f"Costo total: {cobroHabitacion}")
+                messagebox.showinfo("Reserva", textFin)
+            else:
+                messagebox.showerror("Error", "No tiene reservas.")
         
         
         if (isIni()):
                 messagebox.showinfo("Empieza tu reserva", "Su Reserva ha comenzado, disfrute.")
                 
         if (isFin()):
-            us.setReserva(None)
             reserva = us.getReserva()
             costo = reserva.getCosto()
+            us.setReserva(None)
             messagebox.showinfo("Termina tu reserva", "Su Reserva ha terminado.\n\n"+
                                 f"Costo total: {costo}") 
             #Calificar.seleccionar(root,us)
         
         prosCon.add_command(label="Reservar", command=reservar)             #Aquí se le agrega los commandos que llevan a las diferentes funcioanlidades
         #prosCon.add_command(label="calificar", command=Calificar.seleccionar(root,us))
-    
+        prosCon.add_command(label="Ver reserva", command=verReserva)
     
     
     
