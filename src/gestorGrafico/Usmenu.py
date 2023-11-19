@@ -375,12 +375,14 @@ class Usmenu():
             
             num = 1
             for i in habitaciones:
-                text = str(num) + " " + i.getTipo()
+                text = str(num) + ". " + i.getTipo()
                 habitacion = tk.Label(root, text=text, font=("Arial",13))
                 habitacion.pack(fill="both", pady=10)
 
-            volver = Button(root, text="Volver", command=volver)
-            volver.pack(pady=10)
+                num += 1
+
+            volverS = Button(root, text="Volver", command=volver)
+            volverS.pack(pady=10)
 
 
         #
@@ -389,10 +391,16 @@ class Usmenu():
 
         def regisHabitacion():
 
+            def volver():
+                cls.menu(root, us)
+
             #
             #Se crea el nuevo objeto habitación
             #
             def crearHabitacion():
+
+                def volver():
+                    cls.menu(root, us)
 
                 tip = combo.get()
                 tipo = combo.get().split()
@@ -429,10 +437,6 @@ class Usmenu():
 
                 messagebox.showinfo("Operación Completa", "La habitación se ha registrado correctamente")
                 volver()
-
-
-            def volver():
-                cls.menu(root, us)
 
             root.cleanRoot()
             root.title("CosmoReserve")
@@ -705,11 +709,14 @@ class Usmenu():
             titulo1 = tk.Label(root, text=respuesta1, font=("Arial",20))
             titulo1.pack(fill="both", pady=10)
 
-            titulo2 = tk.Label(root, text=respuesta2, font=("Arial",20))
+            titulo2 = tk.Label(root, text=respuesta2, font=("Arial",15))
             titulo2.pack(fill="both", pady=10)
 
-            titulo3 = tk.Label(root, text=respuesta3, font=("Arial",20))
+            titulo3 = tk.Label(root, text=respuesta3, font=("Arial",15))
             titulo3.pack(fill="both", pady=10)
+
+            descripcionP = tk.Label(root, text="La funcionalidad de pagar empleados le permite a el administrador hacer el respectivo pago a los empleados.\n Se le descuenta el dinero a la cuenta bancaria del hotel.\nLos pagos se hacen minimo cada mes ", font=("Arial",13))
+            descripcionP.pack(fill="both", pady=10)
 
             pagar = Button(root, text="Pagar Empleados", command=pagar)
             pagar.pack(pady=10)

@@ -114,16 +114,16 @@ class Hotel:
         
     @property
     def getEmpleados(self):
-       return  self._empleados
+       return  self.__empleados
     
-    #def getEmpleado(self):
-     #  return  self.__empleados
+    def getEmpleado(self):
+       return  self.__empleados
     
     def setEmpleados(self, __empleados):
-        self._empleados = __empleados
+        self.__empleados = __empleados
         
     def addEmpleados(self, empleado):
-        self._empleados.append(empleado)
+        self.__empleados.append(empleado)
         
     def getHistorialClientes(self):
         return  self.__historial_clientes
