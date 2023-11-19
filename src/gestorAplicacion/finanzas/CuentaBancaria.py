@@ -50,7 +50,7 @@ class CuentaBancaria():
 
     @classmethod
 
-    def transferencia(cls, cuenta1, cuenta2, valor):
+    def transfarencia(cls, cuenta1, cuenta2, valor):
 
         cuenta1.retirar(valor)
         cuenta2.depositar(valor)

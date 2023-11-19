@@ -1,6 +1,7 @@
 class Hotel:
     
     _totalHoteles = []
+
     
     def __init__(self,__cuenta_bancaria,__nombre=None,__ciudad=None,__servicios=None,_habitaciones=None,__empleados=None):
         
@@ -109,6 +110,13 @@ class Hotel:
     @property
     def getEmpleados(self):
        return  self.__empleados
+    
+    def getEmpleado(self):
+       return  self.__empleados
+    
+    def addEmpleados(self, empleado):
+
+        self.__empleados.append(empleado)
     
 
     def setEmpleados(self, __empleados):
