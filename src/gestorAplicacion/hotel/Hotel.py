@@ -15,13 +15,16 @@ class Hotel:
             self.__ciudad = __ciudad
         
         if __servicios is not None:
-            self._servicios = __servicios
+            self.__servicios = __servicios
+        else:
+            self.__servicios = []  # Inicializar __servicios si no se proporciona
             
         if _habitaciones is  not None:
             self._habitaciones = _habitaciones
             
         if __empleados is not None:
             self.__empleados = __empleados
+            
         if _habitaciones is not None:
             for i  in  _habitaciones:
                 i.setHotel(self)
@@ -40,12 +43,12 @@ class Hotel:
         for i in self.getServicios():
             totalServicios = totalServicios + i.promedioCalificaciones(i)
         totalHabitaciones = totalHabitaciones/len(self._habitaciones)
-        totalServicios = totalServicios/len(self._servicios)
+        totalServicios = totalServicios/len(self.__servicios)
         totalEmpleados = totalEmpleados/len(self.__empleados)
         return (totalEmpleados+totalServicios+totalHabitaciones)/3
 
     def addServicioExtra(self, servicio):
-        self._servicios.append(servicio)
+        self.__servicios.append(servicio)
     def addHabitacion(self, habitacion):
         self._habitaciones.append(habitacion)
       
@@ -78,13 +81,11 @@ class Hotel:
     def setCuentaBancaria(self, __cuenta_bancaria):
         self.__cuenta_bancaria = __cuenta_bancaria
         
-    
     def getServicios(self):
-        return self._servicios
+        return self.__servicios
     
-
-    def setServicios(self, _servicios):
-        self._servicios = _servicios
+    def setServicios(self, __servicios):
+        self.__servicios = __servicios
         
     def getNombre(self):
         return self.__nombre
@@ -109,18 +110,16 @@ class Hotel:
         
     @property
     def getEmpleados(self):
-       return  self.__empleados
+       return  self._empleados
     
-    def getEmpleado(self):
-       return  self.__empleados
+    #def getEmpleado(self):
+     #  return  self.__empleados
     
-    def addEmpleados(self, empleado):
-
-        self.__empleados.append(empleado)
-    
-
     def setEmpleados(self, __empleados):
-        self.__empleados = __empleados
+        self._empleados = __empleados
+        
+    def addEmpleados(self, empleado):
+        self._empleados.append(empleado)
         
     def getHistorialClientes(self):
         return  self.__historial_clientes

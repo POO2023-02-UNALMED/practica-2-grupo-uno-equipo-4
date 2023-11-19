@@ -10,12 +10,12 @@ from gestorAplicacion.finanzas.CuentaBancaria import CuentaBancaria
 from gestorAplicacion.hotel.Hotel import Hotel
 from gestorAplicacion.usuarios.Administrador import Administrador
 from gestorAplicacion.usuarios.Empleado import Empleado
-from gestorGrafico.Usmenu import Usmenu
+from gestorAplicacion.hotel.ServiciosExtra import ServiciosExtra
 
 class Calificar :
     
     @classmethod
-    def seleccionar(cls,root:Root,huesped=None):
+    def seleccionar(cls,root:Root,huesped:Huesped):
         root.title("Calificar")
         menuBar = Menu(root)
         root.config(menu=menuBar)
@@ -24,7 +24,7 @@ class Calificar :
         archivo.add_command(label="Salir", command=root.salir)
         
         Titulo = tk.Label(root, text="Calificar", font=("arial", 25))
-        subtitulo = tk.Label(root, text="A CONTINUACION SE  DESPLEGARAN 3 ENCUESTAS PARA CALIFICAR AL HOTEL", font=("arial", 15))
+        subtitulo = tk.Label(root, text="A CONTINUACION SE DESPLEGARA LA ENCUESTA PARA CALIFICAR AL HOTEL", font=("arial", 15))
         Titulo.pack(side="top", padx=10, pady=10,)
         subtitulo.pack(side="top", padx=10, pady=10,)
         
@@ -33,7 +33,7 @@ class Calificar :
         P1 = tk.Frame(root, bg="red")
         P1.pack(side="top", fill="both", expand=True)
         P2 = tk.Frame(P1, bg="yellow")
-        P2.place(relx=0.5, rely=0.14, relheight=0.25, anchor="c")
+        P2.place(relx=0.5, relheight=0.5, anchor="n")
         
         
         Titulo = tk.Label(P2, text="Habitacion", font=("arial", 15))
@@ -83,10 +83,21 @@ class Calificar :
         #username_label.grid(row=1, column=0, padx=1, pady=1)
         #username_entry = tk.Entry(P2)
         #username_entry.grid(row=1, column=1, padx=1, pady=1)
-        conts = 6
-        for servicio  in huesped.getReserva().getHotel().getServicios():
+        conts = 7
+        #print(huesped.getReserva())
+        serv1 = ServiciosExtra(1)
+        serv1.setTipoServicio("Piscina")
+        serv2 = ServiciosExtra(2)
+        serv2.setTipoServicio("Transporte")
+        serv3 = ServiciosExtra(3)
+        serv3.setTipoServicio("Teatro")
+        print(serv3.getTipoServicio())
+        servicios = [serv1,serv2,serv3]
+        Titulo2 = tk.Label(P2, text="Servicios", font=("arial", 15))
+        Titulo2.grid(row=6, column=0, padx=1, pady=1)
+        for servicio  in servicios:
             etiqueta4 = tk.Label(P2, text=servicio.getTipoServicio(), font=("arial", 10))
-            etiqueta4.grid(row=4, column=0, padx=1, pady=1)
+            etiqueta4.grid(row=conts, column=0, padx=1, pady=1)
             types = [1,2,3,4,5]
             usType5 = Combobox(P2, values=types, state="readonly",font=("arial", 10))
             usType5.set("Calificacion servicio")

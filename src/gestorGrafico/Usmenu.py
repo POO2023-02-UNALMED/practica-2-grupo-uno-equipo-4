@@ -15,6 +15,7 @@ from gestorAplicacion.finanzas.CuentaBancaria import CuentaBancaria
 from gestorAplicacion.usuarios.Administrador import Administrador
 from gestorAplicacion.usuarios.Empleado import Empleado
 from gestorGrafico.FieldFrame import FieldFrame
+from gestorGrafico.Calificar import Calificar
 
 
 #@autor: David Restrepo
@@ -187,10 +188,10 @@ class Usmenu():
             costo = reserva.getCosto()
             messagebox.showinfo("Termina tu reserva", "Su Reserva ha terminado.\n\n"+
                                 f"Costo total: {costo}") 
-            
+            #Calificar.seleccionar(root,us)
         
         prosCon.add_command(label="Reservar", command=reservar)             #Aquí se le agrega los commandos que llevan a las diferentes funcioanlidades
-        
+        prosCon.add_command(label="calificar", command=Calificar.seleccionar(root,us))
     
     
     
