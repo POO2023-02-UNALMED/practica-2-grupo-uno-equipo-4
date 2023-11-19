@@ -148,6 +148,16 @@ class Administrador(Usuario):
         return saldoAPagar
 
 
+    def reiniciarUltimoPago(self):
+
+        empleados = self.getHotel().getEmpleado()
+
+        for empleado in empleados:
+            empleado.setUltimoPago(None)
+
+        self.setUltimoPago(None)
+
+
     def getTotalAdministradores(self):
         return self.totalAdministradores
     

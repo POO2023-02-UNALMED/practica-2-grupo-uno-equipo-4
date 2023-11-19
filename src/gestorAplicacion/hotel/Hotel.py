@@ -107,6 +107,10 @@ class Hotel:
 
     def setHabitaciones(self, _habitaciones):
         self._habitaciones = _habitaciones
+
+    def addHabitaciones(self, habitacion):
+
+        self._habitaciones.append(habitacion)
         
     @property
     def getEmpleados(self):
