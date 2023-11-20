@@ -46,10 +46,11 @@ if __name__ == '__main__' :
     # Base.addHoteles(hotel)
     #
     ##NESESARIA PARA CALIFICAR
-    ##PRUEBAS RECOMENDACIONES
+    #PRUEBAS RECOMENDACIONES
     #cuentaBancaria1 = CuentaBancaria(1000000, "b")
     #cuentaBancaria2 = CuentaBancaria(1000000, "b")
     #cuentaBancaria3 = CuentaBancaria(1000000, "b")
+    #cuentaBancariaHuesped = CuentaBancaria(100000,"b")
     #habs = []
     #hab1 = Habitacion(1,"simple",1,1000)
     #hab2 = Habitacion(2,"doble",1,1000)
@@ -106,7 +107,8 @@ if __name__ == '__main__' :
     #preferencia2 = Preferencia("Medellin","Hotel2",["vipfamiliar","vipsimple"])
     #preferencias.append(preferencia2)
     #preferencias.append(preferencia)
-    #huesped = Huesped(False,preferencias,"Alejandra","32145","Alejandra","123",CuentaBancaria(1000,"Bancolombia","2919191"))
+    #huesped = Huesped(False,preferencias,"Alejandra","32145","Alejandra","123",cuentaBancariaHuesped)
+    #Base.addHuespedes(huesped)
     #reserva = Reserva(huesped,hab5,None,None,None,)
     #reserva.setCalificacionHotel(4)
     #huesped.addReserva(reserva)
@@ -119,8 +121,7 @@ if __name__ == '__main__' :
     #reserva3.setCalificacionHotel(4)
     #huesped.addReserva(reserva3)
     #hab60.addCalificacion(huesped,5)
-
-
+#
     #Pruebas Administrador
     # cuentaBancariaH = CuentaBancaria(1000, "b")
     # cuentaBancariaA = CuentaBancaria(100, "b")
