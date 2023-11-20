@@ -489,9 +489,12 @@ class Usmenu():
 
                 except UnboundLocalError:
                     print("Debe escoger una habitación para poder registrarla")
+                    messagebox.showerror("Error", "Escoga un tipo de habitación")
 
-                messagebox.showinfo("Operación Completa", "La habitación se ha registrado correctamente")
-                volver()
+
+                else:
+                    messagebox.showinfo("Operación Completa", "La habitación se ha registrado correctamente")
+                    volver()
 
             root.cleanRoot()
             root.title("CosmoReserve")
