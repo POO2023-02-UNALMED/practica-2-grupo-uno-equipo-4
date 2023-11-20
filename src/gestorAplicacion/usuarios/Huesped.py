@@ -4,6 +4,8 @@ from .PresentacionBono import PresentacionBono
 from baseDatos.Base import Base
 from ..hotel import Reserva
 
+#@autor: Alejandra Toro
+
 class Huesped(Usuario, PresentacionBono):
     def __init__(self,vip=None,preferencias=None, nombre=None, telefono=None, username=None, password=None, cuentaBancaria=None):
         super().__init__(nombre, telefono, username, password, cuentaBancaria)
@@ -97,7 +99,7 @@ class Huesped(Usuario, PresentacionBono):
     def entrando(self):
         return "Entrando a su cuenta de Huesped, señor(a) "+ self.getNombre()
     
-    #Método que se usa en recomendacion hoteles por similar(). 
+    #Método que se usa en recomendacion hoteles por similar, para elegir habitaciones basadas en las preferencias
     def _recomendacionHabitacionPorSimilar(self,hotel,preferencia):
         habitacionesHotel = hotel.getHabitaciones()
         tiposHabitacionesPreferencias = preferencia.getTiposHabitaciones()
@@ -116,7 +118,7 @@ class Huesped(Usuario, PresentacionBono):
                         if(habitaciones!= None):
                             recomendaciones[hotel] = habitaciones
         return recomendaciones
-
+    #Método que se usa en recomendacion hoteles por historial, para elegir las habitaciones con calificaciones por encima de 4
     def _recomendacionHabitacionPorHistorial(self,hotel):
         habitacionesHotel = hotel.getHabitaciones()
         habitacionesRecomendadas = []
@@ -130,6 +132,7 @@ class Huesped(Usuario, PresentacionBono):
                         break
         return habitacionesRecomendadas
 
+    #Para recomendar hoteles y habitaciones basadas en el historial de reservaciones
     def recomendacionHotelesPorHistorial(self,ciudad):
         recomendaciones = {}
         hoteles = []

@@ -5,6 +5,8 @@ from baseDatos.Base import Base
 from tkinter import Menu
 from gestorGrafico.Usmenu import Usmenu
 
+#@autor: Alejandra Toro
+
 class Recomendaciones():
     _ventanaElegirCiudad = None
     _ventanaTipoRecomendacion = None
@@ -29,7 +31,7 @@ class Recomendaciones():
         return nombresHoteles
    
 
-    
+    #Ventana de inicio de la interfaz gráfica para recomendaciones
     def inicio(self):
         ventana = self._root
         ventana.title("Tipo de recomendacion")
@@ -38,7 +40,7 @@ class Recomendaciones():
         framePrincipal.grid_columnconfigure((0,1), minsize=80)
 
         labelTitulo = tk.Label(framePrincipal,text="Recomendaciones",font=("Arial", 20), bg="lightgray")
-        labelExplicacion = tk.Label(framePrincipal,text="El sistema de recomendaciones permite basado en el tipo que se eliga y la ciudad,proporcionarle al huesped algunos posibles hoteles y habitaciones donde se podría hospedar. Para generar estas recomendaciones se tiene en cuenta el historial de previas reservaciones y/o las preferencias que anteriormente ha agregado a su cuenta como huesped. ",font=("arial", 10),wraplength=ventana.winfo_screenwidth() - 50)
+        labelExplicacion = tk.Label(framePrincipal,text="El sistema de recomendaciones permite basado en el tipo y la ciudad que se elija,proporcionarle al huesped algunos posibles hoteles y habitaciones donde se podría hospedar. Para generar estas recomendaciones se tiene en cuenta el historial de previas reservaciones y/o las preferencias que anteriormente ha agregado a su cuenta como huesped. ",font=("arial", 10),wraplength=ventana.winfo_screenwidth() - 50)
         labelSubtitulo = tk.Label(framePrincipal,text="Elige el tipo de recomendación: ",font=("arial", 10))
 
         labelTitulo.pack(expand=True)
@@ -57,12 +59,14 @@ class Recomendaciones():
         siguiente.place(relx=0.5,rely=0.3,anchor="center")
         ventana.mainloop()
 
+    #Donde se verifica que el usuario si haya elegido un tipo de recomendacion
     def _verificacionTipoRecomendacion(self,valor,ventana):
         if(valor!="Por preferencias" and valor!="Por historial"):
             messagebox.showerror("Error","Elige una opción")
         else:
             self._elegirCiudad(valor,ventana)
-        
+
+    #Ventana para elegir la ciudad donde desea ver recomendaciones    
     def _elegirCiudad(self,tipoRecomendacion,ventana):
         ventana.cleanRoot()
         Usmenu.menu(ventana,self._huesped)
@@ -90,12 +94,14 @@ class Recomendaciones():
         siguiente.place(relx=0.55,rely=0.3,anchor="center")
         ventana.mainloop()
     
+    #Donde se verifica que el usuario si haya elegido una ciudad
     def _verificacionCiudad(self,ciudad,ciudades,tipoRecomendacion,ventana):
         if ciudad not in ciudades:
             messagebox.showerror("Error","Elige una ciudad")
         else:
             self._tipoRecomendacion(tipoRecomendacion,ciudad,ventana)
 
+    #Ventana donde le aparecen las recomendaciones al usuario
     def _tipoRecomendacion(self,tipoRecomendacion,ciudad,ventana):
         ventana.cleanRoot()
         Usmenu.menu(ventana,self._huesped)
@@ -126,10 +132,11 @@ class Recomendaciones():
             posiciones+=1
         ventana.mainloop()
 
+    #Donde se verifica que si hayan recomendaciones, en caso de que no aparecerá un mensaje donde se le indica al usuario que no hay habitaciones disponibles
     def _verificarRecomendaciones(self,recomendaciones):
         return recomendaciones!={}
 
-    #Todo: a dónde devuelve?
+    #Ventana para agregar preferencias.
     def agregarPreferencia(self):
         hoteles = Base.getHoteles()
         nombresHoteles = self._hoteles(hoteles)
@@ -189,6 +196,7 @@ class Recomendaciones():
         agregarPreferencia.place(relx=0.5,rely=0.55,anchor="center")
         ventana.mainloop()
 
+    #Donde se verifica que si hayan datos para agregar a la lista de preferencias del usuario
     def _enviarDatosPreferencia(self,hoteles,hotel,ciudades,ciudad):
         verificacion = True
         if hotel not in hoteles:
@@ -205,10 +213,11 @@ class Recomendaciones():
             self._huesped.agregarPreferencias(ciudad,hotel,Recomendaciones._tiposHabitaciones)
             messagebox.showinfo("Info","Preferencia agregada")
 
-
+    #Volver al valor inicial de los tipos de habitaciones que luego se añadirán a la lista de preferencias
     def _valorInicial(self):
         Recomendaciones._tiposHabitaciones = []
 
+    #Donde se verifican los checkbox que estén seleccionados
     def _verificarCheckbox(self,valorCasilla,tipoHabitacion):
         if valorCasilla==1:
             Recomendaciones._tiposHabitaciones.append(tipoHabitacion)
