@@ -102,7 +102,7 @@ if __name__ == '__main__' :
     #preferencia2 = Preferencia("Medellin","Hotel2",["vipfamiliar","vipsimple"])
     #preferencias.append(preferencia2)
     #preferencias.append(preferencia)
-    #huesped = Huesped(False,preferencias,"Alejandra",None,None,None,None)
+    #huesped = Huesped(False,preferencias,"Alejandra",None,"Alejandra","123",None)
     #Base.addHuespedes(huesped)
     #reserva = Reserva(huesped,hab5,None,None,None,)
     #reserva.setCalificacionHotel(4)
@@ -116,8 +116,6 @@ if __name__ == '__main__' :
     #reserva3.setCalificacionHotel(4)
     #huesped.addReserva(reserva3)
     #hab60.addCalificacion(huesped,5)
-
-
 
     # cuentaBancariaH = CuentaBancaria(1000000, "b")
     # cuentaBancariaA = CuentaBancaria(1000000, "b")
