@@ -676,8 +676,13 @@ class Usmenu():
             
             titulo = "Bienvenido " + us.getNombre()
 
+            saldoAdmin = "Tienes un saldo de: " + str(us.getCuentaBancaria().getSaldo())
+
             titulo = tk.Label(root, text=titulo, font=("Arial",20))
             titulo.pack(fill="both", pady=10)
+
+            descrop = tk.Label(root, text=saldoAdmin, font=("Arial",15))
+            descrop.pack(fill="both", pady=10)
 
             resumen = tk.Label(root, text="Escoge la opción que desear realizar.\nRecuerda que la funcionalidad de pagar empleados se encuentra en el menú en Procesos y consultas", font=("Arial",13))
             resumen.pack(pady=10)
@@ -753,10 +758,13 @@ class Usmenu():
                 ultimoPago = "No se han realizados pagos"
 
             respuesta2 = "El último pago se realizó el: " + str(ultimoPago)
-            saldoAPagar = us.saldoAPagarHotel(hotel.getEmpleados)
+            saldoAPagar = us.saldoAPagarHotel(hotel.getEmpleados())
             respuesta3 = "El saldo que debe pagar el hotel es de: " + str(saldoAPagar)
 
-            titulo1 = tk.Label(root, text=respuesta1, font=("Arial",20))
+            titulo1 = tk.Label(root, text="Funcionalidad Pagar Empleados", font=("Arial",20))
+            titulo1.pack(fill="both", pady=10)
+
+            titulo1 = tk.Label(root, text=respuesta1, font=("Arial",15))
             titulo1.pack(fill="both", pady=10)
 
             titulo2 = tk.Label(root, text=respuesta2, font=("Arial",15))
