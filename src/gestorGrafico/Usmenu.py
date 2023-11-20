@@ -483,7 +483,12 @@ class Usmenu():
 
                     habitacion = Habitacion(19, "VIPSimple", TipoHabitacion.asign_camas(TipoHabitacion.VIPSIMPLE), TipoHabitacion.asign_precio(TipoHabitacion.VIPSIMPLE))
 
-                us.getHotel().addHabitaciones(habitacion)
+                try:
+
+                    us.getHotel().addHabitacion(habitacion)
+
+                except UnboundLocalError:
+                    print("Debe escoger una habitación para poder registrarla")
 
                 messagebox.showinfo("Operación Completa", "La habitación se ha registrado correctamente")
                 volver()
