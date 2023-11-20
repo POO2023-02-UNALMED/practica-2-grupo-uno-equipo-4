@@ -7,6 +7,20 @@ class Hotel:
         
         self.__cuenta_bancaria = __cuenta_bancaria
         self.__historial_clientes = []
+
+        self.motivos = {
+            "Falta de respeto":0,
+            "Falta  de  Puntualidad":0,
+            "Poca Eficiencia": 0,
+            "Mala Presentación personal":0
+        }
+
+        self.sugerencias = {
+            "Mejorar el respeto":0,
+            "Mejorar  puntualidad":0,
+            "Mejorar  eficiencia":0,
+            "Mejorar presentación personal":0
+        }
             
         if __nombre is  not None:
             self.__nombre = __nombre
@@ -76,7 +90,33 @@ class Hotel:
     def addTotalHoteles(cls, _total_hoteles):
         cls._total_hoteles = _total_hoteles
     
-    
+    def getSugerencias(self):
+        return self.sugerencias
+
+    def setSugerencias(self,sugerencias):
+        self.sugerencias = sugerencias
+
+    def addSugerencias(self,sugerencia):
+        if self.sugerencias[sugerencia] is None:
+            self.sugerencias[sugerencia] = 1
+        else:
+            self.sugerencias[sugerencia] = self.sugerencias[sugerencia] + 1
+
+    def getCuentaBancaria(self):
+        return self.__cuenta_bancaria
+
+    def getMotivos(self):
+        return self.motivos
+
+    def setMotivos(self,motivos):
+        self.motivos = motivos
+
+    def addMotivos(self,motivo):
+        if self.motivos[motivo] is None:
+            self.motivos[motivo] = 1
+        else:
+            self.motivos[motivo] = self.motivos[motivo] + 1
+
     def getCuentaBancaria(self):
         return self.__cuenta_bancaria
     

@@ -11,15 +11,38 @@ from gestorAplicacion.hotel.Hotel import Hotel
 from gestorAplicacion.usuarios.Administrador import Administrador
 from gestorAplicacion.usuarios.Empleado import Empleado
 from gestorAplicacion.hotel.ServiciosExtra import ServiciosExtra
+from tkinter import Menu, messagebox
 
 class Calificar :
+
     
-    @classmethod
-    def continuacion(root:Root,huesped:Huesped):
-        pass
     
     @classmethod
     def seleccionar(cls,root:Root,huesped:Huesped):
+        
+        def verificar(huesped):
+            #print(type(usType.get()))
+            #print(usType2.get())
+            #print(usType5.get())
+            #print(diccionario)
+            if int(usType.get()) in types and usType2.get() in empleados.keys() and int(usType3.get()) in types and usType6.get() in servicios.keys()  and int(usType5.get()) in types:
+                #huesped.getReserva().getHabitacion().addCalificacion(huesped,int(usType))
+                
+                print(huesped.getReserva().getHotel().getEmpleados())
+                for i in huesped.getReserva().getHotel().getEmpleados():
+                    print("entro")
+                    if  i.getNombre() == usType2:
+                        i.addCalificacion(huesped,int(usType3))
+                        print(i.getCalificaciones())
+                for i in huesped.getReserva().getHotel().getServicios():
+                    if  i.getNombre() == usType6:
+                        i.addCalificacion(huesped,int(usType5))
+                        print(i.getCalificaciones())
+                print("calculau")
+                
+            else:
+                messagebox.showerror("Llene todos los campos")
+        
         root.title("Calificar")
         menuBar = Menu(root)
         root.config(menu=menuBar)
@@ -70,12 +93,18 @@ class Calificar :
         etiqueta2.grid(row=4, column=0, padx=1, pady=1)
         cont = 1
         empleados = {}
-        print(huesped.getReserva().getHotel().getEmpleados()[0])
+        #print(huesped.getReserva().getHotel().getEmpleados()[0])
         for empleado in huesped.getReserva().getHotel().getEmpleados():
             empleados[empleado.getNombre()] = empleado
         usType2 = Combobox(P2, values=list(empleados.keys()), state="readonly",font=("arial", 10))
         usType2.set("Empleados")
         usType2.grid(row=4, column=1, padx=1, pady=1)
+        
+        #while usType2 not in empleados.keys():
+         #   usType2 = Combobox(P2, values=list(empleados.keys()), state="readonly",font=("arial", 10))
+          #  usType2.set("Empleados")
+           # usType2.grid(row=4, column=1, padx=1, pady=1)
+            #messagebox.showerror("Error", "Nombre de usuario o contraseña incorrectos")
         
         etiqueta3 = tk.Label(P2, text="Ingrese un entero del  1 al 5, donde 1 es muy  insatisfecho y 5 es muy satisfecho", font=("arial", 10))
         etiqueta3.grid(row=5, column=0, padx=1, pady=1)
@@ -101,14 +130,28 @@ class Calificar :
         Titulo2 = tk.Label(P2, text="Servicios", font=("arial", 15))
         Titulo2.grid(row=6, column=0, padx=1, pady=1)
         #for servicio  in servicios:
+        servicios = {}
         for servicio in huesped.getReserva().getHotel().getServicios():
-            etiqueta4 = tk.Label(P2, text=servicio.getNombre(), font=("arial", 10))
-            etiqueta4.grid(row=conts, column=0, padx=1, pady=1)
-            types = [1,2,3,4,5]
-            usType5 = Combobox(P2, values=types, state="readonly",font=("arial", 10))
-            usType5.set("Calificacion servicio")
-            usType5.grid(row=conts, column=1, padx=1, pady=1)
-            conts = conts  + 1
+            servicios[servicio.getNombre()]=servicio
+        
+        etiqueta6 = tk.Label(P2, text="Seleccione un servicio a calificar", font=("arial", 10))
+        etiqueta6.grid(row=7, column=0, padx=1, pady=1)
+        usType6 = Combobox(P2, values=list(servicios.keys()), state="readonly",font=("arial", 10))
+        usType6.set("servicio")
+        usType6.grid(row=7, column=1, padx=1, pady=1)
+        
+        etiqueta4 = tk.Label(P2, text="Ingrese un entero del  1 al 5, donde 1 es muy  insatisfecho y 5 es muy satisfecho", font=("arial", 10))
+        etiqueta4.grid(row=8, column=0, padx=1, pady=1)
+        types = [1,2,3,4,5]
+        usType5 = Combobox(P2, values=types, state="readonly",font=("arial", 10))
+        usType5.set("Calificacion servicio")
+        usType5.grid(row=8, column=1, padx=1, pady=1)
+ 
+        
+        print(usType5.get())
+        boton = tk.Button(P2, text="Continuar")
+        boton.grid(row=9, column=0, padx=1, pady=1)
+        boton.bind("<Button-1>", verificar(huesped))
             
     
    

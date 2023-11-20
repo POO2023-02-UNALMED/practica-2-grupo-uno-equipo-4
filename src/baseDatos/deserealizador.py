@@ -9,10 +9,7 @@ class Deserializador:
     
     @classmethod
     def deserializador(cls):
-
-        path = os.path.join(pathlib.Path(__file__).parent.absolute())
-        file = open(path+"\\temp\\administradores.pkl", "rb")
-
+        file = open("C:/Users/Usuario/OneDrive/Escritorio/U/Cuarto Semestre/POO/Practica2/practica-2-grupo-uno-equipo-4/src/baseDatos/temp/administradores.pkl", "rb")
         try :
             pcs = pickle.load(file)
             Base.setAdministradores(pcs)
@@ -20,9 +17,7 @@ class Deserializador:
             Base.setAdministradores([])
         file.close()
 
-
-        file = open(path+"\\temp\\huespedes.pkl", "rb")
-
+        file = open("C:/Users/Usuario/OneDrive/Escritorio/U/Cuarto Semestre/POO/Practica2/practica-2-grupo-uno-equipo-4/src/baseDatos/temp/huespedes.pkl", "rb")
         try :
             pcs = pickle.load(file)
             Base.setHuespedes(pcs)
@@ -30,8 +25,7 @@ class Deserializador:
             Base.setHuespedes([])
         file.close()
 
-
-        file = open(path+"\\temp\\hoteles.pkl", "rb")
+        file = open("C:/Users/Usuario/OneDrive/Escritorio/U/Cuarto Semestre/POO/Practica2/practica-2-grupo-uno-equipo-4/src/baseDatos/temp/hoteles.pkl", "rb")
         try :
             pcs = pickle.load(file)
             Base.setHoteles(pcs)
@@ -39,9 +33,7 @@ class Deserializador:
             Base.setHoteles([])
         file.close()
 
-
-        file = open(path+"\\temp\\empleados.pkl", "rb")
-
+        file = open("C:/Users/Usuario/OneDrive/Escritorio/U/Cuarto Semestre/POO/Practica2/practica-2-grupo-uno-equipo-4/src/baseDatos/temp/empleados.pkl", "rb")
         try :
             pcs = pickle.load(file)
             Base.setEmpleados(pcs)
