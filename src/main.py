@@ -28,7 +28,8 @@ if __name__ == '__main__' :
     Deserializador.deserializador()
 
     
-
+    # habitaciones = []
+    # cuentaBancaria = CuentaBancaria(1000000, "b")
     # hab1 = Habitacion(1, "simple", TipoHabitacion.asign_camas(TipoHabitacion.SIMPLE), TipoHabitacion.asign_precio(TipoHabitacion.SIMPLE))
     # hab1.addCalificacion(Huesped(), 3)
     # hab1.addCalificacion(Huesped(), 2)

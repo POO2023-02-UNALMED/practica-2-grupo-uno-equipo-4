@@ -146,11 +146,9 @@ class Reservar():
         def seleccionar():
             habId = cls.resultadoHotel.item(cls.resultadoHotel.selection(), "text")
             habitaciones = hotel.getHabitaciones()
-            print(habitaciones)
             for i in habitaciones:
                 if i.getId() == habId:
                     selectedRoom = i
-            print(selectedRoom)
             cls.realizarReserva(selectedRoom, huesped)
             
         
@@ -423,7 +421,6 @@ class Reservar():
                     hotCity = hot.getCiudad()
                     
                     messagebox.showinfo("Mensaje", f"Se le han descontado {cobroHabitacion}$ de su cuenta bancaria")
-                    print(habitacion.getId())
                     reserva = Reserva(huesped, habitacion, fechaIni, fechaFin, cobroHabitacion)
                     huesped.setReserva(reserva)
                     
