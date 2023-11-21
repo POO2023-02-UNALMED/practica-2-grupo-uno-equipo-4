@@ -314,232 +314,248 @@ class Usmenu():
 
         def agregarServicio():
 
-            def volver():
-                cls.menu(root, us)
-
-            def crearServicio():
+            res = us.getReserva()
+            if res != None:
 
                 def volver():
                     cls.menu(root, us)
 
-                tipo = combo.get()
-                tipo = tipo.split()
+                def crearServicio():
 
-                try:
+                    
 
-                    tipo = tipo[0]
 
-                #tipoPrueba = combo.get()
+                    def volver():
+                        cls.menu(root, us)
 
-                except:
+                    tipo = combo.get()
+                    tipo = tipo.split()
 
-                    messagebox.showerror("Error", "Escoga un servicio")
-                
-                else:
-                
-                    if tipo == "Transporte":
+                    try:
 
-                        saldo = us.getCuentaBancaria().getSaldo()
-                        valor = 2000
+                        tipo = tipo[0]
 
-                        if saldo < valor:
+                    #tipoPrueba = combo.get()
 
-                            messagebox.showerror("Error", "No cuentas con el dinero suficiente para pagar el servicio extra")
-                        
-                        else:
+                    except:
 
-                            ServiciosExtra.agregarServicioTransporte(us)
-                            messagebox.showinfo("Servicio agregado", "El servicio se ha agregado correctamente. El valor del servicio se ha descontado de su cuenta bancaria.")
+                        messagebox.showerror("Error", "Escoga un servicio")
+                    
+                    else:
+                    
+                        if tipo == "Transporte":
 
-                    elif tipo == "Alimentación":
-                        
-                        saldo = us.getCuentaBancaria().getSaldo()
-                        valor = 1000
+                            saldo = us.getCuentaBancaria().getSaldo()
+                            valor = 2000
 
-                        if saldo < valor:
+                            if saldo < valor:
 
-                            messagebox.showerror("Error", "No cuentas con el dinero suficiente para pagar el servicio extra")
+                                messagebox.showerror("Error", "No cuentas con el dinero suficiente para pagar el servicio extra")
                             
-                        
-                        else:
+                            else:
 
-                            ServiciosExtra.agregarServicioAlimentacion(us)
-                            messagebox.showinfo("Servicio agregado", "El servicio se ha agregado correctamente. El valor del servicio se ha descontado de su cuenta bancaria.")
+                                ServiciosExtra.agregarServicioTransporte(us)
+                                messagebox.showinfo("Servicio agregado", "El servicio se ha agregado correctamente. El valor del servicio se ha descontado de su cuenta bancaria.")
 
+                        elif tipo == "Alimentación":
+                            
+                            saldo = us.getCuentaBancaria().getSaldo()
+                            valor = 1000
 
+                            if saldo < valor:
 
+                                messagebox.showerror("Error", "No cuentas con el dinero suficiente para pagar el servicio extra")
+                                
+                            
+                            else:
 
-                    elif tipo == "Limpieza":
-                        
-                        saldo = us.getCuentaBancaria().getSaldo()
-                        valor = 3000
-
-                        if saldo < valor:
-
-                            messagebox.showerror("Error", "No cuentas con el dinero suficiente para pagar el servicio extra")
-                        
-                        else:
-
-                            ServiciosExtra.agregarServicioLimpieza(us)
-                            messagebox.showinfo("Servicio agregado", "El servicio se ha agregado correctamente. El valor del servicio se ha descontado de su cuenta bancaria.")
+                                ServiciosExtra.agregarServicioAlimentacion(us)
+                                messagebox.showinfo("Servicio agregado", "El servicio se ha agregado correctamente. El valor del servicio se ha descontado de su cuenta bancaria.")
 
 
-                    volver()
 
-            root.cleanRoot()
-            root.title("CosmoReserve")
-            menuBar = Menu(root)
-            root.config(menu=menuBar)
-            
-            archivo = Menu(menuBar, tearoff=False)                              #opcion archivo 
-            menuBar.add_cascade(label="Archivo", menu=archivo)
-            archivo.add_command(label="Aplicación", command=root.aplicacion)
-            archivo.add_command(label="Salir", command=root.salir)
-            
-            prosCon = Menu(menuBar, tearoff=False)                           #opcion procesos y consultas
-            menuBar.add_cascade(label="Procesos y Consultas", menu=prosCon)
-            
-            ayuda = Menu(menuBar, tearoff=False)                           #opcion ayuda
-            menuBar.add_cascade(label="Ayuda", menu=ayuda)
-            ayuda.add_command(label="Acerca de", command=root.ayuda)
 
-            prosCon.add_command(label="Ver reserva", command=verReserva)
-            prosCon.add_command(label="Ver Cuenta Bancaria", command=verCB)
-            prosCon.add_command(label="Recomendaciones",command=recomendacionesMenu)          #Aquí se le agrega los commandos que llevan a las diferentes funcioanlidades
-            prosCon.add_command(label="Agregar preferencia",command=agregarPreferencia) 
-        
-            prosCon.add_command(label="Agregar servicio", command=agregarServicio) 
-            prosCon.add_command(label="Quitar servicio", command=quitarServicio) 
+                        elif tipo == "Limpieza":
+                            
+                            saldo = us.getCuentaBancaria().getSaldo()
+                            valor = 3000
 
-            titulo = tk.Label(root, text="Agregar servicio", font=("Arial",20))
-            titulo.pack(fill="both", pady=10)
+                            if saldo < valor:
 
-            servicios = ServiciosExtra.listServiciosExtra(us)
+                                messagebox.showerror("Error", "No cuentas con el dinero suficiente para pagar el servicio extra")
+                            
+                            else:
 
-            if not (servicios == False):
+                                ServiciosExtra.agregarServicioLimpieza(us)
+                                messagebox.showinfo("Servicio agregado", "El servicio se ha agregado correctamente. El valor del servicio se ha descontado de su cuenta bancaria.")
+
+
+                        volver()
+
+                root.cleanRoot()
+                root.title("CosmoReserve")
+                menuBar = Menu(root)
+                root.config(menu=menuBar)
                 
-                desc = tk.Label(root, text="Actualmente cuentas con los siguientes servicios", font=("Arial",13))
-                desc.pack(fill="both", pady=10)
+                archivo = Menu(menuBar, tearoff=False)                              #opcion archivo 
+                menuBar.add_cascade(label="Archivo", menu=archivo)
+                archivo.add_command(label="Aplicación", command=root.aplicacion)
+                archivo.add_command(label="Salir", command=root.salir)
+                
+                prosCon = Menu(menuBar, tearoff=False)                           #opcion procesos y consultas
+                menuBar.add_cascade(label="Procesos y Consultas", menu=prosCon)
+                
+                ayuda = Menu(menuBar, tearoff=False)                           #opcion ayuda
+                menuBar.add_cascade(label="Ayuda", menu=ayuda)
+                ayuda.add_command(label="Acerca de", command=root.ayuda)
 
-                for i in servicios:
+                prosCon.add_command(label="Ver reserva", command=verReserva)
+                prosCon.add_command(label="Ver Cuenta Bancaria", command=verCB)
+                prosCon.add_command(label="Recomendaciones",command=recomendacionesMenu)          #Aquí se le agrega los commandos que llevan a las diferentes funcioanlidades
+                prosCon.add_command(label="Agregar preferencia",command=agregarPreferencia) 
+            
+                prosCon.add_command(label="Agregar servicio", command=agregarServicio) 
+                prosCon.add_command(label="Quitar servicio", command=quitarServicio) 
 
-                    salida = "- " + str(i.getTipoServicio())
-                    serv = tk.Label(root, text=salida, font=("Arial",13))
-                    serv.pack(fill="both", pady=10)
+                titulo = tk.Label(root, text="Agregar servicio", font=("Arial",20))
+                titulo.pack(fill="both", pady=10)
+
+                servicios = ServiciosExtra.listServiciosExtra(us)
+
+                if not (servicios == False):
+                    
+                    desc = tk.Label(root, text="Actualmente cuentas con los siguientes servicios", font=("Arial",13))
+                    desc.pack(fill="both", pady=10)
+
+                    for i in servicios:
+
+                        salida = "- " + str(i.getTipoServicio())
+                        serv = tk.Label(root, text=salida, font=("Arial",13))
+                        serv.pack(fill="both", pady=10)
 
 
 
-            desc2 = tk.Label(root, text="Escoga el servicio que desea agregar", font=("Arial",13))
-            desc2.pack(fill="both", pady=10)
+                desc2 = tk.Label(root, text="Escoga el servicio que desea agregar", font=("Arial",13))
+                desc2.pack(fill="both", pady=10)
 
-            combo =  Combobox(root, values=["Transporte $2000", "Alimentación $1000", "Limpieza $3000"])
-            combo.pack(pady=10)
+                combo =  Combobox(root, values=["Transporte $2000", "Alimentación $1000", "Limpieza $3000"])
+                combo.pack(pady=10)
 
-            asignarbtn = Button(root, text="Agregar", command=crearServicio)
-            asignarbtn.pack(pady=10)
+                asignarbtn = Button(root, text="Agregar", command=crearServicio)
+                asignarbtn.pack(pady=10)
 
-            volver1 = Button(root, text="Volver", command=volver)
-            volver1.pack(pady=10)
+                volver1 = Button(root, text="Volver", command=volver)
+                volver1.pack(pady=10)
+
+            else:
+                messagebox.showerror("Error", "Para acceder a un servicio extra necesitas de una reserva")
+                            
 
 
 
 
 
         def quitarServicio():
-            def volver():
-                cls.menu(root, us)
 
-            def quitarServicioExtra():
+            res = us.getReserva()
+            if res != None:
 
                 def volver():
                     cls.menu(root, us)
-            
-                servicios = ServiciosExtra.listServiciosExtra(us)
-                tipo = combo.get()
+
+                def quitarServicioExtra():
+
+                    def volver():
+                        cls.menu(root, us)
                 
+                    servicios = ServiciosExtra.listServiciosExtra(us)
+                    tipo = combo.get()
+                    
 
-                if tipo == None or tipo == "":
-                    messagebox.showerror("Error", "Debe escoger el servicio extra a eliminar")
+                    if tipo == None or tipo == "":
+                        messagebox.showerror("Error", "Debe escoger el servicio extra a eliminar")
 
+                    else:
+
+                        tipoList = tipo.split()
+                        tipoIndex = int(tipoList[0]) - 1
+
+                        ServiciosExtra.eliminarServicio(us, servicios[tipoIndex])
+                        messagebox.showinfo("Servicio eliminado", "El servicio se ha eliminado correctamente. Se ha devuelto el dinero a tu cuenta")
+
+                        volver()
+
+
+                root.cleanRoot()
+                root.title("CosmoReserve")
+                menuBar = Menu(root)
+                root.config(menu=menuBar)
+                
+                archivo = Menu(menuBar, tearoff=False)                              #opcion archivo 
+                menuBar.add_cascade(label="Archivo", menu=archivo)
+                archivo.add_command(label="Aplicación", command=root.aplicacion)
+                archivo.add_command(label="Salir", command=root.salir)
+                
+                prosCon = Menu(menuBar, tearoff=False)                           #opcion procesos y consultas
+                menuBar.add_cascade(label="Procesos y Consultas", menu=prosCon)
+                
+                ayuda = Menu(menuBar, tearoff=False)                           #opcion ayuda
+                menuBar.add_cascade(label="Ayuda", menu=ayuda)
+                ayuda.add_command(label="Acerca de", command=root.ayuda)
+
+                prosCon.add_command(label="Ver reserva", command=verReserva)
+                prosCon.add_command(label="Ver Cuenta Bancaria", command=verCB)
+                prosCon.add_command(label="Recomendaciones",command=recomendacionesMenu)          #Aquí se le agrega los commandos que llevan a las diferentes funcioanlidades
+                prosCon.add_command(label="Agregar preferencia",command=agregarPreferencia) 
+            
+                prosCon.add_command(label="Agregar servicio", command=agregarServicio) 
+                prosCon.add_command(label="Quitar servicio", command=quitarServicio) 
+
+                titulo = tk.Label(root, text="Quitar servicio", font=("Arial",20))
+                titulo.pack(fill="both", pady=10)
+
+                servicios = ServiciosExtra.listServiciosExtra(us)
+
+                serviciosCombo = []
+
+                if not (servicios == False):
+                    
+                    desc = tk.Label(root, text="Actualmente cuentas con los siguientes servicios", font=("Arial",13))
+                    desc.pack(fill="both", pady=10)
+
+                    contador = 1
+
+                    for i in servicios:
+
+                        salida = "- " + str(i.getTipoServicio())
+                        serv = tk.Label(root, text=salida, font=("Arial",13))
+                        serv.pack(fill="both", pady=10)
+
+                        serviciosCombo.append(str(contador) + " " + i.getTipoServicio())
+                        contador += 1
+
+
+                    desc2 = tk.Label(root, text="Escoga el servicio que desea eliminar", font=("Arial",13))
+                    desc2.pack(fill="both", pady=10)
+
+                    combo =  Combobox(root, values=serviciosCombo)
+                    combo.pack(pady=10)
+
+                    asignarbtn = Button(root, text="Eliminar", command=quitarServicioExtra)
+                    asignarbtn.pack(pady=10)
+                
                 else:
 
-                    tipoList = tipo.split()
-                    tipoIndex = int(tipoList[0]) - 1
-
-                    ServiciosExtra.eliminarServicio(us, servicios[tipoIndex])
-                    messagebox.showinfo("Servicio eliminado", "El servicio se ha eliminado correctamente. Se ha devuelto el dinero a tu cuenta")
+                    messagebox.showinfo("Servicio agregado", "Actualmente no cuentas con Servicios extra")
 
                     volver()
 
 
-            root.cleanRoot()
-            root.title("CosmoReserve")
-            menuBar = Menu(root)
-            root.config(menu=menuBar)
-            
-            archivo = Menu(menuBar, tearoff=False)                              #opcion archivo 
-            menuBar.add_cascade(label="Archivo", menu=archivo)
-            archivo.add_command(label="Aplicación", command=root.aplicacion)
-            archivo.add_command(label="Salir", command=root.salir)
-            
-            prosCon = Menu(menuBar, tearoff=False)                           #opcion procesos y consultas
-            menuBar.add_cascade(label="Procesos y Consultas", menu=prosCon)
-            
-            ayuda = Menu(menuBar, tearoff=False)                           #opcion ayuda
-            menuBar.add_cascade(label="Ayuda", menu=ayuda)
-            ayuda.add_command(label="Acerca de", command=root.ayuda)
+                volver1 = Button(root, text="Volver", command=volver)
+                volver1.pack(pady=10)
 
-            prosCon.add_command(label="Ver reserva", command=verReserva)
-            prosCon.add_command(label="Ver Cuenta Bancaria", command=verCB)
-            prosCon.add_command(label="Recomendaciones",command=recomendacionesMenu)          #Aquí se le agrega los commandos que llevan a las diferentes funcioanlidades
-            prosCon.add_command(label="Agregar preferencia",command=agregarPreferencia) 
-        
-            prosCon.add_command(label="Agregar servicio", command=agregarServicio) 
-            prosCon.add_command(label="Quitar servicio", command=quitarServicio) 
-
-            titulo = tk.Label(root, text="Quitar servicio", font=("Arial",20))
-            titulo.pack(fill="both", pady=10)
-
-            servicios = ServiciosExtra.listServiciosExtra(us)
-
-            serviciosCombo = []
-
-            if not (servicios == False):
-                
-                desc = tk.Label(root, text="Actualmente cuentas con los siguientes servicios", font=("Arial",13))
-                desc.pack(fill="both", pady=10)
-
-                contador = 1
-
-                for i in servicios:
-
-                    salida = "- " + str(i.getTipoServicio())
-                    serv = tk.Label(root, text=salida, font=("Arial",13))
-                    serv.pack(fill="both", pady=10)
-
-                    serviciosCombo.append(str(contador) + " " + i.getTipoServicio())
-                    contador += 1
-
-
-                desc2 = tk.Label(root, text="Escoga el servicio que desea eliminar", font=("Arial",13))
-                desc2.pack(fill="both", pady=10)
-
-                combo =  Combobox(root, values=serviciosCombo)
-                combo.pack(pady=10)
-
-                asignarbtn = Button(root, text="Eliminar", command=quitarServicioExtra)
-                asignarbtn.pack(pady=10)
-            
             else:
-
-                messagebox.showinfo("Servicio agregado", "Actualmente no cuentas con Servicios extra")
-
-                volver()
-
-
-            volver1 = Button(root, text="Volver", command=volver)
-            volver1.pack(pady=10)
-
+                messagebox.showerror("Error", "Para acceder a un servicio extra necesitas de una reserva")
             
         
         prosCon.add_command(label="Reservar", command=reservar)             #Aquí se le agrega los commandos que llevan a las diferentes funcioanlidades
