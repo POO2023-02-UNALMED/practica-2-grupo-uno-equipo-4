@@ -308,6 +308,10 @@ class Usmenu():
             Calificar.seleccionar(root,us)
             #us.setReserva(None)
 
+        ##############################################
+        #       Funcionalidad de servivios extra
+        ##############################################
+        
         #
         #Agregar servicio
         #
@@ -452,7 +456,9 @@ class Usmenu():
                             
 
 
-
+        #
+        #Quitar servicio extra de la reserva
+        #
 
 
         def quitarServicio():

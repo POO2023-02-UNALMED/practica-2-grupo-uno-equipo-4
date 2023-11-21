@@ -66,6 +66,10 @@ class ServiciosExtra:
     def escogerLimpiador(self):
         pass
 
+    #
+    #Devuelve una lista con los servicios extra que tiene el huésped en la reserva
+    #
+
     @classmethod
 
     def listServiciosExtra(cls, huesped):
@@ -79,6 +83,10 @@ class ServiciosExtra:
         else:
 
             return servicios
+        
+    #
+    #Agrega el servicio de transporte a la reserva del huésped
+    #
 
     @classmethod
 
@@ -89,6 +97,10 @@ class ServiciosExtra:
         cuentaHotel = huesped.getReserva().getHotel().getCuentaBancaria()
         CuentaBancaria.transfarencia(huesped.getCuentaBancaria(), cuentaHotel, 2000)
 
+    #
+    #Agrega el servicio de alimentación a la reserva del huésped
+    #
+
     @classmethod
 
     def agregarServicioAlimentacion(cls, huesped):
@@ -98,7 +110,13 @@ class ServiciosExtra:
         cuentaHotel = huesped.getReserva().getHotel().getCuentaBancaria()
         CuentaBancaria.transfarencia(huesped.getCuentaBancaria(), cuentaHotel, 1000)
 
+    #
+    #Agrega el servicio de limpieza a la reserva del huésped
+    #
+
     @classmethod
+
+    
 
     def agregarServicioLimpieza(cls, huesped):
         limpieza = ServiciosExtra(2, "Limpieza", 3000)
@@ -107,6 +125,10 @@ class ServiciosExtra:
         cuentaHotel = huesped.getReserva().getHotel().getCuentaBancaria()
         CuentaBancaria.transfarencia(huesped.getCuentaBancaria(), cuentaHotel, 3000)
 
+    #
+    #El método elimina un servicio especifico a la reserva 
+    #de un huésped
+    #
     @classmethod
 
     def eliminarServicio(cls, huesped, servicio):
