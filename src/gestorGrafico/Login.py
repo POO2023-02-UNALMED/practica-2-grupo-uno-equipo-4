@@ -45,7 +45,7 @@ class Login():
                             cls.avisoEntrada(x)
                             correctRegist = True
                             root.cleanRoot()
-                            Usmenu.menu(root, x)
+                            Usmenu.menu(root, x, True)
                             break
                     if correctRegist == False:
                         messagebox.showerror("Error", "Nombre de usuario o contraseña incorrectos")
@@ -61,7 +61,7 @@ class Login():
                             cls.avisoEntrada(x)
                             correctRegist = True
                             root.cleanRoot()
-                            Usmenu.menu(root, x)
+                            Usmenu.menu(root, x, True)
                             break
                     if correctRegist == False:
                         print("Nombre de usuario o contraseña incorrectos")
@@ -76,7 +76,7 @@ class Login():
                             cls.avisoEntrada(x)
                             correctRegist = True
                             root.cleanRoot()
-                            Usmenu.menu(root, x)
+                            Usmenu.menu(root, x, True)
                             break
                     if correctRegist == False:
                         messagebox.showerror("Error", "Nombre de usuario o contraseña incorrectos")
@@ -96,9 +96,9 @@ class Login():
         signLabel.pack(side="top", padx=10, pady=10,)
         
         #Seleccionar que tipo de usuario es
-        P1 = tk.Frame(root, bg="red")
+        P1 = tk.Frame(root)
         P1.pack(side="top", fill="both", expand=True)
-        P2 = tk.Frame(P1, bg="yellow")
+        P2 = tk.Frame(P1)
         P2.place(relx=0.5, rely=0.14, relheight=0.25, anchor="c")
         # P2.pack(anchor="c", pady=10, fill="y")
         typesLabel = tk.Label(P2, text="Tipo de usuario:")

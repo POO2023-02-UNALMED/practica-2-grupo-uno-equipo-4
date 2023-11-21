@@ -55,9 +55,9 @@ class Signup():
         signLabel.pack(side="top", padx=10, pady=10,)
         
         #Seleccionar que tipo de usuario es
-        P1 = tk.Frame(root, bg="red")
+        P1 = tk.Frame(root)
         P1.pack(side="top", fill="both", expand=True)
-        P2 = tk.Frame(P1, bg="yellow")
+        P2 = tk.Frame(P1)
         P2.place(relx=0.5, rely=0.1, relheight=0.15, anchor="c")
         # P2.pack(anchor="c", pady=10, fill="y")
         typesLabel = tk.Label(P2, text="Tipo de usuario:")
@@ -113,7 +113,7 @@ class Signup():
         
         entries = []
         
-        P3 = tk.Frame(P1, bg="blue", pady=10)
+        P3 = tk.Frame(P1, pady=10)
         P3.place(relx=0.5 ,relheight=1, anchor="n")
         nombre_label = tk.Label(P3, text="Ingrese su nombre completo:")
         nombre_label.grid(row=0, column=0, padx=1, pady=1)
@@ -343,10 +343,10 @@ class Signup():
         signLabel = tk.Label(root, text="Registrarse", font=("arial", 30))
         signLabel.pack(side="top", padx=10, pady=10,)
         
-        P1 = tk.Frame(root, bg="red")
+        P1 = tk.Frame(root)
         P1.pack(side="top", fill="both", expand=True)
         
-        P2 = tk.Frame(P1, bg="blue", pady=10)
+        P2 = tk.Frame(P1, pady=10)
         P2.place(relx=0.5 ,relheight=1, anchor="n")
         nombre_label = tk.Label(P2, text="Ingrese su nombre completo:")
         nombre_label.grid(row=0, column=0, padx=1, pady=1)
@@ -510,10 +510,10 @@ class Signup():
         signLabel = tk.Label(root, text="Registrarse", font=("arial", 30))
         signLabel.pack(side="top", padx=10, pady=10,)
         
-        P1 = tk.Frame(root, bg="red")
+        P1 = tk.Frame(root)
         P1.pack(side="top", fill="both", expand=True)
         
-        P2 = tk.Frame(P1, bg="blue", pady=10)
+        P2 = tk.Frame(P1, pady=10)
         P2.place(relx=0.5 ,relheight=1, anchor="n")
         nombre_label = tk.Label(P2, text="Ingrese su nombre completo:")
         nombre_label.grid(row=0, column=0, padx=1, pady=1)

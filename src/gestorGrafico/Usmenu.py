@@ -67,15 +67,15 @@ class Usmenu():
                                     "hoteles y habitaciones que tiene la cadena hotelera para él, ya sea basadas " +
                                     "en su experiencia o en la experiencia de otros clientes que cumplan con su perfil.\n\n"+
                                     "Calificaciones: el usuario tendrá que calificar la habitación en la que se hospedó, así"+ 
-                                    "mismo en caso de haber adquirido algún servicio extra y/o relacionado con algún empleado.")
+                                    "mismo en caso de haber adquirido algún servicio extra y/o relacionado con algún empleado.\n\n"+
+                                    "Servicios: el huésped tiene la posibilidad adquerir un servicio y eliminarlo, siendo esto \n\n"+
+                                    "descontado o añadido de su cuenta bancaria en caso de que lo agregue o elimine correspondientemente.")
             
                 txt2.configure(state="disable")
                 txt2.pack(fill="both", pady=10)
                 
             elif (us == "administrador"):
-                txt2.insert(tk.END, "Servicios: el administrador tiene la posibilidad de dar un servicio al cliente según sus "+
-                                    "parámetros y lo que fuese solicitado.\n\n"+
-                                    "Pago por administrador: El usuario administrador podrá depositar el respectivo sueldo de cada "+
+                txt2.insert(tk.END, "Pago por administrador: El usuario administrador podrá depositar el respectivo sueldo de cada "+
                                     "empleado desde la cuenta del hotel, hasta las cuentas de cada empleado. Solo se puede depositar "+
                                     "a los empleados una vez por mes.\n\n")
             

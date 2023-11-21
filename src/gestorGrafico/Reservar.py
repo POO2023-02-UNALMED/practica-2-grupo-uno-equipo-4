@@ -22,7 +22,7 @@ class Reservar():
     typestOptions = None
     rootMaster = None
     uscls = None
-    
+    ingreso = None
     
     @classmethod
     def volver(cls):
@@ -38,6 +38,8 @@ class Reservar():
             for i in Base.getHoteles():
                 if i.getNombre() == hotelNom:
                     selectedHotel = i
+            fr = cls.ingreso.getFrame()
+            fr.destroy()
             cls.chooseRoom(selectedHotel, huesped)
         
         def continuarFiltrado(valores):
@@ -57,12 +59,11 @@ class Reservar():
                     hoteles.append(i)
                 
                 
-            cls.resultadoHotel = ttk.Treeview(cls.p2, columns=("Ciudad", "Habitaciones", "Servicios"), selectmode='browse')
+            cls.resultadoHotel = ttk.Treeview(cls.p2, columns=("Ciudad", "Habitaciones"), selectmode='browse')
             cls.resultadoHotel.pack(pady=2)
             cls.resultadoHotel.heading("#0", text="Nombre")
             cls.resultadoHotel.heading("Ciudad", text="Ciudad")
             cls.resultadoHotel.heading("Habitaciones", text="Habitaciones Desocupadas")
-            cls.resultadoHotel.heading("Servicios", text="Servicios")
                         
             if hoteles != None:
                 for i in hoteles:
@@ -84,10 +85,10 @@ class Reservar():
                 for w in cls.p2.winfo_children() :
                     w.destroy()
                     
-                ingreso = FieldFrame("Label", ["Nombre"], "Ingreso", ["Nombre"])
-                ingreso.setRoot(cls.p2)
-                ingreso.getFrame().pack(pady=10)
-                ingreso.setFunc(continuarFiltrado)             
+                cls.ingreso = FieldFrame("Label", ["Nombre"], "Ingreso", ["Nombre"])
+                cls.ingreso.setRoot(cls.p2)
+                cls.ingreso.getFrame().pack(pady=10)
+                cls.ingreso.setFunc(continuarFiltrado)             
             
                
             elif hFiltOptions.get() == hfiltros[1]:
@@ -95,10 +96,10 @@ class Reservar():
                 for w in cls.p2.winfo_children() :
                     w.destroy()
                     
-                ingreso = FieldFrame("Label", ["Ciudad"], "Ingreso", ["Ciudad"])
-                ingreso.setRoot(cls.p2)
-                ingreso.getFrame().pack(pady=10)
-                ingreso.setFunc(continuarFiltrado) 
+                cls.ingreso = FieldFrame("Label", ["Ciudad"], "Ingreso", ["Ciudad"])
+                cls.ingreso.setRoot(cls.p2)
+                cls.ingreso.getFrame().pack(pady=10)
+                cls.ingreso.setFunc(continuarFiltrado) 
             else:
                 for w in cls.p2.winfo_children() :
                     w.destroy()
@@ -149,6 +150,8 @@ class Reservar():
             for i in habitaciones:
                 if i.getId() == habId:
                     selectedRoom = i
+            fr = cls.ingreso.getFrame()
+            fr.destroy()
             cls.realizarReserva(selectedRoom, huesped)
             
         
@@ -170,7 +173,7 @@ class Reservar():
                 habitaciones = Base.sortRooms(hotel)
                 
             
-            cls.resultadoHotel = ttk.Treeview(cls.p2, columns=("Camas", "Tipo", "Precio", "Calificación", "Reservada"), selectmode='browse')
+            cls.resultadoHotel = ttk.Treeview(cls.p2, columns=("Tipo", "Camas", "Precio", "Calificación", "Reservada"), selectmode='browse')
             cls.resultadoHotel.pack(pady=2)
             cls.resultadoHotel.heading("#0", text="Id")
             cls.resultadoHotel.heading("Tipo", text="Tipo")
@@ -213,10 +216,10 @@ class Reservar():
                 for w in cls.p2.winfo_children() :
                     w.destroy()
                     
-                ingreso = FieldFrame("Label", ["Id"], "Ingreso", ["Id"])
-                ingreso.setRoot(cls.p2)
-                ingreso.getFrame().pack(pady=10)
-                ingreso.setFunc(continuarFiltrado)             
+                cls.ingreso = FieldFrame("Label", ["Id"], "Ingreso", ["Id"])
+                cls.ingreso.setRoot(cls.p2)
+                cls.ingreso.getFrame().pack(pady=10)
+                cls.ingreso.setFunc(continuarFiltrado)             
             
                
             elif hFiltOptions.get() == hfiltros[1]:
