@@ -4,6 +4,7 @@ import pickle
 from .Base import Base
 
 #@autor: David Restrepo
+# Esta clase se encarga de tomar la información guardada en las listas de la clase Base
 
 class Deserializador:
     

@@ -15,6 +15,7 @@ from baseDatos.serializador import Serializador
 path = os.path.join(pathlib.Path(__file__).parent.absolute())
 
 #@autor: David Restrepo
+# Esta clase se encarga de controlar todo lo relacionado a la ventana de inicio
 
 class Inicio:
     def __init__(self, root:Root):

@@ -1,6 +1,7 @@
 from .ErrorRegister import ErrorRegister
 
 #@autor: David Restrepo
+# Esta clase se encarga de manejar los errores en los casos que se ingresa un valor no correspondiente
 
 class ErrorValores(ErrorRegister):
     def __init__(self, cajon, typeError):

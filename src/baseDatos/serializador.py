@@ -4,6 +4,8 @@ import pickle
 from .Base import Base
 
 #@autor: David Restrepo
+# Esta clase se encarga de guardar la inforamción de los objetos que están en las listas de la clase Base
+
 class Serializador:
     
     @classmethod

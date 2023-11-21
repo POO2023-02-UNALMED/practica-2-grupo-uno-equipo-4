@@ -1,6 +1,7 @@
 from .ErrorReserv import ErrorReserv
 
 #@autor: David Restrepo
+# Esta clase se encarga de manejar los errores cuando en vez de ingresar una fecha d/m/a, se ingresa otro dato
 
 class ErrorNoDate(ErrorReserv):
     def __init__(self, cajon, ingreso):

@@ -21,6 +21,7 @@ from errores.ErrorValores import ErrorValores
 
 
 #@autor: David Restrepo
+# Esta clase se encarga se encarga de controlar todo lo relacionado con el menú de usuario
 
 class Usmenu():
     

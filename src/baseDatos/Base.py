@@ -5,6 +5,8 @@ from tkinter import messagebox
 from errores.ErrorValores import ErrorValores
 
 #@autor: David Restrepo
+# Esta clase se encarga de administrar todo lo relacionado a la base de datos y la busqueda dentro de ella
+
 class Base(ABC):
     _administradores = []
     _hoteles = []

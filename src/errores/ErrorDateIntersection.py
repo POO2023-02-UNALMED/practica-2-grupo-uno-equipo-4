@@ -1,6 +1,7 @@
 from .ErrorReserv import ErrorReserv
 
 #@autor: David Restrepo
+# Esta clase maneja los errores en los que se intersecan la fechas dentro de reserva
 
 class ErrorDateIntersection(ErrorReserv):
     def __init__(self, fReIni, fReFin):

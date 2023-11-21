@@ -1,6 +1,7 @@
 from .ErrorReserv import ErrorReserv
 
 #@autor: David Restrepo
+# Esta clase se encarga de controlar los errores cuando no hay saldo suficeinte al momento de realizar la reserva
 
 class ErrorNoCash(ErrorReserv):
     def __init__(self, saldo, precio):

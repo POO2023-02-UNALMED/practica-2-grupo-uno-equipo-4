@@ -2,6 +2,7 @@ from tkinter import Tk, Menu, messagebox
 from baseDatos.serializador import Serializador
 
 #@autor: David Restrepo
+# Esta clase se encarga de controlar las ventanas
 
 class Root(Tk) :
     def __init__(self) -> None:
@@ -22,9 +23,7 @@ class Root(Tk) :
         Inicio(self)
 
     def inicio(self, user) :
-        #from gestorGrafico.UserWindow import UserWindow
-        self.cleanRoot()
-       # UserWindow(self, user)
+       self.cleanRoot()
        
     def aplicacion(self):
         messagebox.showinfo("Aplicación", "CosmoReserve es un programa desarrollado para gestionar una cadena de hoteles.")

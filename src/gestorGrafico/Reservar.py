@@ -12,6 +12,9 @@ from errores.ErrorEnterDates import ErrorEnterDate
 from errores.ErrorDateIntersection import ErrorDateIntersection
 from errores.ErrorNoCash import ErrorNoCash
 
+#@autor: David Restrepo
+# Esta clase se encarga de manejar la funcionalidad de reserva
+
 class Reservar():
     
     resultadoHotel = None
@@ -24,11 +27,13 @@ class Reservar():
     uscls = None
     ingreso = None
     
+    #Este método se encarga de volver al menú de usuario
     @classmethod
     def volver(cls):
         from gestorGrafico.Usmenu import Usmenu
         Usmenu.menu(cls.rootMaster, cls.uscls)
     
+    #Este método se encarga de empezar con la funcionalidad
     @classmethod
     def reservar(cls, huesped, root, archivo):
         cls.uscls = huesped
@@ -85,7 +90,7 @@ class Reservar():
                 for w in cls.p2.winfo_children() :
                     w.destroy()
                     
-                cls.ingreso = FieldFrame("Label", ["Nombre"], "Ingreso", ["Nombre"])
+                cls.ingreso = FieldFrame("Label", ["Nombre"], "Ingreso", ["Nombre"])        #Implementación de FieldFrame
                 cls.ingreso.setRoot(cls.p2)
                 cls.ingreso.getFrame().pack(pady=10)
                 cls.ingreso.setFunc(continuarFiltrado)             
@@ -96,7 +101,7 @@ class Reservar():
                 for w in cls.p2.winfo_children() :
                     w.destroy()
                     
-                cls.ingreso = FieldFrame("Label", ["Ciudad"], "Ingreso", ["Ciudad"])
+                cls.ingreso = FieldFrame("Label", ["Ciudad"], "Ingreso", ["Ciudad"])    #Implementación de FieldFrame
                 cls.ingreso.setRoot(cls.p2)
                 cls.ingreso.getFrame().pack(pady=10)
                 cls.ingreso.setFunc(continuarFiltrado) 
@@ -140,7 +145,7 @@ class Reservar():
         cls.resultados = tk.Text(p1, background="gray", fg="white", font=("Arial", 15))
         cls.resultados.place(anchor="s", rely=0.997, relx=0.5, relheight=0.1, relwidth=1) 
         
-        
+    #Este método se encarga de llevar a las opciones cuando se escoge un hotel
     @classmethod
     def chooseRoom(cls, hotel, huesped):
         
@@ -216,7 +221,7 @@ class Reservar():
                 for w in cls.p2.winfo_children() :
                     w.destroy()
                     
-                cls.ingreso = FieldFrame("Label", ["Id"], "Ingreso", ["Id"])
+                cls.ingreso = FieldFrame("Label", ["Id"], "Ingreso", ["Id"])        #Implementación de FieldFrame
                 cls.ingreso.setRoot(cls.p2)
                 cls.ingreso.getFrame().pack(pady=10)
                 cls.ingreso.setFunc(continuarFiltrado)             
@@ -266,7 +271,7 @@ class Reservar():
         filtconfirm = tk.Button(cls.p2, text="Confirmar", command=filtrar)
         filtconfirm.grid(row=1, column=0, sticky="nsew")
         
-    
+    # Este método se encarga de llevar a la edición de la reserva después de escoger una habitación
     @classmethod
     def realizarReserva(cls, habitacion, huesped):
         from gestorGrafico.Usmenu import Usmenu
@@ -469,11 +474,11 @@ class Reservar():
             criterios = ["Fecha de inicio actual", "Fecha de salida actual", "Fecha de inicio", "Fecha de salida"]
             valores = [reservaActual.getFechaEntrada(), reservaActual.getFechaSalida(),"Fecha de inicio", "Fecha de salida"]
             habilitado = ["Fecha de inicio actual", "Fecha de salida actual"]
-            datesFrame = FieldFrame("Criterios", criterios, "Fechas", valores, habilitado)
+            datesFrame = FieldFrame("Criterios", criterios, "Fechas", valores, habilitado)      #Implementación de FieldFrame
         else:
            criterios = ["Fecha de inicio", "Fecha de salida"] 
            valores = ["Fecha de inicio", "Fecha de salida"]
-           datesFrame = FieldFrame("Criterios", criterios, "Fechas", valores)
+           datesFrame = FieldFrame("Criterios", criterios, "Fechas", valores)       #Implementación de FieldFrame
         
         datesFrame.setRoot(cls.p2)
         datesFrame.getFrame().pack(pady=10)

@@ -1,6 +1,7 @@
 from .ErrorRegister import ErrorRegister
 
 #@autor: David Restrepo
+# Esta clase se encarga del error que se presenta cuando el username ingresado ya está en uso (este es extra =) )
 
 class ErrorUsername(ErrorRegister):
     def __init__(self, nombre):

@@ -2,7 +2,7 @@ from tkinter import *
 
 #@autor: David Restrepo
 
-class FieldFrame(Frame):
+class FieldFrame(Frame):        #FieldFrame
     
     def __init__ (self, tituloCriterios, criterios, tituloValores, valores = None, habilitado = None) :
         

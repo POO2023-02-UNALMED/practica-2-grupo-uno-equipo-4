@@ -16,6 +16,7 @@ from errores.ErrorValores import ErrorValores
 from errores.ErrorUsername import ErrorUsername
 
 #@autor: David Restrepo
+# Esta clase se encarga de manejar el registro de los usuarios
 
 class Signup():
     nombre_entry = object

@@ -14,6 +14,7 @@ from gestorGrafico.Usmenu import Usmenu
 from errores.ErrorEmpty import ErrorEmpty
 
 #@autor: David Restrepo
+# Esta clase se encarga de llevar a cabo el inicio de sesión de los usuarios
 
 class Login():
     @classmethod
