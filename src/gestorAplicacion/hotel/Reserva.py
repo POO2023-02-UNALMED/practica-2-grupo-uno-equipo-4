@@ -1,5 +1,5 @@
 class Reserva:
-    def __init__(self,_huesped,_habitacion,_fechaEntrada,_fechaSalida,_costo,_hotel,_ciudad):
+    def __init__(self,_huesped,_habitacion,_fechaEntrada,_fechaSalida,_costo):
 
         self._calificacionHotel = 0
         self._calificacionHabitacion = 0
@@ -8,8 +8,6 @@ class Reserva:
         self._fechaEntrada = _fechaEntrada
         self._fechaSalida = _fechaSalida
         self._costo  = _costo
-        self._hotel = _hotel
-        self._ciudad = _ciudad
 
     
     def getHuesped(self):
@@ -25,7 +23,7 @@ class Reserva:
         self._habitacion = _habitacion
 
     def getFechaEntrada(self):
-        return self._fechaEnrada
+        return self._fechaEntrada
 
     def setFechaEntrada(self,_fechaEntrada):
         self._fechaEntrada = _fechaEntrada
