@@ -44,7 +44,7 @@ if __name__ == '__main__' :
     # habitaciones.append(hab3)
     # hotel = Hotel(cuentaBancaria, "Hotel1", "Medellín", [], habitaciones, [])
     # Base.addHoteles(hotel)
-    #
+    
     ##NESESARIA PARA CALIFICAR
     #PRUEBAS RECOMENDACIONES
     #cuentaBancaria1 = CuentaBancaria(1000000, "b")

@@ -28,6 +28,9 @@ class Huesped(Usuario, PresentacionBono):
 
     def getReserva(self) -> Reserva:
         return self._reserva
+    
+    def getReservaServis(self):
+        return self._reserva
    
     def setReserva(self, value):
         self._reserva = value

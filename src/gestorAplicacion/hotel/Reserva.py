@@ -1,4 +1,5 @@
-from  .Hotel import Hotel
+from .Hotel import Hotel
+from gestorAplicacion.hotel.ServiciosExtra import ServiciosExtra
 
 class Reserva:
     def __init__(self,_huesped,_habitacion,_fechaEntrada,_fechaSalida,_costo):
@@ -12,7 +13,21 @@ class Reserva:
         self._costo  = _costo
         self._hotel = _habitacion.getHotel()
 
+        self._servicios = []
+
+    def getServicios(self):
+        return self._servicios
     
+    def addServicios(self, servicio):
+        self._servicios.append(servicio)
+
+        self._costo += servicio.getTarifa()
+
+    def delServicio(self, servicio):
+
+        self._servicios.remove(servicio)
+        self._costo -= servicio.getTarifa()
+
     def getHuesped(self):
         return self._huesped
 
