@@ -24,7 +24,6 @@ class Usmenu():
     
     @classmethod
     def menu(cls, root:Root, us, fTime=False):              
-        
         def firstTime(us):                                     #Información en caso de primera vez
             cls.fTime = True
             cls.pl = tk.Frame(root)
@@ -85,7 +84,7 @@ class Usmenu():
                 txt2.pack(fill="both", pady=10)
         
         
-        
+        root.cleanRoot()
         root.title("CosmoReserve")
         menuBar = Menu(root)
         root.config(menu=menuBar)
@@ -116,6 +115,10 @@ class Usmenu():
     @classmethod
     def sistemaHuesped(cls, root, us, prosCon):
         from gestorGrafico.Reservar import Reservar
+        
+        def volver():
+            cls.menu(root, us)
+        
         def isIni():                                            #logica para ver si ya se acabo o empezó la estadía
             fecha_actual = datetime.now()
             for hotel in Base.getHoteles():
@@ -126,8 +129,9 @@ class Usmenu():
                             fecha_ini = datetime(int(f_ini[2]), int(f_ini[1]), int(f_ini[0]))
                             if fecha_ini.date() == fecha_actual.date():
                                 habitacion.setReservada(True)
-                                return True
-            
+                                huesped = reserv.getHuesped()
+                                if huesped.getUsername() == us.getUsername():
+                                    return True
             return False
         
         def isFin():
@@ -141,27 +145,47 @@ class Usmenu():
                             
                             if fecha_actual.date() == fecha_fin.date():
                                 habitacion.setReservada(False)
-                                return True
-
+                                huesped = reserv.getHuesped()
+                                if huesped.getUsername() == us.getUsername():
+                                    return True
             return False
-        
+            
         
         def reservar():                             #Poner esto al inicio de cada funcionalidad (borra la información anterior)
-            if cls.fTime:
-                cls.pl.destroy()
-                cls.pr.destroy()
+            root.cleanRoot()
+            root.title("CosmoReserve")
+            menuBar = Menu(root)
+            root.config(menu=menuBar)
             
-            Reservar.reservar(us, root)
+            archivo = Menu(menuBar, tearoff=False)                              #opcion archivo 
+            menuBar.add_cascade(label="Archivo", menu=archivo)
+            archivo.add_command(label="Aplicación", command=root.aplicacion)
+            archivo.add_command(label="Volver al menú", command=volver)
+            archivo.add_command(label="Salir", command=root.salir)
+            
+            prosCon = Menu(menuBar, tearoff=False)                           #opcion procesos y consultas
+            menuBar.add_cascade(label="Procesos y Consultas", menu=prosCon)
+            
+            ayuda = Menu(menuBar, tearoff=False)                           #opcion ayuda
+            menuBar.add_cascade(label="Ayuda", menu=ayuda)
+            ayuda.add_command(label="Acerca de", command=root.ayuda)
+            prosCon.add_command(label="Reservar", command=reservar)
+            
+            Reservar.reservar(us, root, archivo)
+        
+        
         
         if (isIni()):
                 messagebox.showinfo("Empieza tu reserva", "Su Reserva ha comenzado, disfrute.")
                 
         if (isFin()):
+            us.setReserva(None)
             reserva = us.getReserva()
             costo = reserva.getCosto()
             messagebox.showinfo("Termina tu reserva", "Su Reserva ha terminado.\n\n"+
                                 f"Costo total: {costo}") 
             
+        
         prosCon.add_command(label="Reservar", command=reservar)             #Aquí se le agrega los commandos que llevan a las diferentes funcioanlidades
         
     

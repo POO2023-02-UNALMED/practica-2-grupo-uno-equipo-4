@@ -16,9 +16,17 @@ class Reservar():
     resultados = None
     typestOptions = None
     rootMaster = None
+    uscls = None
+    
     
     @classmethod
-    def reservar(cls, huesped, root):
+    def volver(cls):
+        from gestorGrafico.Usmenu import Usmenu
+        Usmenu.menu(cls.rootMaster, cls.uscls)
+    
+    @classmethod
+    def reservar(cls, huesped, root, archivo):
+        cls.uscls = huesped
         cls.rootMaster = root
         def seleccionar():
             hotelNom = cls.resultadoHotel.item(cls.resultadoHotel.selection(), "text")
@@ -93,7 +101,6 @@ class Reservar():
                 cls.selectedHotelFilter = 2
                 continuarFiltrado(None)
                 
-        
         p1 = tk.Frame(root, bg="white")
         p1.pack(expand=True, fill="both")
 
