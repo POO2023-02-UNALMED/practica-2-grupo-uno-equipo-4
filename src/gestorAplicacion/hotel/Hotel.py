@@ -1,3 +1,7 @@
+
+#Autor Juan Pablo Rivera Alvarez
+
+#Esta clase nos sirve para abstraer las propiedades y caracteristicas de un hotel, con tal de emular su funcionamiento
 class Hotel:
     
     _totalHoteles = []
@@ -48,6 +52,7 @@ class Hotel:
             for i  in  _habitaciones:
                 i.setHotel(self)
             
+    #Calcula el promedio del hotel
     def calcularPromedioHotel(self):
         totalHabitaciones = 0
         totalEmpleados = 0
@@ -63,14 +68,19 @@ class Hotel:
         totalEmpleados = totalEmpleados/len(self.__empleados)
         return (totalEmpleados+totalServicios+totalHabitaciones)/3
 
+    #agrega servicios
     def addServicioExtra(self, servicio):
         self.__servicios.append(servicio)
+        
+    #agrega habitacion
     def addHabitacion(self, habitacion):
         self._habitaciones.append(habitacion)
       
+    #agrega hitorial de cliente
     def addHistorialClientes(self, huesped):
         self.__historial_clientes.append(huesped)
         
+    #agrega administradores
     def addAdministradores(self, administrador):
         self.__administradores.append(administrador)
     

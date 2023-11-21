@@ -13,6 +13,8 @@ from gestorAplicacion.usuarios.Empleado import Empleado
 from gestorAplicacion.hotel.ServiciosExtra import ServiciosExtra
 from tkinter import Menu, messagebox
 
+#Autor Juan Pablo Rivera
+#Clase donde se ejecutan las acciones propias de la funcionalidad Calificar
 class Calificar :
 
     @classmethod
