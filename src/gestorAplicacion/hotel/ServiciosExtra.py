@@ -11,6 +11,7 @@ class ServiciosExtra:
         self.tarifa = tarifa
         self.calificaciones = {}
 
+    #Se encarga de calcular el promedio del servicio
     @classmethod
     def promedioCalificaciones(cls,servicio):
         total = 0
@@ -18,6 +19,7 @@ class ServiciosExtra:
             total = total + valor
         return total
 
+    #agrega calificaciones
     def addCalificacion(self,usuario,calificacion):
         self.calificaciones[usuario] = calificacion
 

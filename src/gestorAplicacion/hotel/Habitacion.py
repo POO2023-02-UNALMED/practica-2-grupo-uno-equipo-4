@@ -4,6 +4,10 @@ from ..usuarios.Huesped import Huesped
 from ..usuarios.Huesped import Huesped
 from typing import List
 
+#Autor Juan Pablo Rivera Alvarez
+
+
+#Esta clase nos sirve para abstraer las propiedades y caracteristicas de una habitacion de hotel, con tal de emular su funcionamiento
 class Habitacion:
     
     def __init__(self,_id,_tipo=None,_numero_camas=None,_precio=None,__hotel=None):
@@ -26,7 +30,7 @@ class Habitacion:
         if __hotel is not None:
             self.__hotel  = __hotel
             
-
+    #Se encarga de calcular el promedio de la habitacion
     def calcularPromedio(self) -> float:
         prom = 0
         cont  = 0
@@ -35,6 +39,7 @@ class Habitacion:
             cont = cont + 1
         return prom/cont
 
+    #Se encarga de buscar el Habitaciones un un rango de precio similar
     def rangoPrecio(self,totalHabitaciones) -> List:
         rango = []
         for i  in totalHabitaciones:
@@ -42,12 +47,14 @@ class Habitacion:
                 rango.append(i)
         return rango
 
+    #Se encarga de buscar las abitaciones mejor calificadas
     def mejorCalificadas(self,habitaciones) -> List:
         rango =  []
         for i in habitaciones:
             if i.calcularPromedio() >= 3:
                 rango.append(i)
 
+    #Se encarga de mostrarnos todas las sugerencias de la habitacion
     def totalSugerencias(self, habitaciones)->List:
         resultado = []
         for i in habitaciones:
@@ -55,24 +62,28 @@ class Habitacion:
                 resultado.append(clave)
         return resultado
 
+    #agrega sugerencias
     def addSugerenciasPendientes(self, sugerencia):
         self.__sugerencias[self.getId()] = sugerencia
 
+    #agrega calificaciones
     def  addCalificacion(self, __huesped,__calificacion):
         self._calificaciones[__huesped] = __calificacion
-        
+    #agrega motivos    
     def addMotivos(self, motivo):
         if self.__motivos_calificaciones[motivo] is  not  None:
             self.__motivos_calificaciones[motivo] = self.__motivos_calificaciones[motivo]+1    
         else:
             self.__motivos_calificaciones[motivo] = 1
-            
+     
+    #agrega sugerencias       
     def  addSugerencias(self,sugerencia):
         if self.__sugerencias[sugerencia] is  not  None:
             self.__sugerencias[sugerencia] = self.__sugerencias[sugerencia]+1    
         else:
             self.__sugerencias[sugerencia] = 1
-            
+    
+    #agrega reservas        
     def addReservas(self,reserva):
         self.__reservas.append(reserva)
 
