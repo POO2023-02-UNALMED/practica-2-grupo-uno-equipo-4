@@ -15,33 +15,107 @@ from tkinter import Menu, messagebox
 
 class Calificar :
 
-    
-    
     @classmethod
     def seleccionar(cls,root:Root,huesped:Huesped):
         
-        def verificar(huesped):
+        def verificar(evento):
+
+            def nido(evento):
+                if usType11.get() in sugerencias:
+                    huesped.getReserva().getHotel().addMotivos(usType11.get())
+                    messagebox.showinfo("info","Gracias por llenar la encuenta")
+                    huesped.setReserva(None)
+                    root.salir()
+                else:
+                    messagebox.showerror("Error","Ingrese algo valido")
+
+            def nido2(evento):
+                if usType10.get() in sugerencias:
+                    huesped.getReserva().getHotel().addSugerencias(usType10.get())
+                    messagebox.showinfo("info","Gracias por llenar la encuenta")
+                    huesped.setReserva(None)
+                    root.salir()
+                else:
+                    messagebox.showerror("Error","Ingrese algo valido")
+
             #print(type(usType.get()))
             #print(usType2.get())
             #print(usType5.get())
             #print(diccionario)
             if int(usType.get()) in types and usType2.get() in empleados.keys() and int(usType3.get()) in types and usType6.get() in servicios.keys()  and int(usType5.get()) in types:
-                #huesped.getReserva().getHabitacion().addCalificacion(huesped,int(usType))
-                
+                huesped.getReserva().getHabitacion().addCalificacion(huesped,int(usType.get()))
                 print(huesped.getReserva().getHotel().getEmpleados())
+                print(usType2.get())
                 for i in huesped.getReserva().getHotel().getEmpleados():
-                    print("entro")
-                    if  i.getNombre() == usType2:
-                        i.addCalificacion(huesped,int(usType3))
+                    print(i.getNombre())
+                    if  i.getNombre() == usType2.get():
+                        i.addCalificacion(huesped,int(usType3.get()))
                         print(i.getCalificaciones())
                 for i in huesped.getReserva().getHotel().getServicios():
-                    if  i.getNombre() == usType6:
-                        i.addCalificacion(huesped,int(usType5))
+                    if  i.getNombre() == usType6.get():
+                        i.addCalificacion(huesped,int(usType5.get()))
                         print(i.getCalificaciones())
                 print("calculau")
+                if huesped.getReserva().getHotel().calcularPromedioHotel() <= 2.5:
+                    messagebox.showinfo("Calificacion", "debido a su baja puntuacion el hotel  sera eliminado")
+                    #Base.getHoteles().remove(huesped.getReserva().getHotel())
+                    
+                    messagebox.showinfo("Calificacion", "A continucion debera llenar la siguiente encuenta")
+
+                    root.cleanRoot()
+
+                    menuBar = Menu(root)
+                    root.config(menu=menuBar)
+                    archivo = Menu(menuBar, tearoff=False)
+                    menuBar.add_cascade(label="Archivo", menu=archivo)
+                    #archivo.add_command(label="Salir", command=root.salir)
+                    P1 = tk.Frame(root, bg="red")
+                    P1.pack(side="top", fill="both", expand=True)
+                    P2 = tk.Frame(P1, bg="yellow")
+                    P2.place(relx=0.5, relheight=0.5, anchor="n")
+                    etiqueta11 = tk.Label(P2, text="Seleccione entre las siguiente opciones cual pudo haber sido  el  motivo de su mala experiencia: ", font=("arial", 10))
+                    etiqueta11.grid(row=1, column=0, padx=1, pady=1)
+        
+                    sugerencias = ["Falta de respeto","Falta  de  Puntualidad","Poca Eficiencia","Mala Presentación personal"]
+                    usType11 = Combobox(P2, values=sugerencias, state="readonly",font=("arial", 10))
+                    usType11.set("Calificacion habitacion")
+                    usType11.grid(row=1, column=1, padx=1, pady=1)
+
+                    boton2 = tk.Button(P2, text="Continuar")
+                    boton2.grid(row=2, column=0, padx=1, pady=1)
+                    boton2.bind("<Button-1>", nido)
+
+                    
+                    
+                else:
+
+                    messagebox.showinfo("Calificacion", "A continucion debera llenar la siguiente encuenta")
+                    
+                    root.cleanRoot()
+                    menuBar = Menu(root)
+                    root.config(menu=menuBar)
+                    archivo = Menu(menuBar, tearoff=False)
+                    menuBar.add_cascade(label="Archivo", menu=archivo)
+                    #archivo.add_command(label="Salir", command=root.salir)
+                    P1 = tk.Frame(root, bg="red")
+                    P1.pack(side="top", fill="both", expand=True)
+                    P2 = tk.Frame(P1, bg="yellow")
+                    P2.place(relx=0.5, relheight=0.5, anchor="n")
+                    etiqueta10 = tk.Label(P2, text="Como su experiencia fue favorable, seleccione un aspecto a mejorar: ", font=("arial", 10))
+                    etiqueta10.grid(row=1, column=0, padx=1, pady=1)
+        
+                    sugerencias = ["Mejorar el respeto","Mejorar  puntualidad","Mejorar  eficiencia","Mejorar presentación personal"]
+                    usType10 = Combobox(P2, values=sugerencias, state="readonly",font=("arial", 10))
+                    usType10.set("Calificacion habitacion")
+                    usType10.grid(row=1, column=1, padx=1, pady=1)
+
+                    boton2 = tk.Button(P2, text="Continuar")
+                    boton2.grid(row=2, column=0, padx=1, pady=1)
+                    boton2.bind("<Button-1>", nido2)
+                    
                 
             else:
-                messagebox.showerror("Llene todos los campos")
+                messagebox.showerror("Error", "Llene todos los campos")
         
         root.title("Calificar")
         menuBar = Menu(root)
@@ -151,8 +225,7 @@ class Calificar :
         print(usType5.get())
         boton = tk.Button(P2, text="Continuar")
         boton.grid(row=9, column=0, padx=1, pady=1)
-        boton.bind("<Button-1>", verificar(huesped))
+        boton.bind("<Button-1>", verificar)
             
     
    
-        
