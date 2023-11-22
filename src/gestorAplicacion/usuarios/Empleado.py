@@ -31,7 +31,10 @@ class Empleado (Usuario, PresentacionBono):
         total = 0
         for clave, valor in empleado.getCalificaciones().items():
             total = total + valor
-        return  total/len(empleado.getCalificaciones().items())
+        if len(empleado.getCalificaciones().items()) > 0:
+            return  total/len(empleado.getCalificaciones().items())
+        else:
+            return total
 
     def mejorCalificacion(self, empleados):
         rango = []

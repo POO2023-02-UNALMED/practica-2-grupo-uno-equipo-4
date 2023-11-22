@@ -43,8 +43,9 @@ class Reservar():
             for i in Base.getHoteles():
                 if i.getNombre() == hotelNom:
                     selectedHotel = i
-            fr = cls.ingreso.getFrame()
-            fr.destroy()
+            if cls.ingreso != None:
+                fr = cls.ingreso.getFrame()
+                fr.destroy()
             cls.chooseRoom(selectedHotel, huesped)
         
         def continuarFiltrado(valores):
@@ -155,8 +156,9 @@ class Reservar():
             for i in habitaciones:
                 if i.getId() == habId:
                     selectedRoom = i
-            fr = cls.ingreso.getFrame()
-            fr.destroy()
+            if cls.ingreso != None:
+                fr = cls.ingreso.getFrame()
+                fr.destroy()
             cls.realizarReserva(selectedRoom, huesped)
             
         
@@ -466,7 +468,7 @@ class Reservar():
         cls.resultados.insert(tk.END, f"Se ha seleccionado una habitación con Id {habitacion.getId()} y tipo {habitacion.getTipo()}", "centrado")
         cls.resultados.tag_configure("centrado", justify="center")
         
-        titleReserva = tk.Label(cls.p2, text="Ingrese las fechas en las que se hospedará en formato dd/mm/aa")
+        titleReserva = tk.Label(cls.p2, text="Ingrese las fechas en las que se hospedará en formato dd/mm/aaaa")
         titleReserva.pack(pady=10)
         
         reservaActual = Habitacion.compararReservas(habitacion)

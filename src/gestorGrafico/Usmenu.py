@@ -34,7 +34,7 @@ class Usmenu():
         def firstTime(us):                                     #Información en caso de primera vez
             cls.fTime = True
             cls.pl = tk.Frame(root)
-            cls.pl.place(relwidth=0.4, relheight=1, relx=0.003, rely=0, anchor="nw")
+            cls.pl.place(relwidth=0.25, relheight=1, relx=0.003, rely=0, anchor="nw")
             tituloResumen = tk.Label(cls.pl, text="Resumen", font=("Arial",20))
             tituloResumen.pack(fill="both", pady=10)
             txt1 = tk.Text(cls.pl)
@@ -56,7 +56,7 @@ class Usmenu():
             
             
             cls.pr = tk.Frame(root)
-            cls.pr.place(relwidth=0.4, relheight=1, relx=0.997, rely=0, anchor="ne")
+            cls.pr.place(relwidth=0.25, relheight=1, relx=0.997, rely=0, anchor="ne")
             tituloFuncionalidad = tk.Label(cls.pr, text="Funcionalidades", font=("Arial",20))
             tituloFuncionalidad.pack(fill="both", pady=10)
             txt2 = tk.Text(cls.pr)
@@ -121,6 +121,7 @@ class Usmenu():
             
     @classmethod
     def sistemaHuesped(cls, root, us, prosCon):
+        cls.fTime = False
         from gestorGrafico.Reservar import Reservar
         from gestorGrafico.Recomendaciones import Recomendaciones
         def volver():
@@ -165,7 +166,6 @@ class Usmenu():
                                 plantUser = huesped.getUsername()
                                 oriUser = us.getUsername()
                                 if plantUser == oriUser:
-                                    habitacion.setReservada(False)
                                     return True
             return False
             
@@ -303,9 +303,10 @@ class Usmenu():
                 
         if (isFin()):
             reserva = us.getReserva()
-            costo = reserva.getCosto()
-            messagebox.showinfo("Termina tu reserva", "Su Reserva ha terminado.\n\n"+
-                                f"Costo total: {costo}") 
+            if reserva != None:
+                costo = reserva.getCosto()
+                messagebox.showinfo("Termina tu reserva", "Su Reserva ha terminado.\n\n"+
+                                    f"Costo total: {costo}") 
             Calificar.seleccionar(root,us)
             #us.setReserva(None)
 
@@ -579,6 +580,7 @@ class Usmenu():
     
     @classmethod
     def sistemaAdministrador(cls, root, us, prosCon):
+        cls.fTime = False
 
         ##############################################
         #       Información pre-cargada  
@@ -1065,4 +1067,4 @@ class Usmenu():
         
     @classmethod
     def sistemaEmpleado(cls, root, us, prosCon):
-        pass
+        cls.fTime = False

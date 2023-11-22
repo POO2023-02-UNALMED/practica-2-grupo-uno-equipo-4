@@ -37,7 +37,10 @@ class Habitacion:
         for clave,valor in self._calificaciones.items():
             prom = prom + valor
             cont = cont + 1
-        return prom/cont
+        if cont>0:
+            return prom/cont
+        else:
+            return prom
 
     #Se encarga de buscar el Habitaciones un un rango de precio similar
     def rangoPrecio(self,totalHabitaciones) -> List:

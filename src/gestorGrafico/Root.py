@@ -29,4 +29,4 @@ class Root(Tk) :
         messagebox.showinfo("Aplicación", "CosmoReserve es un programa desarrollado para gestionar una cadena de hoteles.")
         
     def ayuda(self):
-        messagebox.showinfo("Ayuda","¿Qué haces por aquí 👀?\t\t\n\nSomos:\nAlejandra Toro Grisales\nJuan Pablo Rivera Alvarez\nDavid Restrepo Aguilar\nYohan Camilo Sanchez Meza\nSamuel Castaño Alfonso")
+        messagebox.showinfo("Ayuda","¿Qué haces por aquí 👀?\t\t\n\nSomos:\nAlejandra Toro Grisales\nJuan Pablo Rivera Alvarez\nDavid Restrepo Aguilar\nYohan Camilo Sanchez Meza")

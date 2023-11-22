@@ -54,6 +54,11 @@ class Base(ABC):
         return cls._empleados
 
     @classmethod
+    def remove(cls, hotel):
+        cls._hoteles.remove(hotel)
+                
+    
+    @classmethod
     def setEmpleados(cls, empleados):
         cls._empleados = empleados
 

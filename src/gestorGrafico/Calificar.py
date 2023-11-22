@@ -26,6 +26,9 @@ class Calificar :
                 if usType11.get() in sugerencias:
                     huesped.getReserva().getHotel().addMotivos(usType11.get())
                     messagebox.showinfo("info","Gracias por llenar la encuenta")
+                    res = huesped.getReserva()
+                    habitacion = res.getHabitacion()
+                    habitacion.setReservada(False)
                     huesped.setReserva(None)
                     root.salir()
                 else:
@@ -35,6 +38,9 @@ class Calificar :
                 if usType10.get() in sugerencias:
                     huesped.getReserva().getHotel().addSugerencias(usType10.get())
                     messagebox.showinfo("info","Gracias por llenar la encuenta")
+                    res = huesped.getReserva()
+                    habitacion = res.getHabitacion()
+                    habitacion.setReservada(False)
                     huesped.setReserva(None)
                     root.salir()
                 else:
@@ -60,7 +66,7 @@ class Calificar :
                 print("calculau")
                 if huesped.getReserva().getHotel().calcularPromedioHotel() <= 2.5:
                     messagebox.showinfo("Calificacion", "debido a su baja puntuacion el hotel  sera eliminado")
-                    #Base.getHoteles().remove(huesped.getReserva().getHotel())
+                    Base.getHoteles().remove(huesped.getReserva().getHotel())
                     
                     messagebox.showinfo("Calificacion", "A continucion debera llenar la siguiente encuenta")
 
