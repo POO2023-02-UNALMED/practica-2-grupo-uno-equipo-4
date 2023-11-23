@@ -51,10 +51,11 @@ if __name__ == '__main__' :
 
 
 
-    # cuentaBancariaH = CuentaBancaria(1000000, "b")
-    # cuentaBancariaA = CuentaBancaria(1000000, "b")
-    # cuentaBancariaE1 = CuentaBancaria(1000000, "b")
-    # cuentaBancariaE2 = CuentaBancaria(1000000, "b")
+    #Pruebas Administrador
+    # cuentaBancariaH = CuentaBancaria(1000, "b")
+    # cuentaBancariaA = CuentaBancaria(100, "b")
+    # cuentaBancariaE1 = CuentaBancaria(0, "b")
+    # cuentaBancariaE2 = CuentaBancaria(50, "b")
 
     # habitaciones = []
     # hab1 = Habitacion(1, "simple", TipoHabitacion.asign_camas(TipoHabitacion.SIMPLE), TipoHabitacion.asign_precio(TipoHabitacion.SIMPLE))
