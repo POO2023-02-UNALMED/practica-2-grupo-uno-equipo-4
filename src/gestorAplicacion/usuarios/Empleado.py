@@ -17,7 +17,7 @@ class Empleado (Usuario, PresentacionBono):
             hotel.addEmpleados(self)
 
 
-    def addCalificaciones(self,usuario,calificacion):
+    def addCalificacion(self,usuario,calificacion):
         self.calificaciones[usuario] = calificacion
 
     def addMotivos(self,motivo):
@@ -26,7 +26,7 @@ class Empleado (Usuario, PresentacionBono):
         else:
             self.motivosCalificacion[motivo] = 1
 
-
+    @classmethod
     def promedioCalificaciones(cls,empleado):
         total = 0
         for clave, valor in empleado.getCalificaciones().items():

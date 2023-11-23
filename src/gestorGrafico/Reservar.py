@@ -423,6 +423,7 @@ class Reservar():
                     hotCity = hot.getCiudad()
                     
                     messagebox.showinfo("Mensaje", f"Se le han descontado {cobroHabitacion}$ de su cuenta bancaria")
+                    print(habitacion.getId())
                     reserva = Reserva(huesped, habitacion, fechaIni, fechaFin, cobroHabitacion)
                     huesped.setReserva(reserva)
                     

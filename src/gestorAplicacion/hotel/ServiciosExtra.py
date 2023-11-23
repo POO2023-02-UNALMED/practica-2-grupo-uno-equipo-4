@@ -8,6 +8,16 @@ class ServiciosExtra:
         self.tarifa = 0
         self.calificaciones = {}
 
+    @classmethod
+    def promedioCalificaciones(cls,servicio):
+        total = 0
+        for clave,valor in servicio.getCalificaciones().items():
+            total = total + valor
+        return total
+
+    def addCalificacion(self,usuario,calificacion):
+        self.calificaciones[usuario] = calificacion
+
     def setIdServicio(self,idServicio):
         self.idServicio = idServicio
 

@@ -30,7 +30,7 @@ class Habitacion:
     def calcularPromedio(self) -> float:
         prom = 0
         cont  = 0
-        for clave,valor in self.__calificaciones.items():
+        for clave,valor in self._calificaciones.items():
             prom = prom + valor
             cont = cont + 1
         return prom/cont
