@@ -42,7 +42,7 @@ class Calificar :
             #print(usType2.get())
             #print(usType5.get())
             #print(diccionario)
-            if int(usType.get()) in types and usType2.get() in empleados.keys() and int(usType3.get()) in types and usType6.get() in servicios.keys()  and int(usType5.get()) in types:
+            if usType.get() in types and usType2.get() in empleados.keys() and usType3.get() in types and usType6.get() in servicios.keys()  and usType5.get() in types:
                 huesped.getReserva().getHabitacion().addCalificacion(huesped,int(usType.get()))
                 print(huesped.getReserva().getHotel().getEmpleados())
                 print(usType2.get())
@@ -143,7 +143,7 @@ class Calificar :
         etiqueta1 = tk.Label(P2, text="Ingrese un entero del  1 al 5, donde 1 es muy  insatisfecho y 5 es muy satisfecho", font=("arial", 10))
         etiqueta1.grid(row=1, column=0, padx=1, pady=1)
         
-        types = [1,2,3,4,5]
+        types = ["1","2","3","4","5"]
         usType = Combobox(P2, values=types, state="readonly",font=("arial", 10))
         usType.set("Calificacion habitacion")
         usType.grid(row=1, column=1, padx=1, pady=1)
@@ -183,7 +183,7 @@ class Calificar :
         etiqueta3 = tk.Label(P2, text="Ingrese un entero del  1 al 5, donde 1 es muy  insatisfecho y 5 es muy satisfecho", font=("arial", 10))
         etiqueta3.grid(row=5, column=0, padx=1, pady=1)
         
-        types = [1,2,3,4,5]
+        types = ["1","2","3","4","5"]
         usType3 = Combobox(P2, values=types, state="readonly",font=("arial", 10))
         usType3.set("Calificacion empleado")
         usType3.grid(row=5, column=1, padx=1, pady=1)
@@ -216,7 +216,7 @@ class Calificar :
         
         etiqueta4 = tk.Label(P2, text="Ingrese un entero del  1 al 5, donde 1 es muy  insatisfecho y 5 es muy satisfecho", font=("arial", 10))
         etiqueta4.grid(row=8, column=0, padx=1, pady=1)
-        types = [1,2,3,4,5]
+        types = ["1","2","3","4","5"]
         usType5 = Combobox(P2, values=types, state="readonly",font=("arial", 10))
         usType5.set("Calificacion servicio")
         usType5.grid(row=8, column=1, padx=1, pady=1)
