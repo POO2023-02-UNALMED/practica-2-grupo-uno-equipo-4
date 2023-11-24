@@ -12,7 +12,9 @@ class Reserva:
         self._fechaSalida = _fechaSalida
         self._costo  = _costo
         self._hotel = _habitacion.getHotel()
-
+        #_huesped.addReserva(self)
+        ciu = self._hotel.getCiudad()
+        self._ciudad = ciu
         self._servicios = []
 
     def getServicios(self):

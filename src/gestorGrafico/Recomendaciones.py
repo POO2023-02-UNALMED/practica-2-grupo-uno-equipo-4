@@ -123,7 +123,7 @@ class Recomendaciones():
                 labelHotel.grid(row=posiciones,column=2)
                 posiciones +=1
                 for value in values:
-                    labelHabitacion = tk.Label(framePrincipal,text=value.getTipo(),font=("arial",10))
+                    labelHabitacion = tk.Label(framePrincipal,text=value,font=("arial",10))
                     labelHabitacion.grid(row=posiciones,column=3)
                     posiciones+=1
         else:

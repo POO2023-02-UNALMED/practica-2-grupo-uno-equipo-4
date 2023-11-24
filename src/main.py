@@ -45,8 +45,8 @@ if __name__ == '__main__' :
     # hotel = Hotel(cuentaBancaria, "Hotel1", "Medellín", [], habitaciones, [])
     # Base.addHoteles(hotel)
     
-    ##NESESARIA PARA CALIFICAR
-    #PRUEBAS RECOMENDACIONES
+    #NESESARIA PARA CALIFICAR
+    # PRUEBAS RECOMENDACIONES
     # cuentaBancaria1 = CuentaBancaria(1000000, "b")
     # cuentaBancaria2 = CuentaBancaria(1000000, "b")
     # cuentaBancaria3 = CuentaBancaria(1000000, "b")
@@ -121,8 +121,8 @@ if __name__ == '__main__' :
     # reserva3.setCalificacionHotel(4)
     # huesped.addReserva(reserva3)
     # hab60.addCalificacion(huesped,5)
-#
-    #Pruebas Administrador
+
+    # # Pruebas Administrador
     # cuentaBancariaH = CuentaBancaria(1000, "b")
     # cuentaBancariaA = CuentaBancaria(100, "b")
     # cuentaBancariaE1 = CuentaBancaria(0, "b")
@@ -138,7 +138,8 @@ if __name__ == '__main__' :
 
     # habitaciones.append(hab1)
     # habitaciones.append(hab2)
-
+    
+    
     # hotel = Hotel(cuentaBancariaH, "Hotel4", "Medellín", [serv1, serv2], habitaciones, [])
 
     # administrador1 = Administrador("Camilo", 12345, "kmi", "12345", cuentaBancariaA, hotel)
@@ -150,7 +151,7 @@ if __name__ == '__main__' :
     # Base.addAdministradores(administrador1)
     # Base.addEmpleados(empleado1)
     # Base.addEmpleados(empleado2)
-
+    
     root = Root()
     Inicio(root)
     root.mainloop()

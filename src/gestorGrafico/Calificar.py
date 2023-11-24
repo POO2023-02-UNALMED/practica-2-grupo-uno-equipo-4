@@ -96,7 +96,12 @@ class Calificar :
                     
                     
                 else:
-
+                    hotCal = huesped.getReserva().getHotel().calcularPromedioHotel() 
+                    habCal = int(usType.get())
+                    res = huesped.getReserva()
+                    res.setCalificacionHotel(hotCal)
+                    res.setCalificacionHabitacion(habCal)
+                    huesped.addReserva(res)
                     messagebox.showinfo("Calificacion", "A continucion debera llenar la siguiente encuenta")
                     
                     root.cleanRoot()

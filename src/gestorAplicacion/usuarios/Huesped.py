@@ -18,7 +18,7 @@ class Huesped(Usuario, PresentacionBono):
         self._reserva = None
         self._habitacion = None
         self._enReserva = None
-        self._historialReservas = None
+        self._historialReservas = []
 
     def isVip(self):
         return self._vip
@@ -137,18 +137,21 @@ class Huesped(Usuario, PresentacionBono):
 
     #Para recomendar hoteles y habitaciones basadas en el historial de reservaciones
     def recomendacionHotelesPorHistorial(self,ciudad):
-        recomendaciones = {}
-        hoteles = []
-        historialReservas = self.getHistorialReservas()
-        for reserva in historialReservas:
-            if(reserva.getCiudad()==ciudad):
-                calificacion = reserva.getCalificacionHotel()
-                if(calificacion>=4):
-                    hoteles.append(reserva.getHotel())
-                
-        for hotel in hoteles:
-            habitaciones = self._recomendacionHabitacionPorHistorial(hotel)
-            if(habitaciones!=None):
-                recomendaciones[hotel] = habitaciones
-        
-        return recomendaciones
+            recomendaciones = {}
+            hoteles = []
+            historialReservas = self.getHistorialReservas()
+            habitaciones = []
+            for reserva in historialReservas:
+                if(reserva.getCiudad()==ciudad):
+                    calificacion = reserva.getCalificacionHotel()
+                    calificacionHabitacion = reserva.getCalificacionHabitacion()
+                    if(calificacion>=4):
+                        hoteles.append(reserva.getHotel())
+                    if(calificacionHabitacion>=4):
+                        habitaciones.append(reserva.getHabitacion().getTipo())
+                    
+            for hotel in hoteles:
+                if(habitaciones!=None):
+                    recomendaciones[hotel] = habitaciones
+            
+            return recomendaciones
