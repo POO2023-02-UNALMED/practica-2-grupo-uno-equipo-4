@@ -15,6 +15,10 @@ from gestorAplicacion.hotel.ServiciosExtra import ServiciosExtra
 class Calificar :
     
     @classmethod
+    def continuacion(root:Root,huesped:Huesped):
+        pass
+    
+    @classmethod
     def seleccionar(cls,root:Root,huesped:Huesped):
         root.title("Calificar")
         menuBar = Menu(root)
@@ -66,8 +70,9 @@ class Calificar :
         etiqueta2.grid(row=4, column=0, padx=1, pady=1)
         cont = 1
         empleados = {}
-        #for empleado in huesped.getReserva().getHotel().getEmpleados():
-        #    empleados[empleado.getNombre()] = empleado
+        print(huesped.getReserva().getHotel().getEmpleados()[0])
+        for empleado in huesped.getReserva().getHotel().getEmpleados():
+            empleados[empleado.getNombre()] = empleado
         usType2 = Combobox(P2, values=list(empleados.keys()), state="readonly",font=("arial", 10))
         usType2.set("Empleados")
         usType2.grid(row=4, column=1, padx=1, pady=1)
@@ -85,18 +90,19 @@ class Calificar :
         #username_entry.grid(row=1, column=1, padx=1, pady=1)
         conts = 7
         #print(huesped.getReserva())
-        serv1 = ServiciosExtra(1)
-        serv1.setTipoServicio("Piscina")
-        serv2 = ServiciosExtra(2)
-        serv2.setTipoServicio("Transporte")
-        serv3 = ServiciosExtra(3)
-        serv3.setTipoServicio("Teatro")
-        print(serv3.getTipoServicio())
-        servicios = [serv1,serv2,serv3]
+        # serv1 = ServiciosExtra(1)
+        # serv1.setTipoServicio("Piscina")
+        # serv2 = ServiciosExtra(2)
+        # serv2.setTipoServicio("Transporte")
+        # serv3 = ServiciosExtra(3)
+        # serv3.setTipoServicio("Teatro")
+        # print(serv3.getTipoServicio())
+        #servicios = [serv1,serv2,serv3]
         Titulo2 = tk.Label(P2, text="Servicios", font=("arial", 15))
         Titulo2.grid(row=6, column=0, padx=1, pady=1)
-        for servicio  in servicios:
-            etiqueta4 = tk.Label(P2, text=servicio.getTipoServicio(), font=("arial", 10))
+        #for servicio  in servicios:
+        for servicio in huesped.getReserva().getHotel().getServicios():
+            etiqueta4 = tk.Label(P2, text=servicio.getNombre(), font=("arial", 10))
             etiqueta4.grid(row=conts, column=0, padx=1, pady=1)
             types = [1,2,3,4,5]
             usType5 = Combobox(P2, values=types, state="readonly",font=("arial", 10))

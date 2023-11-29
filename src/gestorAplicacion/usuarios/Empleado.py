@@ -1,6 +1,6 @@
 from .PresentacionBono import PresentacionBono
 from .Usuario import Usuario
-from gestorAplicacion.hotel.Hotel import Hotel
+#from gestorAplicacion.hotel.Hotel import Hotel
 class Empleado (Usuario, PresentacionBono):
     def __init__(self, nombre, telefono, username, password, cuentaBancaria, hotel=None, estado_empleado = False, salario=0):
         super().__init__(nombre, telefono, username, password, cuentaBancaria)

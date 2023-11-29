@@ -24,14 +24,16 @@ class Hotel:
             
         if __empleados is not None:
             self.__empleados = __empleados
+           # for  i  in __empleados:
+            #   i.setHotel(self)
+        else:
+            self.__empleados = []  # Inicializar __servicios si no se proporciona
+
             
         if _habitaciones is not None:
             for i  in  _habitaciones:
                 i.setHotel(self)
-        if __empleados is not None:
-            for  i  in __empleados:
-               i.setHotel(self)
-
+            
     def calcularPromedioHotel(self):
         totalHabitaciones = 0
         totalEmpleados = 0
@@ -112,18 +114,17 @@ class Hotel:
 
         self._habitaciones.append(habitacion)
         
-    @property
     def getEmpleados(self):
-       return  self._empleados
+       return  self.__empleados
     
     #def getEmpleado(self):
      #  return  self.__empleados
     
     def setEmpleados(self, __empleados):
-        self._empleados = __empleados
+        self.__empleados = __empleados
         
     def addEmpleados(self, empleado):
-        self._empleados.append(empleado)
+        self.__empleados.append(empleado)
         
     def getHistorialClientes(self):
         return  self.__historial_clientes

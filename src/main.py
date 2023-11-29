@@ -27,8 +27,10 @@ from gestorAplicacion.hotel.ServiciosExtra import ServiciosExtra
 if __name__ == '__main__' :
     Deserializador.deserializador()
 
-    # cuentaBancaria = CuentaBancaria(1000000, "b")
-    # habitaciones = []
+    cuentaBancaria1 = CuentaBancaria(1000000, "b")
+    cuentaBancaria2 = CuentaBancaria(1000000, "b")
+    cuentaBancaria3 = CuentaBancaria(1000000, "b")
+
     # hab1 = Habitacion(1, "simple", TipoHabitacion.asign_camas(TipoHabitacion.SIMPLE), TipoHabitacion.asign_precio(TipoHabitacion.SIMPLE))
     # hab1.addCalificacion(Huesped(), 3)
     # hab1.addCalificacion(Huesped(), 2)
@@ -43,7 +45,7 @@ if __name__ == '__main__' :
     # habitaciones.append(hab3)
     # hotel = Hotel(cuentaBancaria, "Hotel1", "Medellín", [], habitaciones, [])
     # Base.addHoteles(hotel)
-    #PRUEBAS RECOMENDACIONES
+
     # habs = []
     # hab1 = Habitacion(1,"simple",1,1000)
     # hab2 = Habitacion(2,"doble",1,1000)
@@ -85,11 +87,11 @@ if __name__ == '__main__' :
     # serv1 = ServiciosExtra(1)
     # serv1.setNombre("piscina")
     # emp1 = Empleado("albert",123,"albert",123,123)
-    # emp2 = Empleado("juan",123,"juan",123,123)
+    # emp2 = Empleado("juanji",123,"juanji",123,123)
     # emp3 = Empleado("maria",123,"maria",123,123)
-    # hotel1 = Hotel(None,"Hotel","Medellin",[serv1],habs,[emp1,emp2,emp3])
-    # hotel2 = Hotel(None,"Hotel1","Cali",[serv1],habs,None)
-    # hotel3 = Hotel(None,"Hotel2","Medellin",[serv1],habs2,None)
+    # hotel1 = Hotel(cuentaBancaria1,"Hotel","Medellin",[serv1],habs,[emp1])
+    # hotel2 = Hotel(cuentaBancaria2,"Hotel1","Cali",[serv1],habs,[emp2])
+    # hotel3 = Hotel(cuentaBancaria3,"Hotel2","Medellin",[serv1],habs2,[emp3])
     # Base.addHoteles(hotel1)
     # Base.addHoteles(hotel2)
     # Base.addHoteles(hotel3)
@@ -102,18 +104,18 @@ if __name__ == '__main__' :
     # reserva = Reserva(huesped,hab5,None,None,None,)
     # reserva.setCalificacionHotel(4)
     # huesped.addReserva(reserva)
-    #hab5.addCalificacion(huesped,5)
-    #reserva2 = Reserva(huesped,hab6,None,None,None)
-    #reserva2.setCalificacionHotel(4)
-    #huesped.addReserva(reserva2)
-    #hab6.addCalificacion(huesped,5)
-    #reserva3 = Reserva(huesped,hab60,None,None,None)
-    #reserva3.setCalificacionHotel(4)
-    #huesped.addReserva(reserva3)
-    #hab60.addCalificacion(huesped,5)
+    # hab5.addCalificacion(huesped,5)
+    # reserva2 = Reserva(huesped,hab6,None,None,None)
+    # reserva2.setCalificacionHotel(4)
+    # huesped.addReserva(reserva2)
+    # hab6.addCalificacion(huesped,5)
+    # reserva3 = Reserva(huesped,hab60,None,None,None)
+    # reserva3.setCalificacionHotel(4)
+    # huesped.addReserva(reserva3)
+    # hab60.addCalificacion(huesped,5)
 
 
-    #Pruebas Administrador
+
     # cuentaBancariaH = CuentaBancaria(1000000, "b")
     # cuentaBancariaA = CuentaBancaria(1000000, "b")
     # cuentaBancariaE1 = CuentaBancaria(1000000, "b")

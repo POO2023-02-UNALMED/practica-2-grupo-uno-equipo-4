@@ -215,10 +215,10 @@ class Usmenu():
         if (isFin()):
             reserva = us.getReserva()
             costo = reserva.getCosto()
-            us.setReserva(None)
             messagebox.showinfo("Termina tu reserva", "Su Reserva ha terminado.\n\n"+
                                 f"Costo total: {costo}") 
-            #Calificar.seleccionar(root,us)
+            Calificar.seleccionar(root,us)
+            us.setReserva(None)
         
         prosCon.add_command(label="Reservar", command=reservar)             #Aquí se le agrega los commandos que llevan a las diferentes funcioanlidades
         #prosCon.add_command(label="calificar", command=Calificar.seleccionar(root,us))

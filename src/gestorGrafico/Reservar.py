@@ -71,7 +71,7 @@ class Reservar():
                     for j in habs:
                         if not j.getReservada():
                             c += 1
-                    cls.resultadoHotel.insert("", tk.END, text=i.getNombre(), values=(i.getCiudad(), c, ",".join(i.getServicios())))
+                    cls.resultadoHotel.insert("", tk.END, text=i.getNombre(), values=(i.getCiudad(), c))
                 cls.enviarFiltroHotel = tk.Button(cls.p2, text="Seleccionar", command=seleccionar)
                 cls.enviarFiltroHotel.pack(pady=2)
             
