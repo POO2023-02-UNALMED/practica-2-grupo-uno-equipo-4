@@ -117,8 +117,8 @@ class Hotel:
     def getEmpleados(self):
        return  self.__empleados
     
-    #def getEmpleado(self):
-     #  return  self.__empleados
+    def getEmpleado(self):
+       return  self.__empleados
     
     def setEmpleados(self, __empleados):
         self.__empleados = __empleados
